@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-// const apiRoute = require('./Routes/apiRoute');
+const apiRoute = require('./Routes/apiRoute');
 const authRoute = require('./Routes/authRoute');
 const sessionConfig = require('./config/session');
 
@@ -17,7 +17,7 @@ app.use(cors({ origin: ['http://localhost:3000'], credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(session(sessionConfig));
-// app.use('/api', apiRoute);
+app.use('/api', apiRoute);
 app.use('/auth', authRoute);
 
 app.listen(PORT, () => {

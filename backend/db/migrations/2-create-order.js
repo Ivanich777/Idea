@@ -15,7 +15,6 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
-
       },
       status: {
         type: Sequelize.TEXT,

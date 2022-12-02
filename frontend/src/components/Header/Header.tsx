@@ -22,7 +22,6 @@ export default function Header(): JSX.Element {
     setAnchorElUser(null);
   };
 
-  const pages = ['Каталог'];
   const settings = ['Профиль', 'Корзина', 'Выход'];
 
   return (
@@ -76,11 +75,9 @@ export default function Header(): JSX.Element {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">Каталог</Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -102,15 +99,12 @@ export default function Header(): JSX.Element {
             IDEA
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
               <Button
-                key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                Каталог
               </Button>
-            ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

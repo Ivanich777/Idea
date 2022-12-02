@@ -5,7 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 // const apiRoute = require('./Routes/apiRoute');
-// const authRoute = require('./Routes/authRoute');
+const authRoute = require('./Routes/authRoute');
 const sessionConfig = require('./config/session');
 
 const app = express();
@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(session(sessionConfig));
 // app.use('/api', apiRoute);
-// app.use('/auth', authRoute);
+app.use('/auth', authRoute);
 
 app.listen(PORT, () => {
   console.log('Опять работа?');

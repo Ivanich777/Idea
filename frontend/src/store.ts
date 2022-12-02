@@ -5,7 +5,7 @@ import userSlice from './components/Auth/authSlice';
 const store = configureStore({
   reducer: {
     users: userSlice,
-    products: productSlice,
+    // products: productSlice,
   },
 });
 export default store;

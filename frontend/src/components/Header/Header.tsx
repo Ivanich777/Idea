@@ -2,6 +2,7 @@ import React from 'react';
 
 import { AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 export default function Header(): JSX.Element {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -16,7 +17,7 @@ export default function Header(): JSX.Element {
 
   // const { user } = useSelector((state: RootState) => state.user);
   const user = {
-    id: 0,
+    id: 1,
   };
 
   return (
@@ -119,18 +120,21 @@ export default function Header(): JSX.Element {
             {user.id !== 0 && (
               <>
                 <Button
+                  variant="outlined"
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                   Корзина
                 </Button>
                 <Button
+                  variant="outlined"
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                   Профиль
                 </Button>
                 <Button
+                  variant="outlined"
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
@@ -156,6 +160,9 @@ export default function Header(): JSX.Element {
             )}
 
           </Box>
+          <IconButton color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <ShoppingCartIcon />
+          </IconButton>
 
         </Toolbar>
       </Container>

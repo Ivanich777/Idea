@@ -63,16 +63,13 @@ export default function Footer(): JSX.Element {
             </Box>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Box>Аккаунт</Box>
-            <Box>
-              <Link href="/" color="inherit">
-                
-              </Link>
-            </Box>
-            <Box>
-              <Link href="/" color="inherit">
-                
-              </Link>
+            <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+              <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
+                <span>Мы принимаем:</span>
+              </Box>
+              <img width="49" height="14" alt="Мир" src="//res.cloudinary.com/lmru/image/upload/index/mir-logo.svg" />
+              <img width="49" height="14" alt="Visa" src="//res.cloudinary.com/lmru/image/upload/index/visa-logo.svg" />
+              <img width="28" height="19" alt="Mastercard" src="//res.cloudinary.com/lmru/image/upload/index/mastercard-logo.svg" />
             </Box>
           </Grid>
         </Grid>

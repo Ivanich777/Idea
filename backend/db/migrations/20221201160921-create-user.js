@@ -34,7 +34,7 @@ module.exports = {
         allowNull: false,
 
       },
-      number: {
+      phone: {
         type: Sequelize.TEXT,
         allowNull: false,
 

@@ -1,10 +1,19 @@
 import React from 'react';
-import ProductPage from '../ProductPage/ProductPage';
 
-function App() {
+import { Route, Routes } from 'react-router-dom';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+
+function App(): JSX.Element {
   return (
     <div className="App">
-      <ProductPage></ProductPage>
+
+      <Routes>
+        <Route path="/" element={<><Header /><Footer /></>}>
+          <Route path="/main" element={<Header />} />
+
+        </Route>
+      </Routes>
     </div>
   );
 }

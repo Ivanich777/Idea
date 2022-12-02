@@ -3,6 +3,7 @@ import React from 'react';
 import { AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Outlet, Link, NavLink } from 'react-router-dom';
 
 export default function Header(): JSX.Element {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -74,7 +75,11 @@ export default function Header(): JSX.Element {
               {user.id !== 0 && (
                 <>
                   <MenuItem>
-                    <Typography textAlign="center">Профиль</Typography>
+                    <Typography textAlign="center">
+                      <NavLink to="/profile">
+                        Профиль
+                      </NavLink>
+                    </Typography>
                   </MenuItem>
                   <MenuItem>
                     <Typography textAlign="center">Корзина</Typography>
@@ -131,7 +136,9 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  Профиль
+                  <NavLink to="/profile">
+                    Профиль
+                  </NavLink>
                 </Button>
                 <Button
                   variant="outlined"
@@ -166,6 +173,8 @@ export default function Header(): JSX.Element {
 
         </Toolbar>
       </Container>
+      <Outlet />
+
     </AppBar>
   );
 }

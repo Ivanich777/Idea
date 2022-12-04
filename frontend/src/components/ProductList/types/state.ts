@@ -1,15 +1,14 @@
-
 export interface Product {
+  id: number,
   article: number,
   title: string,
-  description: string,
-  count: number,
-  price: number,
-  idCategory: number,
+  price: number
 }
-
 export interface State {
-  products: Product[];
+  products: Product []
 }
 
+export type productId = Product['id'];
 
+export type Action =
+| { type: 'init'; payload: Product [] };

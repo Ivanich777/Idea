@@ -1,23 +1,31 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { State } from './types/state';
 
+export const addAsyncProducts = createAsyncThunk('products/addAsyncProducts', () => fetch('http://locakhost:4000/api/products')
+    .then((result) => result.json())
+    .then((data) => data));
+
 const initialState: State = {
-  products: [],
+    products: [
+        {
+            id: 1,
+            article: 228228,
+            title: 'doska',
+            price: 1000
+        }
+    ]
 };
 
-export const asyncProductList = createAsyncThunk('products/asyncProductList', () => {
-  return fetch('http://localhost:3000/')
-    .then((result) => result.json())
-    .then((data) => data);
+const productSlice = createSlice({
+    name: 'products',
+    initialState,
+    reducers: {},
+    extraReducers: (product) => {
+        product
+        .addCase(addAsyncProducts.fulfilled, (state, action) => {
+            state.products = action.payload;
+        });
+    }
 });
 
-const productListSlice = createSlice({
-  name: 'products',
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-
-  }
-})
-
-export default productListSlice.reducer;
+export default productSlice.reducer;

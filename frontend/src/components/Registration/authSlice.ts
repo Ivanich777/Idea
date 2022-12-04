@@ -1,18 +1,18 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { State, User } from "./types/state";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { State, User } from './types/state';
 
 const initialState: State = {
   user: {
     id: 0,
-    email: "",
-    password: "",
-    name: "",
-    surname: "",
+    email: '',
+    password: '',
+    name: '',
+    surname: '',
     admin: false,
-    phone: "",
+    phone: '',
   },
   error: {
-    message: "",
+    message: '',
   },
 };
 
@@ -29,23 +29,25 @@ const initialState: State = {
 //     .then((data) => data));
 // })
 
-export const addAsyncUser = createAsyncThunk("user/addAsyncUser", (data) => {
+export const addAsyncUser = createAsyncThunk('user/addAsyncUser', async (data) => {
   console.log(data);
-  
-  return fetch("https://localhost:4000/auth/registration", {
-    method: "POST",
-    credentials: "include",
+
+  const res = await fetch('http://localhost:4000/auth/registration', {
+    method: 'POST',
+    credentials: 'include',
     headers: {
-      "Content-Type": "Application/json",
+      'Content-Type': 'Application/json',
     },
     body: JSON.stringify(data),
-  })
-    .then((res) => res.json())
-    .then((data) => data);
+  });
+
+  console.log(res);
+
+   return res.json();
 });
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {},
   extraReducers: (builder) => {

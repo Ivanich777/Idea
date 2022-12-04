@@ -1,18 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { State } from './types/state';
 
-const addAsyncOrders = createAsyncThunk('orders/addAsyncOrders', () => fetch('http://localhost:4000/profile')
-  .then((result) => result.json())
-  .then((data) => data));
+export const addAsyncOrders = createAsyncThunk('orders/addAsyncOrders', () =>
+  fetch('http://localhost:4000/api/profile')
+    .then((result) => result.json())
+    .then((data) => data));
 
 const initialState: State = {
   orders: [],
+  error: {
+    message: '',
+  },
 };
 
 const orderSlice = createSlice({
   name: 'orders',
   initialState,
-  reducer: {},
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(addAsyncOrders.fulfilled, (state, action) => {
@@ -24,4 +28,4 @@ const orderSlice = createSlice({
   }
 });
 
-export const addAsyncOrders;
+export default orderSlice.reducer;

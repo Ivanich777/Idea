@@ -1,21 +1,25 @@
-import React from 'react';
+import { Box } from '@mui/material';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
+import OrderCard from './OrderCard';
 import { addAsyncOrders } from './orderSlice';
 
 function Orders(): JSX.Element {
   const dispatch = useAppDispatch();
-  dispatch(addAsyncOrders());
+  useEffect(() => {
+    dispatch(addAsyncOrders());
+  }, []);
   const { orders } = useSelector((state: RootState) => state.orders);
 
   return (
     <div>
-      <div>Orders</div>
-      <ul>
+      <div>Заказы</div>
+      <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
         {orders.map((order) => (
-          <li key={order.id}>{order.status}</li>
+          <OrderCard order={order} />
         ))}
-      </ul>
+      </Box>
     </div>
   );
 }

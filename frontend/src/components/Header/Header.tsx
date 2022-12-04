@@ -22,6 +22,7 @@ export default function Header(): JSX.Element {
   };
 
   return (
+    <>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -173,8 +174,11 @@ export default function Header(): JSX.Element {
 
         </Toolbar>
       </Container>
-      <Outlet />
 
     </AppBar>
+    <Outlet />
+
+    </>
+
   );
 }

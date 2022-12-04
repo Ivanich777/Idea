@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
 
-function Orders():JSX.Element {
+function Orders(): JSX.Element {
   return (
-    <div>Orders</div>
-  )
+    <>
+      <div>Orders</div>
+      <div>Orders</div>
+      <div>Orders</div>
+      <div>Orders</div>
+      <div>Orders</div>
+      <div>Orders</div>
+      <div>Orders</div>
+      <div>Orders</div>
+      <div>Orders</div>
+    </>
+  );
 }
 
-export default Orders
+export default Orders;

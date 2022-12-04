@@ -18,7 +18,7 @@ export default function Header(): JSX.Element {
 
   // const { user } = useSelector((state: RootState) => state.user);
   const user = {
-    id: 0,
+    id: 1,
   };
 
   return (
@@ -77,21 +77,14 @@ export default function Header(): JSX.Element {
                 <>
                   <MenuItem>
                     <Typography textAlign="center">
-                      <NavLink to="/profile">
+                      <NavLink to="/profile" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
                         Профиль
                       </NavLink>
                     </Typography>
                   </MenuItem>
                   <MenuItem>
                     <Typography textAlign="center">
-                      <NavLink to="/basket">
-                        Корзина
-                      </NavLink>
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem>
-                    <Typography textAlign="center">
-                      <NavLink to="/logout">
+                      <NavLink to="/logout" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
                         Выход
                       </NavLink>
                     </Typography>
@@ -102,22 +95,15 @@ export default function Header(): JSX.Element {
                 <>
                   <MenuItem>
                     <Typography textAlign="center">
-                      <NavLink to="/registration">
+                      <NavLink to="/registration" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
                         Регистрация
                       </NavLink>
                     </Typography>
                   </MenuItem>
                   <MenuItem>
-                    <Typography textAlign="center">
+                    <Typography textAlign="center" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
                       <NavLink to="/login">
                         Войти
-                      </NavLink>
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem>
-                    <Typography textAlign="center">
-                      <NavLink to="/basket">
-                        Корзина
                       </NavLink>
                     </Typography>
                   </MenuItem>
@@ -153,7 +139,7 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="/basket">
+                  <NavLink to="/basket" style={{ textDecoration: 'none', color: 'white' }}>
                     Корзина
                   </NavLink>
                 </Button>
@@ -162,7 +148,7 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="/profile">
+                  <NavLink to="/profile" style={{ textDecoration: 'none', color: 'white' }}>
                     Профиль
                   </NavLink>
                 </Button>
@@ -171,7 +157,7 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="/logout">
+                  <NavLink to="/logout" style={{ textDecoration: 'none', color: 'white' }}>
                     Выход
                   </NavLink>
                 </Button>
@@ -183,7 +169,7 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="/registration">
+                  <NavLink to="/registration" style={{ textDecoration: 'none', color: 'white' }}>
                     Регистрация
                   </NavLink>
                 </Button>
@@ -191,7 +177,7 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="/login">
+                  <NavLink to="/login" style={{ textDecoration: 'none', color: 'white' }}>
                     Войти
                   </NavLink>
                 </Button>
@@ -199,7 +185,7 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="/basket">
+                  <NavLink to="/basket" style={{ textDecoration: 'none', color: 'white' }}>
                     Корзина
                   </NavLink>
                 </Button>

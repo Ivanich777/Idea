@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Fuse from 'fuse.js';
 import ProductCard from '../../ProductCard/productCard';
 
-function Find({ arr }) {
+function Find({ products }) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -19,7 +19,7 @@ function Find({ arr }) {
         boxShadow: 24,
         p: 4,
       };
-      const fuse = new Fuse(arr, {
+      const fuse = new Fuse(products, {
         keys: ['title'],
       });
       const [str, setStr] = useState('');
@@ -28,7 +28,8 @@ function Find({ arr }) {
         setStr(a);
         fuse.search(str);
         const match = fuse.search(str); 
-        setMatch(match);
+        const res = match.map((el)=> el.item)
+        setMatch(res)
       };
     return (
         <div>

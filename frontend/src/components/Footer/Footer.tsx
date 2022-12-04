@@ -89,6 +89,7 @@ export default function Footer(): JSX.Element {
           IdeaProject &reg; {new Date().getFullYear()}
         </Box>
       </Container>
+
     </Box>
   );
 }

@@ -10,11 +10,12 @@ function App(): JSX.Element {
     <div className="App">
 
       <Routes>
-        {/* <Route path="/" element={<><Header /><Footer /></>}> */}
-          {/* <Route path="/main" element={<Header />} /> */}
+        <Route path="/" element={<><Header /><Footer /></>}>
+          <Route path="/main" element={<Header />} />
           <Route path="/profile" element={<Orders />} />
+          {/* <Route path="/main" element={<Footer />} /> */}
 
-        {/* </Route> */}
+        </Route>
       </Routes>
     </div>
   );

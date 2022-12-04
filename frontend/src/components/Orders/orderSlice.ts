@@ -24,6 +24,7 @@ const orderSlice = createSlice({
       })
       .addCase(addAsyncOrders.rejected, (state, action) => {
         state.error.message = action.error.message;
+        ;
       });
   }
 });

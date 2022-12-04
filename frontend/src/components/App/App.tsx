@@ -1,12 +1,21 @@
+
+
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+
+import Registration from "../Registration/Registration";
+
+import  Login  from "../Login/Login";
+
 import React, { useEffect } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 import { useAppDispatch } from '../../store';
-import Header from '../Header/Header';
 import MainLayout from '../MainLayout/MainLayout';
 import Orders from '../Orders/Orders';
 import ProductList from '../ProductList/ProductList';
 import { addAsyncProducts } from '../ProductList/productSlice';
+
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,12 +25,14 @@ function App(): JSX.Element {
   return (
     <div className="App">
       <Routes>
+
         <Route path="/" element={<MainLayout />}>
           <Route path="/main" element={<Header />} />
           <Route path="/profile" element={<Orders />} />
           <Route path="/product" element={<ProductList />} />
         </Route>
-        {/* <Route path="/registration" element={<Registration />} /> */}
+               <Route path="/auth/reg" element={<Registration />} />
+        <Route path="/auth/login" element={<Login />} />
       </Routes>
     </div>
   );

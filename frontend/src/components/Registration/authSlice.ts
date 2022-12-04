@@ -1,44 +1,62 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { State, User } from './types/state';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { State, User } from "./types/state";
 
 const initialState: State = {
-  // users: [],
   user: {
     id: 0,
-    email: '',
-    password: '',
-    name: '',
-    surname: '',
+    email: "",
+    password: "",
+    name: "",
+    surname: "",
     admin: false,
-    phone: '',
+    phone: "",
+  },
+  error: {
+    message: "",
   },
 };
 
-export const addAsyncUser = createAsyncThunk('users/addAsyncUsers', () => {
-  return fetch('https://jsonplaceholder.typicode.com/users')
-    .then((result) => result.json())
+// export const addAsyncUser =  createAsyncThunk('user/addAsyncUser',  (user) => {
+//   return fetch('https://localhost:4000/auth/registration',{
+//   method:'POST',
+//   credentials:'include',
+//   headers:{
+//     'Content-Type':'Application/json'
+//   },
+//   body:JSON.stringify(user)
+// })
+//     .then((result) => result.json())
+//     .then((data) => data));
+// })
+
+export const addAsyncUser = createAsyncThunk("user/addAsyncUser", (data) => {
+  console.log(data);
+  
+  return fetch("https://localhost:4000/auth/registration", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "Application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
     .then((data) => data);
 });
 
-// export const regAsyncUser = createAsyncThunk('users/addAsyncUsers', () => {
-//   return fetch('https://jsonplaceholder.typicode.com/users')
-//     .then((result) => result.json())
-//     .then((data) => data);
-// });
-
 const userSlice = createSlice({
-  name: 'users',
+  name: "user",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(addAsyncUser.fulfilled, (state, action) => {
-      state.user = action.payload;
-    });
-    // builder.addCase(regAsyncUser.fulfilled, (state, action) => {
-    //   state.user = action.payload;
-    // });
+    builder
+      .addCase(addAsyncUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(addAsyncUser.rejected, (state, action) => {
+        state.error.message = action.error.message;
+      });
   },
 });
 
 export default userSlice.reducer;
-// export const { addAsyncUser } = userSlice.actions;

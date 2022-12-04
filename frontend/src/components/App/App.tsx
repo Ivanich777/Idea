@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../store';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Orders from '../Orders/Orders';
+import ProductItem from '../ProductItem/ProductItem';
 import ProductList from '../ProductList/ProductList';
 import { addAsyncProducts } from '../ProductList/productSlice';
 
@@ -21,7 +22,8 @@ function App(): JSX.Element {
           <Route path="/main" element={<Header />} />
           <Route path="/profile" element={<Orders />} />
           {/* <Route path="/main" element={<Footer />} /> */}
-          <Route path="/product" element={<ProductList />} />
+          <Route path="/catalog" element={<ProductList />} />
+          <Route path="/product/:productId" element={<ProductItem />} />
         </Route>
       </Routes>
     </div>

@@ -4,8 +4,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
-function ProductCard():JSX.Element {
+function ProductCard({product}):JSX.Element {
+    //const { products } = useSelector((state:RootState) => state.products);
+
   return (
     <Card sx={{ maxWidth: 250 }}>
       <CardActionArea>
@@ -17,10 +21,10 @@ function ProductCard():JSX.Element {
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="div">
-            Артикуль товара
+            {product?.article}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-           Название и что то  о товаре
+           {product?.title}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const db = require('../db/models');
-const Product = require('../db/models/product')
+const Product = require('../db/models/product');
 
 router.get('/profile', async (req, res) => {
   const id = req.session.userId;
@@ -10,7 +10,7 @@ router.get('/profile', async (req, res) => {
 
 router.get('/products', async (req, res) => {
   try {
-    const products = await Product.findAll({
+    const products = await db.Product.findAll({
       raw: true,
     });
     res.json(products);

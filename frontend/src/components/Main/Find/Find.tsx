@@ -1,7 +1,9 @@
 import { Box, TextField, Modal, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import Fuse from 'fuse.js';
+import ProductCard from '../../ProductCard/productCard';
 
-function Find() {
+function Find({ products }) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -17,6 +19,18 @@ function Find() {
         boxShadow: 24,
         p: 4,
       };
+      const fuse = new Fuse(products, {
+        keys: ['title'],
+      });
+      const [str, setStr] = useState('');
+      const [matches, setMatch] = useState([]);
+      const searh = (a) => {
+        setStr(a);
+        fuse.search(str);
+        const match = fuse.search(str); 
+        const res = match.map((el)=> el.item)
+        setMatch(res)
+      };
     return (
         <div>
             <TextField onClick={handleOpen} style={{ cursor: 'move' }} disabled={open} placeholder="Поиск" />
@@ -27,7 +41,12 @@ function Find() {
               aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                <TextField placeholder="Поиск" />
+                <TextField onChange={(e) => searh(e.target.value)} placeholder="Поиск" />
+                <ul>
+                    {
+                        matches.map((match, i) => <ProductCard key={i} product={match} />)
+                    }
+                </ul>
                 </Box>
             </Modal>
         </div>

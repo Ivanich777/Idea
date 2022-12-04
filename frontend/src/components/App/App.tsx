@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../store';
 import Main from '../Main/Main';
 import MainLayout from '../MainLayout/MainLayout';
 import Orders from '../Orders/Orders';
+import ProductItem from '../ProductItem/ProductItem';
 import ProductList from '../ProductList/ProductList';
 import { addAsyncProducts } from '../ProductList/productSlice';
 
@@ -24,6 +25,8 @@ function App(): JSX.Element {
  <Route path="/" element={<MainLayout />}>
           <Route path="/" element={<Main />} />
           <Route path="/profile" element={<Orders />} />
+          {/* <Route path="/main" element={<Footer />} /> */}
+          <Route path="/product/:productId" element={<ProductItem />} />
           <Route path="/product" element={<ProductList />} />
         </Route>
        <Route path="/auth/reg" element={<Registration />} />

@@ -5,10 +5,18 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
+import { Product } from '../ProductList/types/state';
 
-function ProductCard({product}):JSX.Element {
-    //const { products } = useSelector((state:RootState) => state.products);
+function ProductCard({ product }: { product:Product
+ }):JSX.Element {
+    // const { products } = useSelector((state:RootState) => state.products);
+    const navigate = useNavigate();
+
+    function handleNav():void {
+      navigate(`/product/${product.id}`);
+    }
 
   return (
     <Card sx={{ maxWidth: 250 }}>
@@ -16,10 +24,11 @@ function ProductCard({product}):JSX.Element {
         <CardMedia
           component="img"
           height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
+          width="100"
+          image={product?.image}
           alt="product"
         />
-        <CardContent>
+        <CardContent onClick={handleNav}>
           <Typography gutterBottom variant="h6" component="div">
             {product?.article}
           </Typography>

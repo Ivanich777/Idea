@@ -2,7 +2,9 @@ export interface Product {
   id: number,
   article: number,
   title: string,
-  price: number
+  description: string,
+  price: number,
+  image: string
 }
 export interface State {
   products: Product []

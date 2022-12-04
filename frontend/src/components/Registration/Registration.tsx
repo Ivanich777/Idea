@@ -1,120 +1,79 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import * as api from '../../App/api';
+// import { useForm, SubmitHandler } from 'react-hook-form';
+// import { useNavigate, useParams } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useSelector } from 'react-redux';
+import FormControl from '@mui/material/FormControl';
+import { Button, TextField } from '@mui/material';
+import { Formik } from 'formik';
 import { RootState, useAppDispatch } from '../../store';
+import { addAsyncUser } from './authSlice';
+import { FormInputs } from './types/state';
 
-function Auth(): JSX.Element {
-  const { name } = useParams();
-  const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  const [login, setLogin] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [checkedPassword, setCheckedPassword] = useState('');
+function Registration(): JSX.Element {
+  // const { name } = useParams();
+  // const navigate = useNavigate();
 
-  const { users } = useSelector((state: RootState) => state.users);
+  // const { user } = useSelector((state: RootState) => state);
   const dispatch = useAppDispatch();
-  const [user, setUser] = useState('');
-  
-
-
-  // if (name === 'logout') {
-  //   api[name]().then((res: Res) => res.message === 'Session destroy' && dispatch({ type: 'LOGOUT' }));
-  // }
 
   const auth = (e: React.FormEvent): void => {
     e.preventDefault();
-    if (name === 'registration') {
-      api[name]({ login, email, password, checkedPassword }).then((res: Res) => {
-        if (res.message === 'Пользователь с таким именем уже существует') {
-          navigate('/auth/login');
-        } else {
-          dispatch({ type: 'REGA', payload: res });
-          navigate('/');
-        }
-      });
-    }
-    // if (name === 'login') {
-    //   api[name]({ login, email, password, checkedPassword }).then((res: Res) => {
-    //     if (res.message === 'Пользователя с таким именем не существует') {
-    //       navigate('/auth/registration');
-    //     } else {
-    //       dispatch({ type: 'REGA', payload: res });
-    //       navigate('/');
-    //     }
-    //   });
-    }
+    dispatch(addAsyncUser());
   };
 
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      checkPassword: '',
+      phone: '',
+      name: '',
+      surname: '',
+    },
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .max(15, 'Must be 15 characters or less')
+        .required('Required'),
+      password: Yup.string()
+        .min(8, 'Must be 8 characters or more')
+        .required('Required'),
+      checkPassword: Yup.string().oneOf([Yup.ref('password')]),
+      email: Yup.string().email('Invalid email address').required('Required'),
+    }),
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
   return (
-    <div className="main_container">
-      <h2>{name?.toUpperCase()}</h2>
-      <div className="form_container">
-        <form onSubmit={auth}>
-          {name === 'registration' && (
-
-              <label className="form_label">
-                Login<br />
-                <input
-                  onChange={(e) => setLogin(e.target.value)}
-                  value={login}
-                  name="login"
-                  type="text"
-                  className="form-control"
-                />
-              </label>
-
-          )}
-
-            <label className="form_label">
-              Email
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                name="email"
-                type="email"
-                className="form-control"
-              />
-            </label>
-
-            <label className="form-label">
-              Password
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                name="password"
-                type="password"
-                className="form-control"
-              />
-            </label>
-
-          {name === 'registration' && (
-            <div className="mb-3">
-              <label className="form-label">
-                CheckedPassword
-                <input
-                  onChange={(e) => setCheckedPassword(e.target.value)}
-                  value={checkedPassword}
-                  name="checkedPassword"
-                  type="password"
-                  className="form-control"
-                />
-              </label>
-            </div>
-          )}
-
-          <button className="btn btn-secondary" type="submit" >
-            {name?.toUpperCase()}
-          </button>
-        </form>
-      </div>
-    </div>
+    <form onSubmit={onSubmitHandler}>
+      {/* <form onSubmit={handleSubmit(onSubmitHandler)}> */}
+      <TextField id="outlined-name" label="Email" />
+      <TextField
+        id="outlined-name"
+        label="Password"
+      />
+      <TextField
+        id="outlined-name"
+        label="Check Password"
+      />
+      <TextField id="outlined-name" label="Name" />
+      <TextField id="outlined-name" label="Surname" />
+      <TextField id="outlined-name" label="Phone" />
+      {/* <TextField type="submit" /> */}
+      <Button type="submit">Hui</Button>
+    </form>
   );
 }
 
-export default Auth;
-function useSelector(arg0: (state: RootState) => any): { users: any; } {
-  throw new Error('Function not implemented.');
-}
+export default Registration;
 
+// function useSelector(arg0: (state: RootState) => any): { users: any; } {
+//   throw new Error('Function not implemented.');
+// }

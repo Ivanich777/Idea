@@ -14,20 +14,20 @@ router.get('/login', async (req, res) => {
 
 router.post('/registration', async (req, res) => {
   const {
-    checkedPassword, login, password, email,
+    checkedPassword, name, password, email, surname, phone,
   } = req.body;
 
-  if (password && email) {
+  if (password && email && name && checkedPassword && surname && phone) {
     const user = await User.findOne({ where: { email } });
     if (user) {
       res.json({ message: 'Пользователь с таким именем уже существует' });
     } else if (password === checkedPassword) {
       const hash = await bcrypt.hash(password, 10);
       const newUser = await User.create({
-        password: hash, email, login, points: 0,
+        password: hash, email, name, phone, surname, admin: false,
       });
       req.session.userId = newUser.id;
-      res.status(200).json({ message: 'все ок', user: newUser.login });
+      res.status(200).json({ message: 'все ок', user: newUser.name });
     }
   }
 });

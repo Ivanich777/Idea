@@ -3,7 +3,7 @@ import React from 'react';
 import { AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Outlet, Link, NavLink } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 
 export default function Header(): JSX.Element {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -18,7 +18,7 @@ export default function Header(): JSX.Element {
 
   // const { user } = useSelector((state: RootState) => state.user);
   const user = {
-    id: 1,
+    id: 0,
   };
 
   return (
@@ -83,20 +83,43 @@ export default function Header(): JSX.Element {
                     </Typography>
                   </MenuItem>
                   <MenuItem>
-                    <Typography textAlign="center">Корзина</Typography>
+                    <Typography textAlign="center">
+                      <NavLink to="/basket">
+                        Корзина
+                      </NavLink>
+                    </Typography>
                   </MenuItem>
                   <MenuItem>
-                    <Typography textAlign="center">Выход</Typography>
+                    <Typography textAlign="center">
+                      <NavLink to="/logout">
+                        Выход
+                      </NavLink>
+                    </Typography>
                   </MenuItem>
                 </>
               )}
               {user.id === 0 && (
                 <>
                   <MenuItem>
-                    <Typography textAlign="center">Регистрация</Typography>
+                    <Typography textAlign="center">
+                      <NavLink to="/registration">
+                        Регистрация
+                      </NavLink>
+                    </Typography>
                   </MenuItem>
                   <MenuItem>
-                    <Typography textAlign="center">Корзина</Typography>
+                    <Typography textAlign="center">
+                      <NavLink to="/login">
+                        Войти
+                      </NavLink>
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography textAlign="center">
+                      <NavLink to="/basket">
+                        Корзина
+                      </NavLink>
+                    </Typography>
                   </MenuItem>
                 </>
               )}
@@ -130,7 +153,9 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  Корзина
+                  <NavLink to="/basket">
+                    Корзина
+                  </NavLink>
                 </Button>
                 <Button
                   variant="outlined"
@@ -146,7 +171,9 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  Выход
+                  <NavLink to="/logout">
+                    Выход
+                  </NavLink>
                 </Button>
               </>
             )}
@@ -156,13 +183,25 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  Регистрация
+                  <NavLink to="/registration">
+                    Регистрация
+                  </NavLink>
                 </Button>
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  Корзина
+                  <NavLink to="/login">
+                    Войти
+                  </NavLink>
+                </Button>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  <NavLink to="/basket">
+                    Корзина
+                  </NavLink>
                 </Button>
               </>
             )}

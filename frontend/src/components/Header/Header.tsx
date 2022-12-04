@@ -1,30 +1,28 @@
 import React from 'react';
 
-import { AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, Avatar, Tooltip, MenuItem } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Outlet, Link, NavLink } from 'react-router-dom';
 
 export default function Header(): JSX.Element {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>): void => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = (): void => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = (): void => {
-    setAnchorElUser(null);
+  // const { user } = useSelector((state: RootState) => state.user);
+  const user = {
+    id: 1,
   };
 
-  const settings = ['Профиль', 'Корзина', 'Выход'];
-
   return (
+    <>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -75,11 +73,36 @@ export default function Header(): JSX.Element {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Каталог</Typography>
-              </MenuItem>
+              {user.id !== 0 && (
+                <>
+                  <MenuItem>
+                    <Typography textAlign="center">
+                      <NavLink to="/profile">
+                        Профиль
+                      </NavLink>
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography textAlign="center">Корзина</Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography textAlign="center">Выход</Typography>
+                  </MenuItem>
+                </>
+              )}
+              {user.id === 0 && (
+                <>
+                  <MenuItem>
+                    <Typography textAlign="center">Регистрация</Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography textAlign="center">Корзина</Typography>
+                  </MenuItem>
+                </>
+              )}
             </Menu>
           </Box>
+
           <Typography
             variant="h5"
             noWrap
@@ -98,46 +121,64 @@ export default function Header(): JSX.Element {
           >
             IDEA
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Каталог
-              </Button>
-          </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
+            {user.id !== 0 && (
+              <>
+                <Button
+                  variant="outlined"
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Корзина
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  <NavLink to="/profile">
+                    Профиль
+                  </NavLink>
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Выход
+                </Button>
+              </>
+            )}
+            {user.id === 0 && (
+              <>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Регистрация
+                </Button>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Корзина
+                </Button>
+              </>
+            )}
+
           </Box>
+          <IconButton color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <ShoppingCartIcon />
+          </IconButton>
+
         </Toolbar>
       </Container>
+
     </AppBar>
+    <Outlet />
+
+    </>
+
   );
 }

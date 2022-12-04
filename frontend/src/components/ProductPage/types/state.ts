@@ -1,4 +1,3 @@
-
 export interface Product {
   article: number,
   title: string,
@@ -9,7 +8,5 @@ export interface Product {
 }
 
 export interface State {
-  products: Product[];
+  product: Product;
 }
-
-

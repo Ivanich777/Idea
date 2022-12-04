@@ -5,7 +5,7 @@ import Catalog from './Catalog/Catalog';
 import Find from './Find/Find';
 import Scroll from './Scroll/Scroll';
 
-function Main() {
+function Main():JSX.Element {
     return (
         <Box>
             <Box>

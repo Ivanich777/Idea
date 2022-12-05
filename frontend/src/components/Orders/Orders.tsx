@@ -10,16 +10,20 @@ function Orders(): JSX.Element {
   useEffect(() => {
     dispatch(addAsyncOrders());
   }, []);
-  const { orders, error } = useSelector((state: RootState) => state.orders);
+  // const { orders } = useSelector((state: RootState) => state.orders);
+  const answerFromBack = useSelector((state: RootState) => state.orders);
+  // const { error } = useSelector((state: RootState) => state.orders);
+
+  console.log(answerFromBack, 'answerFromBack');
 
   return (
     <div>
       <div>Заказы</div>
-      {orders.length < 1 ? (
-        <Typography>{error.message}</Typography>
+      {(answerFromBack.error.message === 'У вас нет заказов') ? (
+        <Typography>{answerFromBack.error.message}</Typography>
       ) : (
         <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-          {orders.map((order) => (
+          {answerFromBack.orders.map((order) => (
             <OrderCard order={order} />
           ))}
         </Box>

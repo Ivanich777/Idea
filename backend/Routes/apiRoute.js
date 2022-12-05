@@ -62,7 +62,7 @@ router.post('/product', async (req, res) => {
       idProduct: newProduct.dataValues.id,
       path: image,
     });
-    newProduct.dataValues.Images = [{ path: image }];
+    newProduct.dataValues.images = [{ path: image }];
     console.log(newProduct);
     res.json(newProduct);
   } catch (e) {

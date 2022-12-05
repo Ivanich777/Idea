@@ -36,7 +36,7 @@ export default function ProductAddForm(): JSX.Element {
     };
 
     if (products.find((item) => Number(item.article) === Number(newProduct.article))) {
-      alert('Артикул не уникален');
+      setArticle('Артикул не уникален!!!');
     } else {
       dispatch(addAsyncProduct(newProduct));
       setArticle('');
@@ -107,38 +107,6 @@ export default function ProductAddForm(): JSX.Element {
               variant="outlined"
               sx={{ mb: 1 }}
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-            >
-              Добавить товар
-            </Button>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              id="outlined-multiline-flexible"
-              name="description"
-              label="Описание"
-              multiline
-              maxRows={6}
-              rows={6}
-              sx={{ width: '100%', mb: 1 }}
-            />
-            <TextField
-              required
-              type="file"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              id="image"
-              name="image"
-              label="Картинка"
-              fullWidth
-              variant="outlined"
-              sx={{ mb: 1 }}
-            />
             <TextField
               required
               value={price}
@@ -150,6 +118,44 @@ export default function ProductAddForm(): JSX.Element {
               variant="outlined"
               sx={{ mb: 1 }}
             />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              id="outlined-multiline-flexible"
+              name="description"
+              label="Описание"
+              multiline
+              rows={6}
+              sx={{ width: '100%', mb: 1 }}
+            />
+            <TextField
+              required
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              id="image"
+              name="image"
+              label="Изображение"
+              fullWidth
+              variant="outlined"
+              sx={{ mb: 1 }}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ width: '100%', mb: 1 }}
+            >
+              Добавить изображение
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+            >
+              Добавить товар
+            </Button>
           </Grid>
         </Grid>
       </Box>

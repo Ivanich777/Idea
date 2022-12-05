@@ -30,7 +30,7 @@ const productSlice = createSlice({
             });
         })
         .addCase(addAsyncProduct.fulfilled, (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
             state.products.push(action.payload);
         });
     }

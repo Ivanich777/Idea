@@ -10,7 +10,7 @@ import './scroll.css';
 function Scroll(): JSX.Element {
   return (
     <Swiper
-      slidesPerView={3}
+      slidesPerView={5}
       spaceBetween={30}
       slidesPerGroup={3}
       loop

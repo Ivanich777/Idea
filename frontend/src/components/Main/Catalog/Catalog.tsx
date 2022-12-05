@@ -1,3 +1,4 @@
+import { withTheme } from '@emotion/react';
 import { Box, Button, Modal, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
@@ -16,9 +17,21 @@ function Catalog() {
         boxShadow: 24,
         p: 4,
     };
+    const btn = {
+        width: 200,
+        height: 50,
+        background: 'white',
+        marginRight: 30,
+        marginLeft: 30,
+        border: 'solid 1px #1976d2'
+    }
     return (
         <div>
-            <Button onClick={handleOpen}>Каталог</Button>
+            <Button
+              sx={btn}
+              onClick={handleOpen}
+            >Каталог
+            </Button>
             <Modal
               open={open}
               onClose={handleClose}

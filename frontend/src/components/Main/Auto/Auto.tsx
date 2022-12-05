@@ -14,14 +14,14 @@ function Auto():JSX.Element {
           spaceBetween={30}
           centeredSlides
           autoplay={{
-                    delay: 2500,
+                    delay: 5000,
                     disableOnInteraction: false,
                 }}
           pagination={{
                     clickable: true,
                 }}
           navigation
-          modules={[Autoplay, Pagination, Navigation]}
+          modules={[Autoplay, Navigation]}
           className="mySwiper"
         >
                 <SwiperSlide><img src="https://www.richardfarrar.com/wp-content/uploads/2008/06/mona300-thumb.jpg" alt="..." /></SwiperSlide>

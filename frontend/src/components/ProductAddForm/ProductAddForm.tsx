@@ -27,14 +27,13 @@ export default function ProductAddForm(): JSX.Element {
       article: data.get('article'),
       title: data.get('title'),
       description: data.get('description'),
-      // category: categories?.find((item) => item.title === category).id,
-      category: data.get('category'),
+      category: categories?.find((item) => item?.title === category)?.id,
     });
   };
 
   return (
     <Container maxWidth="lg">
-      <Box component="form" onSubmit={handleSubmit} sx={{ m: 2 }}>
+      <Box component="form" onSubmit={handleSubmit} sx={{ m: 1 }}>
         <Grid container spacing={5}>
           <Grid item xs={12} sm={6}>
             <TextField

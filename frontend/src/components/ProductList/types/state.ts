@@ -7,7 +7,7 @@ export interface Product {
   idCategory: number,
   images: [{
     path: string
-  }]
+  }],
 }
 export interface State {
   products: Product []

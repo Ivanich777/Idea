@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // import { useForm, SubmitHandler } from 'react-hook-form';
 // import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 import FormControl from '@mui/material/FormControl';
@@ -17,6 +18,7 @@ function Registration(): JSX.Element {
   // const { name } = useParams();
   // const { user } = useSelector((state: RootState) => state);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -41,7 +43,7 @@ function Registration(): JSX.Element {
     }),
     onSubmit: (values) => {
       dispatch(addAsyncUser(values));
-      console.log(values);
+      navigate('/');
     },
   });
   return (

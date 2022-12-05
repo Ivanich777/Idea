@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { State } from './types/state';
+import { State } from './OrderItem/state';
 
 export const addAsyncOrders = createAsyncThunk('orders/addAsyncOrders', () =>
   fetch('http://localhost:4000/api/profile')
@@ -24,7 +24,6 @@ const orderSlice = createSlice({
       })
       .addCase(addAsyncOrders.rejected, (state, action) => {
         state.error.message = action.error.message;
-        ;
       });
   }
 });

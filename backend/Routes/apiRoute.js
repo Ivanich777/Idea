@@ -9,6 +9,19 @@ router.get('/profile', async (req, res) => {
   res.json(orders);
 });
 
+router.get('/order/:idOrder', async (req, res) => {
+  const { idOrder } = req.params;
+  const orderItems = await db.OrderItem.findAll({
+    include: {
+      model: db.Product,
+      attributes: ['title', 'price'],
+    },
+    where: { idOrder },
+    raw: true,
+  });
+  res.json(orderItems);
+});
+
 router.get('/products', async (req, res) => {
   try {
     const products = await db.Product.findAll({

@@ -23,7 +23,6 @@ function Orders(): JSX.Element {
             <OrderCard order={order} />
           ))}
         </Box>
-
       )}
     </div>
   );

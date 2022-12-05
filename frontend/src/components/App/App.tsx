@@ -23,6 +23,7 @@ function App(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(addAsyncProducts());
+    
   }, []);
 
   const user = {

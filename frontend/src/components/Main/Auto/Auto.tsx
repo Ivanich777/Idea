@@ -24,11 +24,11 @@ function Auto():JSX.Element {
           modules={[Autoplay, Navigation]}
           className="mySwiper"
         >
-                <SwiperSlide><img src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2021/svetodiodnye-lampy-d-new-main-0102.jpg" alt="..." /></SwiperSlide>
-                <SwiperSlide><img src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/vygodnaya-pokupka-1210-d.jpg" alt="..." /></SwiperSlide>
-                <SwiperSlide><img src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/stilnaya-kuhnya-0112-d.jpg" alt="." /></SwiperSlide>
-                <SwiperSlide><img src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/tovary-dlya-sada-i-dachi-zima-2811-d.jpg" alt="..." /></SwiperSlide>
-                <SwiperSlide><img src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/super-ceny-0606-d-new.jpg" alt="..." /></SwiperSlide>
+                <SwiperSlide><img className='img' src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2021/svetodiodnye-lampy-d-new-main-0102.jpg" alt="..." /></SwiperSlide>
+                <SwiperSlide><img className='img' src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/vygodnaya-pokupka-1210-d.jpg" alt="..." /></SwiperSlide>
+                <SwiperSlide><img className='img' src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/stilnaya-kuhnya-0112-d.jpg" alt="." /></SwiperSlide>
+                <SwiperSlide><img className='img' src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/tovary-dlya-sada-i-dachi-zima-2811-d.jpg" alt="..." /></SwiperSlide>
+                <SwiperSlide><img className='img'src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/super-ceny-0606-d-new.jpg" alt="..." /></SwiperSlide>
         </Swiper>
     );
 }

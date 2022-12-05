@@ -9,22 +9,17 @@ router.get('/profile', async (req, res) => {
   res.json(orders);
 });
 
-router.get('/order', async (req, res) => {
-  // const id = req.session.userId;
-  const id = 1;
-  const orders = await db.Order.findAll({ where: { idUser: id } });
-  // const orders2 = await db.Order.findAll({
-  //   include: {
-  //     model: db.OrderItem,
-  //     attributes: ['idProduct', 'count'],
-  //     raw: true,
-  //   },
-  //   where: {
-  //     idUser: id,
-  //   },
-  //   raw: true,
-  // });
-  res.json(orders);
+router.get('/order/:idOrder', async (req, res) => {
+  const { idOrder } = req.params;
+  const orderItems = await db.OrderItem.findAll({
+    include: {
+      model: db.Product,
+      attributes: ['title', 'price'],
+    },
+    where: { idOrder },
+    raw: true,
+  });
+  res.json(orderItems);
 });
 
 router.get('/products', async (req, res) => {

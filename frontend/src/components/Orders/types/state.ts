@@ -10,5 +10,3 @@ export interface State {
     message?: string;
   };
 }
-
-// export type Action

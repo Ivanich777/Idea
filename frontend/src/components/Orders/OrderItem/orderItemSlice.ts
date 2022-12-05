@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { State } from './types/state';
 
-export const addAsyncOrders = createAsyncThunk('orders/addAsyncOrders', (idOrder) =>
+export const addAsyncOrderItems = createAsyncThunk('orders/addAsyncOrderItems', (idOrder) =>
   fetch(`http://localhost:4000/api/order/${idOrder}`)
     .then((result) => result.json())
     .then((data) => data));

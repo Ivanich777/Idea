@@ -30,7 +30,6 @@ function App(): JSX.Element {
 
   return (
     <div className="App">
-
       {!user.isAdmin && (
         <Routes>
           <Route path="/" element={<MainLayout />}>

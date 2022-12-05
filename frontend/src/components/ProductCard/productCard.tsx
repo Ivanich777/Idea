@@ -17,7 +17,7 @@ function ProductCard({ product }: { product:Product
     }
 
   return (
-    <Card sx={{ maxWidth: 170 }}>
+    <Card sx={{ width: 250, height: 350 }}>
       <CardActionArea>
         <CardMedia
           component="img"

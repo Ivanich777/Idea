@@ -1,5 +1,5 @@
 import { withTheme } from '@emotion/react';
-import { Box, Button, Modal, Typography } from '@mui/material';
+import { Box, Button, List, ListItem, Modal, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 function Catalog() {
@@ -39,13 +39,17 @@ function Catalog() {
               aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                    </ul>
+                    <List>
+                        <ListItem>
+                            1
+                        </ListItem>
+                        <ListItem>
+                            2
+                        </ListItem>
+                        <ListItem>
+                            3
+                        </ListItem>
+                    </List>
                 </Box>
             </Modal>
         </div>

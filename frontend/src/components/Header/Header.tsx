@@ -4,6 +4,8 @@ import { AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, 
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Outlet, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 export default function Header(): JSX.Element {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -16,10 +18,10 @@ export default function Header(): JSX.Element {
     setAnchorElNav(null);
   };
 
-  // const { user } = useSelector((state: RootState) => state.user);
-  const user = {
-    id: 1,
-  };
+  const { user } = useSelector((state: RootState) => state.users);
+  // const user = {
+  //   id: 1,
+  // };
 
   return (
     <>
@@ -73,7 +75,7 @@ export default function Header(): JSX.Element {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {user.id !== 0 && (
+              {user && (
                 <>
                   <MenuItem>
                     <Typography textAlign="center">
@@ -91,7 +93,7 @@ export default function Header(): JSX.Element {
                   </MenuItem>
                 </>
               )}
-              {user.id === 0 && (
+              {user && (
                 <>
                   <MenuItem>
                     <Typography textAlign="center">

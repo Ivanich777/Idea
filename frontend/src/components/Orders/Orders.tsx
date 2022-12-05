@@ -2,8 +2,9 @@ import { Box } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
-import OrderCard from './OrderCard';
+import OrderCard from './OrderItem/OrderCard';
 import { addAsyncOrders } from './orderSlice';
+
 
 function Orders(): JSX.Element {
   const dispatch = useAppDispatch();

@@ -1,4 +1,5 @@
-import { Box, Button, Modal, Typography } from '@mui/material';
+import { withTheme } from '@emotion/react';
+import { Box, Button, List, ListItem, Modal, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 function Catalog() {
@@ -16,9 +17,21 @@ function Catalog() {
         boxShadow: 24,
         p: 4,
     };
+    const btn = {
+        width: 200,
+        height: 50,
+        background: 'white',
+        marginRight: 30,
+        marginLeft: 30,
+        border: 'solid 1px #1976d2'
+    }
     return (
         <div>
-            <Button onClick={handleOpen}>Каталог</Button>
+            <Button
+              sx={btn}
+              onClick={handleOpen}
+            >Каталог
+            </Button>
             <Modal
               open={open}
               onClose={handleClose}
@@ -26,13 +39,17 @@ function Catalog() {
               aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                    </ul>
+                    <List>
+                        <ListItem>
+                            1
+                        </ListItem>
+                        <ListItem>
+                            2
+                        </ListItem>
+                        <ListItem>
+                            3
+                        </ListItem>
+                    </List>
                 </Box>
             </Modal>
         </div>

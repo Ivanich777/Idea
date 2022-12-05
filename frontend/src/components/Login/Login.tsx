@@ -5,10 +5,12 @@ import { TextField } from '@mui/material';
 import { Authlayput } from '../AuthLayout/AuthLayout';
 import { addAsyncUser } from '../Registration/authSlice';
 import { useAppDispatch } from '../../store';
+import { checkAsyncUser } from './logSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Login(): JSX.Element {
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -21,8 +23,8 @@ function Login(): JSX.Element {
       email: Yup.string().email('Некорректный email').required('Обязательное поле'),
     }),
     onSubmit: (values) => {
-      dispatch(addAsyncUser(values));
-      console.log(values);
+      dispatch(checkAsyncUser(values));
+      navigate('/');
     },
   });
   return (

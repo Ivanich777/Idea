@@ -16,21 +16,8 @@ const initialState: State = {
   },
 };
 
-// export const addAsyncUser =  createAsyncThunk('user/addAsyncUser',  (user) => {
-//   return fetch('https://localhost:4000/auth/registration',{
-//   method:'POST',
-//   credentials:'include',
-//   headers:{
-//     'Content-Type':'Application/json'
-//   },
-//   body:JSON.stringify(user)
-// })
-//     .then((result) => result.json())
-//     .then((data) => data));
-// })
 
 export const addAsyncUser = createAsyncThunk('user/addAsyncUser', async (data) => {
-  console.log(data);
 
   const res = await fetch('http://localhost:4000/auth/registration', {
     method: 'POST',
@@ -40,9 +27,6 @@ export const addAsyncUser = createAsyncThunk('user/addAsyncUser', async (data) =
     },
     body: JSON.stringify(data),
   });
-
-  console.log(res);
-
    return res.json();
 });
 

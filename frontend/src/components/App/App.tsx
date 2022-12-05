@@ -6,16 +6,16 @@ import Login from '../Login/Login';
 
 import { useAppDispatch } from '../../store';
 
-import Header from '../Header/Header';
+
+import { useAppDispatch } from '../../store';
 import HeaderAdmin from '../HeaderAdmin/HeaderAdmin';
-
 import Main from '../Main/Main';
-
 import MainLayout from '../MainLayout/MainLayout';
 import Orders from '../Orders/Orders';
 import ProductItem from '../ProductItem/ProductItem';
 import ProductList from '../ProductList/ProductList';
 import { addAsyncProducts } from '../ProductList/productSlice';
+import ProductAddForm from '../ProductAddForm/ProductAddForm';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -30,25 +30,23 @@ function App(): JSX.Element {
 
   return (
     <div className="App">
-
       {!user.isAdmin && (
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/main" element={<Main />} />
             <Route path="/profile" element={<Orders />} />
             <Route path="/product" element={<ProductList />} />
-              <Route path="/product/:productId" element={<ProductItem />} />
+            <Route path="/product/:productId" element={<ProductItem />} />
           </Route>
-                 <Route path="/auth/reg" element={<Registration />} />
-        <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/reg" element={<Registration />} />
+          <Route path="/auth/login" element={<Login />} />
         </Routes>
-        // </Routes>
       )}
       {user.isAdmin && (
         <Routes>
           <Route path="/" element={<HeaderAdmin />}>
             <Route path="/orders" element={<Orders />} />
-            <Route path="/product" element={<ProductList />} />
+            <Route path="/product" element={<><ProductAddForm /><ProductList /></>} />
           </Route>
         </Routes>
       )}

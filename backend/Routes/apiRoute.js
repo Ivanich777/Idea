@@ -13,6 +13,10 @@ router.get('/products', async (req, res) => {
   try {
     const products = await db.Product.findAll({
       raw: true,
+      include: {
+        model: db.Image,
+        raw: true,
+      },
     });
     res.json(products);
   } catch (e) {

@@ -3,13 +3,14 @@ export interface User {
   email:string,
   password: string,
   name: string,
-  surname: string,
-  admin: boolean,
-  phone: string,
 }
 
+export interface Res {
+  message: string, user: string
+}
 export interface State {
   user: User;
+  error:{
+    message?:string;
+  }
 }
-
-export type UserId = User['id'];

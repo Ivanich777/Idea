@@ -21,6 +21,7 @@ function App(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(addAsyncProducts());
+    
   }, []);
   return (
     <div className="App">

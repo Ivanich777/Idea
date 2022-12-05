@@ -1,8 +1,9 @@
 import { withTheme } from '@emotion/react';
 import { Box, Button, List, ListItem, Modal, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
-function Catalog() {
+function Catalog({ categories }) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -24,7 +25,7 @@ function Catalog() {
         marginRight: 30,
         marginLeft: 30,
         border: 'solid 1px #1976d2'
-    }
+    };
     return (
         <div>
             <Button
@@ -40,15 +41,15 @@ function Catalog() {
             >
                 <Box sx={style}>
                     <List>
-                        <ListItem>
-                            1
-                        </ListItem>
-                        <ListItem>
-                            2
-                        </ListItem>
-                        <ListItem>
-                            3
-                        </ListItem>
+                        {
+                            categories.map((el) => (
+                                <ListItem key={el.id}>
+                                    <NavLink to={`/categories/${el.title}`} style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                                        {el.title}
+                                    </NavLink>
+                                </ListItem>
+                            ))
+                        }
                     </List>
                 </Box>
             </Modal>

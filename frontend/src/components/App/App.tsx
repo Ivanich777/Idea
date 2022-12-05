@@ -12,6 +12,8 @@ import ProductList from '../ProductList/ProductList';
 import { addAsyncProducts } from '../ProductList/productSlice';
 import ProductAddForm from '../ProductAddForm/ProductAddForm';
 import { addAsyncCategories } from '../ProductAddForm/categorySlice';
+import Category from '../Category/Category';
+
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -34,6 +36,7 @@ function App(): JSX.Element {
             <Route path="/profile" element={<Orders />} />
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
+            <Route path="/categories/:categoryId" element={<Category />} />
           </Route>
             <Route path="/auth/reg" element={<Registration />} />
           <Route path="/auth/login" element={<Login />} />

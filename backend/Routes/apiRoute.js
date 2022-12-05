@@ -4,8 +4,12 @@ const db = require('../db/models');
 router.get('/profile', async (req, res) => {
   const id = req.session.userId;
   // const id = 1;
-  const orders = await db.Order.findAll({ where: { idUser: id } });
-  res.json(orders);
+  if (id) {
+    const orders = await db.Order.findAll({ where: { idUser: id } });
+    res.json(orders);
+  } else {
+    res.json({ error: { message: 'У вас нет заказов' } });
+  }
 });
 
 router.get('/order/:idOrder', async (req, res) => {

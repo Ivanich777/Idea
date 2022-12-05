@@ -10,12 +10,7 @@ function Orders(): JSX.Element {
   useEffect(() => {
     dispatch(addAsyncOrders());
   }, []);
-  // const { orders } = useSelector((state: RootState) => state.orders);
   const answerFromBack = useSelector((state: RootState) => state.orders);
-  // const { error } = useSelector((state: RootState) => state.orders);
-
-  console.log(answerFromBack, 'answerFromBack');
-
   return (
     <div>
       <div>Заказы</div>

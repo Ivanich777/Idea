@@ -20,17 +20,10 @@ const orderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addAsyncOrders.fulfilled, (state, action) => {
-          // state.orders = action.payload;
-          // state.error.message = action.payload.error.message;
-          // console.log(action.payload, 'state.orders');
-          // console.log(action.payload, '123');
-
         if (!action.payload.error) {
           state.orders = action.payload;
-          console.log(action.payload, 'state.orders');
         } else {
           state.error.message = action.payload.error.message;
-          console.log(state.error.message, 'state.error.message');
         }
       })
       .addCase(addAsyncOrders.rejected, (state, action) => {

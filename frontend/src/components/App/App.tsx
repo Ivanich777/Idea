@@ -14,6 +14,7 @@ import ProductAddForm from '../ProductAddForm/ProductAddForm';
 import { addAsyncCategories } from '../ProductAddForm/categorySlice';
 import Category from '../Category/Category';
 
+
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -23,7 +24,7 @@ function App(): JSX.Element {
 
   const user = {
     id: 1,
-    isAdmin: false,
+    isAdmin: true,
   };
 
   return (

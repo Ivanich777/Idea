@@ -24,4 +24,9 @@ router.get('/products', async (req, res) => {
   }
 });
 
+router.get('/category', async (req, res) => {
+  const categories = await db.Category.findAll({ raw: true });
+  res.json(categories);
+});
+
 module.exports = router;

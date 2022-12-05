@@ -41,7 +41,7 @@ function Main():JSX.Element {
             <Box style={{
                 width: '1340px',
                 height: '320px',
-                marginBottom: '45px' }}
+                marginBottom: '40px' }}
             >
                 <Auto />
             </Box>

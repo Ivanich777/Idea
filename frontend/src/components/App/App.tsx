@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Registration from '../Registration/Registration';
-
 import Login from '../Login/Login';
-
-import { useAppDispatch } from '../../store';
-
-
 import { useAppDispatch } from '../../store';
 import HeaderAdmin from '../HeaderAdmin/HeaderAdmin';
 import Main from '../Main/Main';
@@ -33,7 +28,7 @@ function App(): JSX.Element {
       {!user.isAdmin && (
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route path="/main" element={<Main />} />
+            <Route path="/" element={<Main />} />
             <Route path="/profile" element={<Orders />} />
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />

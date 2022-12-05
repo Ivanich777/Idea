@@ -97,14 +97,14 @@ export default function Header(): JSX.Element {
                 <>
                   <MenuItem>
                     <Typography textAlign="center">
-                      <NavLink to="/registration" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                      <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
                         Регистрация
                       </NavLink>
                     </Typography>
                   </MenuItem>
                   <MenuItem>
                     <Typography textAlign="center" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                      <NavLink to="/login">
+                      <NavLink to="/auth/login">
                         Войти
                       </NavLink>
                     </Typography>
@@ -171,7 +171,7 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="/registration" style={{ textDecoration: 'none', color: 'white' }}>
+                  <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'white' }}>
                     Регистрация
                   </NavLink>
                 </Button>
@@ -179,7 +179,7 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="/login" style={{ textDecoration: 'none', color: 'white' }}>
+                  <NavLink to="/auth/login" style={{ textDecoration: 'none', color: 'white' }}>
                     Войти
                   </NavLink>
                 </Button>

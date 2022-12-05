@@ -25,12 +25,12 @@ router.get('/order/:idOrder', async (req, res) => {
 router.get('/products', async (req, res) => {
   try {
     const products = await db.Product.findAll({
-      raw: true,
-      include: {
+      include: [{
         model: db.Image,
-        raw: true,
-      },
+        attributes: ['path'],
+      }],
     });
+    // console.log(products);
     res.json(products);
   } catch (e) {
     console.log(e.message);

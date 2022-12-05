@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Registration from '../Registration/Registration';
 
-
 import Login from '../Login/Login';
 
 import { useAppDispatch } from '../../store';
@@ -16,9 +15,7 @@ import Orders from '../Orders/Orders';
 import ProductItem from '../ProductItem/ProductItem';
 import ProductList from '../ProductList/ProductList';
 import { addAsyncProducts } from '../ProductList/productSlice';
-
 import ProductAddForm from '../ProductAddForm/ProductAddForm';
-
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -28,7 +25,7 @@ function App(): JSX.Element {
 
   const user = {
     id: 1,
-    isAdmin: true,
+    isAdmin: false,
   };
 
   return (

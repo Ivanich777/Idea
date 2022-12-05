@@ -4,7 +4,9 @@ export interface Product {
   title: string,
   description: string,
   price: number,
-  image: string
+  images: [{
+    path: string
+  }]
 }
 export interface State {
   products: Product []

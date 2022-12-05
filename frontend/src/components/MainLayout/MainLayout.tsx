@@ -1,16 +1,18 @@
-import React from 'react';
-import { Box } from '@mui/material';
+import React from "react";
+import { Box } from "@mui/material";
 
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import { useSelector } from "react-redux";
 
 function MainLayout(): JSX.Element {
-  // const isAuth = useSelector(state => state.isAuth)
+  const isAuth = useSelector(state => state)
+  console.log(isAuth)
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
+    <Box sx={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}>
       <Header />
-      <Box sx={{ display: 'flex', flexGrow: 1 }} />
+      <Box sx={{ display: "flex", flexGrow: 1 }} />
       <Footer />
     </Box>
   );

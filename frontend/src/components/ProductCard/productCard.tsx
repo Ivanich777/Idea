@@ -4,14 +4,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { Product } from '../ProductList/types/state';
 
 function ProductCard({ product }: { product:Product
  }):JSX.Element {
-    // const { products } = useSelector((state:RootState) => state.products);
     const navigate = useNavigate();
 
     function handleNav():void {
@@ -19,13 +17,13 @@ function ProductCard({ product }: { product:Product
     }
 
   return (
-    <Card sx={{ maxWidth: 250 }}>
+    <Card sx={{ maxWidth: 170 }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
           width="100"
-          image={product?.image}
+          image={product?.Images[0].path}
           alt="product"
         />
         <CardContent onClick={handleNav}>

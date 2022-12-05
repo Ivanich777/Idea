@@ -1,10 +1,9 @@
-import Registration from "../Registration/Registration";
-
-import Login from "../Login/Login";
-
 import React, { useEffect } from 'react';
-
 import { Route, Routes } from 'react-router-dom';
+import Registration from '../Registration/Registration';
+
+import Login from '../Login/Login';
+
 import { useAppDispatch } from '../../store';
 
 import Header from '../Header/Header';
@@ -18,7 +17,6 @@ import ProductItem from '../ProductItem/ProductItem';
 import ProductList from '../ProductList/ProductList';
 import { addAsyncProducts } from '../ProductList/productSlice';
 
-
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -27,7 +25,7 @@ function App(): JSX.Element {
 
   const user = {
     id: 1,
-    isAdmin: true,
+    isAdmin: false,
   };
 
   return (
@@ -36,15 +34,15 @@ function App(): JSX.Element {
       {!user.isAdmin && (
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route path="/main" element={<Header />} />
+            <Route path="/main" element={<Main />} />
             <Route path="/profile" element={<Orders />} />
             <Route path="/product" element={<ProductList />} />
               <Route path="/product/:productId" element={<ProductItem />} />
           </Route>
                  <Route path="/auth/reg" element={<Registration />} />
         <Route path="/auth/login" element={<Login />} />
-      </Routes>
         </Routes>
+        // </Routes>
       )}
       {user.isAdmin && (
         <Routes>

@@ -30,14 +30,14 @@ function Main():JSX.Element {
             </Box>
             <Box style={{
                 width: '1340px',
-                height: '320px',
-                margin: '15px' }}>
-                <Scroll />
+                height: '420px',
+                margin: '75px' }}>
+                <Scroll products = {products} />
             </Box>
             <Box style={{
                 width: '1340px',
                 height: '320px',
-                margin: '15px' }}>
+                marginBottom: '45px' }}>
                 <Auto />
             </Box>
 

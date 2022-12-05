@@ -6,31 +6,34 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import './scroll.css';
+import ProductCard from '../../ProductCard/productCard';
 
-function Scroll(): JSX.Element {
+function Scroll({products}): JSX.Element {
+
+  const scrollItem = products.slice(0,11)
+  
   return (
     <Swiper
       slidesPerView={5}
       spaceBetween={30}
-      slidesPerGroup={3}
+      slidesPerGroup={1}
       loop
       loopFillGroupWithBlank
       pagination={{
           clickable: true,
         }}
       navigation
-      modules={[Pagination, Navigation]}
+      modules={[Navigation]}
       className="mySwiper"
     >
-        <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
-        <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
-        <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
-        <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
-        <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
-        <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
-        <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
-        <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
-        <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
+      {
+        scrollItem.map((item) => (
+        <SwiperSlide key={item.id}>
+          <ProductCard product={item}/>
+        </SwiperSlide>
+      )
+        )
+      }
     </Swiper>
   );
 }

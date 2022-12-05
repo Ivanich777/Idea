@@ -9,12 +9,12 @@ function Category():JSX.Element {
   const { products } = useSelector((state: RootState) => state.products);
   const { categories } = useSelector((state:RootState) => state.categories);
   const catObj = categories.find((el) => el.title === categoryId);
-  const list = products.filter((el) => el.idCategory === catObj?.id)
-  
+  const list = products.filter((el) => el.idCategory === catObj?.id);
+
   return (
    <div className="box">
-    <h1 style={{textAlign:'center'}}>{categoryId}</h1>
-    <ul style={{ display: 'flex', flexDirection: 'raw' }}>
+    <h1 style={{ textAlign: 'center' }}>{categoryId}</h1>
+    <ul style={{ display: 'flex', flexDirection: 'row' }}>
           {list.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

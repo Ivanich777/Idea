@@ -7,10 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { State } from './types/state';
+import { NamedTupleMember } from 'typescript';
+import { OrderItem } from './types/state';
 
 interface IModel {
-  orderItems: State,
+  orderItems: OrderItem[],
   showModal: boolean,
   handleManualClose: () => void,
 }
@@ -29,9 +30,16 @@ function ModalInfo({ orderItems, showModal, handleManualClose }: IModel): JSX.El
     fontSize: '12px'
   };
 
-  function sum() {
-    const arrWithOrder = orderItems.map((orderItem) => orderItem.count > 1 ? (orderItem['Product.price'] * orderItem.count) : orderItem['Product.price']);
-    const wasd = arrWithOrder.reduce((sum, orderItem) => sum + orderItem, 0);
+  function sum(): number {
+    const arrWithOrder: number[] = orderItems.map((order: OrderItem) => {
+      if (order) {
+        return order.count > 1 ?
+          (order['Product.price'] * order.count) :
+          order['Product.price'];
+      }
+        return 0;
+    });
+    const wasd:number = arrWithOrder.reduce((summa, price) => summa + price, 0);
     return wasd;
   }
 
@@ -70,7 +78,7 @@ function ModalInfo({ orderItems, showModal, handleManualClose }: IModel): JSX.El
                     </TableCell>
                     <TableCell align="left">{orderItem['Product.price']}</TableCell>
                     <TableCell align="left">{orderItem.count}</TableCell>
-                    <TableCell align="rigth">{orderItem.count * orderItem['Product.price']}</TableCell>
+                    <TableCell align="right">{orderItem.count * orderItem['Product.price']}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

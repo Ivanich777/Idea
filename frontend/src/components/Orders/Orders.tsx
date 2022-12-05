@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
 import OrderCard from './OrderItem/OrderCard';
+import { OrderItem } from './OrderItem/types/state';
 import { addAsyncOrders } from './orderSlice';
 
 function Orders(): JSX.Element {
@@ -18,7 +19,7 @@ function Orders(): JSX.Element {
         <Typography>{answerFromBack.error.message}</Typography>
       ) : (
         <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-          {answerFromBack.orders.map((order) => (
+          {answerFromBack.orders.map((order: any) => (
             <OrderCard order={order} />
           ))}
         </Box>

@@ -23,7 +23,7 @@ function ProductCard({ product }: { product:Product
           component="img"
           height="140"
           width="100"
-          image={product?.Images[0].path}
+          image={product?.images[0].path}
           alt="product"
         />
         <CardContent onClick={handleNav}>

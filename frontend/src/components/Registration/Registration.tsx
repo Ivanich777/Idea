@@ -55,7 +55,8 @@ function Registration(): JSX.Element {
         label="Email"
         value={formik.values.email}
         onChange={formik.handleChange}
-        error={formik.touched.email && formik.errors.email}
+        error={formik.touched.email}
+        // error={formik.touched.email && formik.errors.email}
       />
       {formik.touched.email && formik.errors.email ? (
         <div style={{ color: 'red' }}>{formik.errors.email}</div>

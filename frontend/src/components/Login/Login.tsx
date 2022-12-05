@@ -2,11 +2,11 @@ import React from 'react';
 import { useFormik, Formik } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { Authlayput } from '../AuthLayout/AuthLayout';
 import { addAsyncUser } from '../Registration/authSlice';
 import { useAppDispatch } from '../../store';
 import { checkAsyncUser } from './logSlice';
-import { useNavigate } from 'react-router-dom';
 
 function Login(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -35,7 +35,8 @@ function Login(): JSX.Element {
         label="Email"
         value={formik.values.email}
         onChange={formik.handleChange}
-        error={formik.touched.email && formik.errors.email}
+        error={formik.touched.email}
+        // error={formik.touched.email && formik.errors.email}
       />
       {formik.touched.email && formik.errors.email ? (
         <div style={{ color: 'red' }}>{formik.errors.email}</div>

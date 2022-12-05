@@ -7,11 +7,11 @@ import 'swiper/css/navigation';
 
 import './scroll.css';
 import ProductCard from '../../ProductCard/productCard';
+import { Product } from '../../ProductList/types/state';
 
-function Scroll({products}): JSX.Element {
+function Scroll({ products }: { products: Product[] }): JSX.Element {
+  const scrollItem = products.slice(0, 11);
 
-  const scrollItem = products.slice(0,11)
-  
   return (
     <Swiper
       slidesPerView={5}
@@ -29,7 +29,7 @@ function Scroll({products}): JSX.Element {
       {
         scrollItem.map((item) => (
         <SwiperSlide key={item.id}>
-          <ProductCard product={item}/>
+          <ProductCard product={item} />
         </SwiperSlide>
       )
         )

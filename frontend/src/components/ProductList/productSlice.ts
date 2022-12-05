@@ -27,7 +27,6 @@ const productSlice = createSlice({
             state.products = action.payload;
             state.products.forEach((item, i) => {
                  item.images = action.payload[i]['Images.path'];
-                //  console.log(item.article);
             });
         })
         .addCase(addAsyncProduct.fulfilled, (state, action) => {

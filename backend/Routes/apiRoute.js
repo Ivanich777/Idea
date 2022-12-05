@@ -33,7 +33,6 @@ router.get('/products', async (req, res) => {
         attributes: ['path'],
       }],
     });
-    // console.log(products);
     res.json(products);
   } catch (e) {
     console.log(e.message);

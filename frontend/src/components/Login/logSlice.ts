@@ -13,11 +13,10 @@ const initialState: State = {
   },
 };
 
-export const checkAsyncUser = createAsyncThunk('users/checkAsyncUser', async (data)=> {
-
-const res = await fetch('http://localhost:4000/auth/login',{
-  method:'POST',
-  credentials:'include',
+export const checkAsyncUser = createAsyncThunk('users/checkAsyncUser', async (data: any) => {
+const res = await fetch('http://localhost:4000/auth/login', {
+  method: 'POST',
+  credentials: 'include',
   headers: {
     'Content-Type': 'Application/json',
   },
@@ -26,12 +25,11 @@ const res = await fetch('http://localhost:4000/auth/login',{
 return res.json();
 });
 
-
 const loginUserSlice = createSlice({
-  name:'user',
+  name: 'user',
   initialState,
-  reducers:{},
-  extraReducers:(builder)=> {
+  reducers: {},
+  extraReducers: (builder) => {
     builder
     .addCase(checkAsyncUser.fulfilled, (state, action) => {
       state.user = action.payload;
@@ -40,7 +38,6 @@ const loginUserSlice = createSlice({
       state.error.message = action.error.message;
     });
   }
-})
-
+});
 
 export default loginUserSlice.reducer;

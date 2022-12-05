@@ -13,7 +13,7 @@ function ProductItem():JSX.Element {
     <Box sx={{ display: 'flex', justifyContent: 'center', margin: '50px' }}>
     <Box sx={{ display: 'flex', flexDirection: 'column', margin: '20px' }}>
 
-   <img src={product?.Images[0].path} alt="prod_img" style={{ width: '300px', height: '350px' }} />
+   <img src={product?.images[0].path} alt="prod_img" style={{ width: '300px', height: '350px' }} />
    <CardActions>
         <Button size="small" color="primary">
           В корзину

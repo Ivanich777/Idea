@@ -2,8 +2,9 @@ import { withTheme } from '@emotion/react';
 import { Box, Button, List, ListItem, Modal, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { Category } from '../../ProductAddForm/types/state';
 
-function Catalog({ categories }) {
+function Catalog({ categories } : { categories: Category[] }):JSX.Element {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);

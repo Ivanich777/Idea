@@ -16,9 +16,7 @@ const initialState: State = {
   },
 };
 
-
-export const addAsyncUser = createAsyncThunk('user/addAsyncUser', async (data) => {
-
+export const addAsyncUser = createAsyncThunk('user/addAsyncUser', async (data: any) => {
   const res = await fetch('http://localhost:4000/auth/registration', {
     method: 'POST',
     credentials: 'include',

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { State } from './OrderItem/state';
+import { State } from './types/state';
 
 export const addAsyncOrders = createAsyncThunk('orders/addAsyncOrders', () =>
   fetch('http://localhost:4000/api/profile')

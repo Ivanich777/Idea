@@ -11,16 +11,18 @@ import ProductItem from '../ProductItem/ProductItem';
 import ProductList from '../ProductList/ProductList';
 import { addAsyncProducts } from '../ProductList/productSlice';
 import ProductAddForm from '../ProductAddForm/ProductAddForm';
+import { addAsyncCategories } from '../ProductAddForm/categorySlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(addAsyncProducts());
+    dispatch(addAsyncCategories());
   }, []);
 
   const user = {
     id: 1,
-    isAdmin: false,
+    isAdmin: true,
   };
 
   return (

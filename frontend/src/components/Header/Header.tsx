@@ -88,7 +88,7 @@ export default function Header(): JSX.Element {
                   </MenuItem>
                   <MenuItem>
                     <Typography textAlign="center">
-                      <NavLink to="/logout" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                      <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
                         Выход
                       </NavLink>
                     </Typography>
@@ -161,7 +161,7 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="auth/logout" style={{ textDecoration: 'none', color: 'white' }}>
+                  <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'white' }}>
                     Выход
                   </NavLink>
                 </Button>

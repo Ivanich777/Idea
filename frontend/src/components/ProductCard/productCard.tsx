@@ -19,7 +19,9 @@ function ProductCard({ product }: {
 }): JSX.Element {
   const navigate = useNavigate();
 
+
   const { user } = useSelector((state: RootState) => state.users);
+
   const handleNav = (): void => {
     navigate(`/product/${product.id}`);
   };

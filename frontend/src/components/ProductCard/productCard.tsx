@@ -12,6 +12,7 @@ import { Product } from '../ProductList/types/state';
 import { delAsyncProduct } from '../ProductList/productSlice';
 import EditModal from './editModal/editModal';
 import AuthModal from './authModal/AuthModal';
+import { addNewOrder } from './basketSlice';
 
 function ProductCard({ product }: {
   product: Product
@@ -19,7 +20,6 @@ function ProductCard({ product }: {
   const navigate = useNavigate();
 
   const { user } = useSelector((state: RootState) => state.users);
-  console.log(user);
   const handleNav = (): void => {
     navigate(`/product/${product.id}`);
   };
@@ -29,6 +29,12 @@ function ProductCard({ product }: {
     dispatch(delAsyncProduct(product.id!));
   };
 
+  const handleClick = ():void => {
+    const obj = {idProduct: product.id, userId: user.id}
+    dispatch(addNewOrder(obj))
+  }
+
+  
   return (
     <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite' }}>
       <CardActionArea>
@@ -96,6 +102,7 @@ function ProductCard({ product }: {
                 size="small"
                 color="primary"
                 style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+                onClick={handleClick}
               >
                 В корзину
               </Button>) : (

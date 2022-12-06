@@ -10,6 +10,9 @@ import Scroll from './Scroll/Scroll';
 function Main():JSX.Element {
   const { products } = useSelector((state:RootState) => state.products);
   const { categories } = useSelector((state:RootState) => state.categories);
+  const { basket } = useSelector((state:RootState) => state.basket);
+  console.log(basket);
+  
     return (
         <Box style={{
             display: 'flex',

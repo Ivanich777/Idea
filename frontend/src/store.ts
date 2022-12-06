@@ -6,6 +6,7 @@ import productSlice from './components/ProductList/productSlice';
 import orderSlice from './components/Orders/orderSlice';
 import categorySlice from './components/ProductAddForm/categorySlice';
 import orderItemSlice from './components/Orders/OrderItem/orderItemSlice';
+import basketSlice from './components/ProductCard/basketSlice';
 
 
 const store = configureStore({
@@ -15,6 +16,7 @@ const store = configureStore({
     orders: orderSlice,
     categories: categorySlice,
     orderItems: orderItemSlice,
+    basket: basketSlice,
   },
 });
 export default store;

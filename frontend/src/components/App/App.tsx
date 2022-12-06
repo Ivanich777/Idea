@@ -23,26 +23,27 @@ import { addAsyncCategories } from '../ProductAddForm/categorySlice';
 import Category from '../Category/Category';
 import { addAsyncUser, checkAsyncUser, getUser } from '../Auth/authSlice';
 import Logout from '../Auth/Logout/Logout';
+import { actualOrder } from '../ProductCard/basketSlice';
 
 function App(): JSX.Element {
+  const { user } = useSelector((state: RootState) => state.users);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(addAsyncProducts());
-    dispatch(addAsyncCategories());
-  }, []);
   useEffect(() => {
     dispatch(getUser());
   }, []);
-const { user } = useSelector((state:RootState) => state.users);
-console.log(user);
+  useEffect(() => {
+    dispatch(addAsyncProducts());
+    dispatch(addAsyncCategories());
+    dispatch(actualOrder(user.id!))
+  }, []);
 
   return (
     <div className="App">
-         {!user && (
+      {!user && (
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<Main />} />
-             {/* <Route path="/profile" element={<Orders />} /> */}
+            {/* <Route path="/profile" element={<Orders />} /> */}
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
           </Route>
@@ -67,7 +68,7 @@ console.log(user);
       {user?.admin && (
         <Routes>
           <Route path="/" element={<HeaderAdmin />}>
-          <Route path="/auth/logout" element={<Logout />} />
+            <Route path="/auth/logout" element={<Logout />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/product" element={<><ProductAddForm id={0} /><ProductList /></>} />
             <Route path="/product/:productId" element={<ProductItem />} />

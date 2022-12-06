@@ -145,14 +145,6 @@ export default function ProductAddForm(): JSX.Element {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ width: '100%', mb: 1 }}
-            >
-              Добавить изображение
-            </Button>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
             >
               Добавить товар
             </Button>

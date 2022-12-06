@@ -1,10 +1,11 @@
 import { Avatar, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import FolderIcon from '@mui/icons-material/Folder';
 import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState, useAppDispatch } from '../../store';
+import { actualOrder } from '../ProductCard/basketSlice';
 
 
 
@@ -12,7 +13,18 @@ function Basket() {
   const Demo = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
   }));
-  const {basket} = useSelector((state:RootState) => state.basket)
+  const { user } = useSelector((state: RootState) => state.users);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(actualOrder(user.id!));
+  }, []);
+  const {basket} = useSelector((state:RootState) => state.basket);
+  const {products} = useSelector((state:RootState) => state.products)
+  const bs = basket.map((item)=>{
+    const product = products.find((el) => el.id === item.idProduct)
+    return product
+  })
+  
   return (
     <div>
       <Grid item xs={12} md={6} sx={{ width: '800px', margin: '100px' }}>
@@ -21,17 +33,19 @@ function Basket() {
         </Typography>
         <Demo>
           <List >
-            <ListItem
+            {
+              bs.map((item) =>
+              <ListItem
               secondaryAction={
                 <IconButton edge="end" aria-label="delete">
                   <DeleteIcon />
                 </IconButton>
               }
             >
-              <ListItemText
-                primary="Single-line item"
-              />
+              {item?.title} {' '} {item?.price} {' рублей'}
             </ListItem>
+              )
+            }
           </List>
         </Demo>
       </Grid>

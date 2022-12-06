@@ -9,8 +9,10 @@ export interface Product {
     path: string
   }],
 }
+
 export interface State {
-  products: Product []
+  products: Product [],
+  images: [],
 }
 
 export type productId = Product['id'];

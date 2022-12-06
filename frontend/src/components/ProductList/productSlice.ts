@@ -13,8 +13,16 @@ export const addAsyncProduct = createAsyncThunk('products/addAsyncProduct', (pro
     .then((result) => result.json())
     .then((data) => data));
 
+export const addAsyncImages = createAsyncThunk('products/addAsyncImages', (files: any) => fetch('http://localhost:4000/api/images', {
+    method: 'post',
+    body: files,
+})
+    .then((result) => result.json())
+    .then((data) => data));
+
 const initialState: State = {
-    products: []
+    products: [],
+    images: [],
 };
 
 const productSlice = createSlice({
@@ -32,6 +40,10 @@ const productSlice = createSlice({
         .addCase(addAsyncProduct.fulfilled, (state, action) => {
             // console.log(action.payload);
             state.products.push(action.payload);
+        })
+        .addCase(addAsyncImages.fulfilled, (state, action) => {
+            // console.log(action.payload);
+            state.images = action.payload;
         });
     }
  });

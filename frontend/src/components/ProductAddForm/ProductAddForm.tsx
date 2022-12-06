@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
-import { addAsyncProduct } from '../ProductList/productSlice';
+import { addAsyncImages, addAsyncProduct } from '../ProductList/productSlice';
 
 export default function ProductAddForm(): JSX.Element {
   const [category, setCategory] = React.useState('');
   const [article, setArticle] = React.useState('');
   const [title, setTitle] = React.useState('');
-  const [description, setDescription] = React.useState('');
   const [image, setImage] = React.useState('');
+  const [description, setDescription] = React.useState('');
   const [count, setCount] = React.useState('');
   const [price, setPrice] = React.useState('');
 
@@ -20,7 +20,17 @@ export default function ProductAddForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const { categories } = useSelector((state: RootState) => state.categories);
-  const { products } = useSelector((state: RootState) => state.products);
+  const { products, images } = useSelector((state: RootState) => state.products);
+
+  const handleChangleFiles = (event: any): void => {
+    setImage(event.target.value);
+    const pictures = [...event.target.files];
+    const newFile = new FormData();
+    pictures.forEach((img) => {
+      newFile.append('homesImg', img);
+    });
+    dispatch(addAsyncImages(newFile));
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -30,7 +40,7 @@ export default function ProductAddForm(): JSX.Element {
       title: data.get('title'),
       description: data.get('description'),
       category: categories?.find((item) => item?.title === category)?.id,
-      image: data.get('image'),
+      images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
       count: data.get('count'),
       price: data.get('price'),
     };
@@ -41,8 +51,9 @@ export default function ProductAddForm(): JSX.Element {
       dispatch(addAsyncProduct(newProduct));
       setArticle('');
       setTitle('');
-      setDescription('');
       setImage('');
+      // uploadFiles?.current.value = '';
+      setDescription('');
       setCount('');
       setPrice('');
     }
@@ -130,16 +141,13 @@ export default function ProductAddForm(): JSX.Element {
               rows={6}
               sx={{ width: '100%', mb: 1 }}
             />
-            <TextField
-              required
+            <input
               value={image}
-              onChange={(e) => setImage(e.target.value)}
-              id="image"
-              name="image"
-              label="Изображение"
-              fullWidth
-              variant="outlined"
-              sx={{ mb: 1 }}
+              name="images"
+              type="file"
+              onChange={handleChangleFiles}
+              multiple
+              required
             />
             <Button
               type="submit"

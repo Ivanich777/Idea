@@ -13,19 +13,19 @@ export const addAsyncProduct = createAsyncThunk('products/addAsyncProduct', (pro
     .then((result) => result.json())
     .then((data) => data));
 
-
 export const delAsyncProduct = createAsyncThunk('products/delAsyncProducts', (id:number) => fetch(`http://localhost:4000/api/product/${id}`, {
     method: 'delete'
 })
     .then((result) => result.json())
     .then((data) => data));
-    export const editAsyncProduct = createAsyncThunk('products/editAsyncProducts', (product: any) => fetch(`http://localhost:4000/api/product/${product.id}`, {
-        method: 'put',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(product),
-    })
-        .then((result) => result.json())
-        .then((data) => data));
+
+export const editAsyncProduct = createAsyncThunk('products/editAsyncProducts', (product: any) => fetch(`http://localhost:4000/api/product/${product.id}`, {
+    method: 'put',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify(product),
+})
+    .then((result) => result.json())
+    .then((data) => data));
 
 export const addAsyncImages = createAsyncThunk('products/addAsyncImages', (files: any) => fetch('http://localhost:4000/api/images', {
     method: 'post',

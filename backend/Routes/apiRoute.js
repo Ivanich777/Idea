@@ -3,14 +3,22 @@ const path = require('path');
 const db = require('../db/models');
 
 router.get('/profile', async (req, res) => {
-  const id = req.session.userId;
-  // const id = 1;
-  if (id) {
-    const orders = await db.Order.findAll({ where: { idUser: id } });
-    res.json(orders);
-  } else {
-    res.json({ error: { message: 'У вас нет заказов' } });
-  }
+  // const id = req.session.userId;
+  // // const id = 1;
+  // if (id) {
+  //   const orders = await db.Order.findAll({ where: { idUser: id } });
+  //   res.json(orders);
+  // } else {
+  //   res.json({ error: { message: 'У вас нет заказов' } });
+  // }
+  const orders = await db.Order.findAll({
+    include: {
+      model: db.User,
+      attributes: ['email'],
+      raw: true,
+    },
+  });
+  res.json(orders);
 });
 
 router.get('/order/:idOrder', async (req, res) => {
@@ -24,6 +32,19 @@ router.get('/order/:idOrder', async (req, res) => {
     raw: true,
   });
   res.json(orderItems);
+});
+
+router.put('/order/:idOrder', async (req, res) => {
+  const { idOrder } = req.params;
+  const { status } = req.body;
+
+  const result = await db.Order.update({
+    status,
+  }, {
+    where: { id: Number(idOrder) },
+    raw: true,
+  });
+  res.json('success');
 });
 
 router.get('/products', async (req, res) => {
@@ -112,6 +133,7 @@ router.delete('/product/:id', async (req, res) => {
   await db.Product.destroy({ where: { id } });
   res.json(Number(id));
 });
+
 router.put('/product/:id', async (req, res) => {
   const {
     id,

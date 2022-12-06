@@ -9,14 +9,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { NamedTupleMember } from 'typescript';
 import { OrderItem } from './types/state';
+import { Order } from '../types/state';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 interface IModel {
+  order: Order,
   orderItems: OrderItem[],
   showModal: boolean,
   handleManualClose: () => void,
 }
 
-function ModalInfo({ orderItems, showModal, handleManualClose }: IModel): JSX.Element {
+function ModalInfo({ order, orderItems, showModal, handleManualClose }: IModel): JSX.Element {
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -37,11 +41,18 @@ function ModalInfo({ orderItems, showModal, handleManualClose }: IModel): JSX.El
           (order['Product.price'] * order.count) :
           order['Product.price'];
       }
-        return 0;
+      return 0;
     });
-    const wasd:number = arrWithOrder.reduce((summa, price) => summa + price, 0);
+    const wasd: number = arrWithOrder.reduce((summa, price) => summa + price, 0);
     return wasd;
   }
+
+  const getDate = (string: string): string => {
+    const date = new Date(Date.parse(string));
+    return `${date.toLocaleDateString()}  ${date.toLocaleTimeString()}`;
+  };
+
+  const { user } = useSelector((state: RootState) => state.users);
 
   return (
     <div>
@@ -53,13 +64,21 @@ function ModalInfo({ orderItems, showModal, handleManualClose }: IModel): JSX.El
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Ваш заказ:
+            {user?.admin
+              ? (
+                <>
+                  Номер: {order.id}<br />
+                  Дата: {getDate(order.createdAt)}<br />
+                  Пользователь: {order.email}
+                </>
+              )
+              : 'Ваш заказ'}
           </Typography>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Номер заказа</TableCell>
+                  <TableCell>Номер</TableCell>
                   <TableCell align="left">Название товара</TableCell>
                   <TableCell align="left">Цена, 1 шт/руб</TableCell>
                   <TableCell align="left">Количество</TableCell>

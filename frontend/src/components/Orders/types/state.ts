@@ -1,7 +1,9 @@
 export interface Order {
   id: number,
   idUser: number,
-  status: string
+  email?: string,
+  status: string,
+  createdAt: string,
 }
 
 export interface State {

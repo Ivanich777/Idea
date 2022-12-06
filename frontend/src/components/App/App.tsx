@@ -23,18 +23,21 @@ import { addAsyncCategories } from '../ProductAddForm/categorySlice';
 import Category from '../Category/Category';
 import { addAsyncUser, checkAsyncUser, getUser } from '../Auth/authSlice';
 import Logout from '../Auth/Logout/Logout';
+import { addAsyncOrders } from '../Orders/orderSlice';
 
 function App(): JSX.Element {
+  const { user } = useSelector((state:RootState) => state.users);
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(addAsyncProducts());
+    dispatch(addAsyncOrders());
     dispatch(addAsyncCategories());
   }, []);
+
   useEffect(() => {
     dispatch(getUser());
   }, []);
-const { user } = useSelector((state:RootState) => state.users);
-console.log(user);
 
   return (
     <div className="App">

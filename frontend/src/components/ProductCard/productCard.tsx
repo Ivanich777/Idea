@@ -17,12 +17,8 @@ function ProductCard({ product }: {
 }): JSX.Element {
   const navigate = useNavigate();
 
- // const { user } = useSelector((state:RootState) => state.users)
- const user = {
-  id: 1,
-  admin: true,
-};
-
+ const { user } = useSelector((state:RootState) => state.users);
+console.log(user);
   const handleNav = (): void => {
     navigate(`/product/${product.id}`);
   };
@@ -33,7 +29,7 @@ function ProductCard({ product }: {
   };
 
   return (
-    <Card sx={{ width: 250, height: 350, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite' }}>
+    <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite' }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -43,8 +39,10 @@ function ProductCard({ product }: {
           style={{ backgroundColor: 'AntiqueWhite', minHeight: '220px', maxHeight: '220px' }}
         />
         <CardContent onClick={handleNav}>
-          <Typography gutterBottom variant="h6" 
-          style={{
+          <Typography
+            gutterBottom
+            variant="h6"
+            style={{
             fontFamily: 'Georgia, serif',
             fontSize: '20px',
             letterSpacing: '1.6px',
@@ -55,7 +53,9 @@ function ProductCard({ product }: {
             fontStyle: 'normal',
             fontVariant: 'small-caps',
             textTransform: 'none',
-          }} component="div">
+          }}
+            component="div"
+          >
             {product?.article}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -77,23 +77,23 @@ function ProductCard({ product }: {
       </CardActionArea>
       <CardActions>
         {
-          user.admin ? (
+          user?.admin ? (
             <>
-              <Button 
-              onClick={handleDel} 
-              size="small" 
-              color="primary"
-              style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+              <Button
+                onClick={handleDel}
+                size="small"
+                color="primary"
+                style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
               >
                 Удалить
               </Button>
               <EditModal id={product.id!} />
             </>
           ) : (
-            <Button 
-            size="small" 
-            color="primary"
-            style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+            <Button
+              size="small"
+              color="primary"
+              style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
             >
               В корзину
             </Button>

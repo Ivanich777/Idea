@@ -2,8 +2,7 @@ import React from 'react';
 import { useFormik, Formik } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { Authlayput } from '../AuthLayout/AuthLayout';
+import  AuthLayout  from '../AuthLayout/AuthLayout';
 import { addAsyncUser } from '../authSlice';
 import { useAppDispatch } from '../../../store';
 import { checkAsyncUser } from '../authSlice';
@@ -30,7 +29,7 @@ function Login(): JSX.Element {
     },
   });
   return (
-    <Authlayput linkTitle="У вас еще нет аккаунта?" href="/auth/reg" title="Авторизация" handleSubmit={formik.handleSubmit} buttonTitle="Войти">
+    <AuthLayout linkTitle="У вас еще нет аккаунта?" href="/auth/reg" title="Авторизация" handleSubmit={formik.handleSubmit} buttonTitle="Войти">
       <TextField
         id="outlined-name"
         name="email"
@@ -54,7 +53,7 @@ function Login(): JSX.Element {
       {formik.touched.password && formik.errors.password ? (
         <div style={{ color: 'red' }}>{formik.errors.password}</div>
       ) : null}
-    </Authlayput>
+    </AuthLayout>
   );
 }
 

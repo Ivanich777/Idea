@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import { AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -12,7 +12,7 @@ export default function Header(): JSX.Element {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
-  
+
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);
   };
@@ -22,7 +22,6 @@ export default function Header(): JSX.Element {
   };
 
   const { user } = useSelector((state: RootState) => state.users);
-  
 
   return (
     <>
@@ -124,13 +123,13 @@ export default function Header(): JSX.Element {
               href=""
               sx={{
                 mr: 2,
-                display: { xs: "flex", md: "none" },
+                display: { xs: 'flex', md: 'none' },
                 flexGrow: 1,
-                fontFamily: "monospace",
+                fontFamily: 'monospace',
                 fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
               }}
             >
               IDEA

@@ -28,7 +28,7 @@ router.post('/registration', async (req, res) => {
   const {
     checkPassword, name, password, email, surname, phone,
   } = req.body;
-  
+
   if (password && email && name && checkPassword && surname && phone) {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {

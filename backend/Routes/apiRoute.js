@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const db = require('../db/models');
+const path = require('path');
 
 router.get('/profile', async (req, res) => {
   const id = req.session.userId;
@@ -45,10 +46,11 @@ router.post('/product', async (req, res) => {
     title,
     description,
     category,
-    image,
+    images,
     count,
     price,
   } = req.body;
+  console.log(images);
   try {
     const newProduct = await db.Product.create({
       article: Number(article),
@@ -58,17 +60,47 @@ router.post('/product', async (req, res) => {
       count: Number(count),
       price: Number(price),
     });
-    await db.Image.create({
-      idProduct: newProduct.dataValues.id,
-      path: image,
+
+    images.forEach(async (img) => {
+      await db.Image.create({
+        idProduct: newProduct.dataValues.id,
+        path: img.path,
+      });
     });
-    newProduct.dataValues.images = [{ path: image }];
+
+    newProduct.dataValues.images = images;
     console.log(newProduct);
     res.json(newProduct);
   } catch (e) {
     console.log(e.message);
   }
   res.end();
+});
+
+router.post('/images', async (req, res) => {
+  const fileArray = req.files.homesImg;
+  const newArr = fileArray.map((ph) => {
+    const fileSize = ph.size;
+    const extension = path.extname(ph.name);
+    const allowedExtensions = /.png|.jpeg|.jpg|.gif|.webp/;
+    if (!allowedExtensions.test(extension)) {
+      return ('Unsupported extension !');
+    }
+    if (fileSize > 5000000) {
+      return ('File must be less than 5MB');
+    }
+    const { md5 } = ph;
+
+    const URL = `/upload/${md5}${extension}`;
+
+    ph.mv(`./public${URL}`, (err) => {
+      if (err) { return res.status(500).send(err); }
+      return URL;
+    });
+    return URL;
+  });
+  console.log(newArr);
+  res.json(newArr);
 });
 
 router.get('/category', async (req, res) => {

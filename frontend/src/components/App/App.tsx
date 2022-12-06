@@ -24,6 +24,7 @@ import Category from '../Category/Category';
 import { addAsyncUser, checkAsyncUser, getUser } from '../Auth/authSlice';
 import Logout from '../Auth/Logout/Logout';
 import { actualOrder } from '../ProductCard/basketSlice';
+import Basket from '../Basket/Basket';
 
 function App(): JSX.Element {
   const { user } = useSelector((state: RootState) => state.users);
@@ -43,7 +44,6 @@ function App(): JSX.Element {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<Main />} />
-            {/* <Route path="/profile" element={<Orders />} /> */}
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
           </Route>
@@ -59,6 +59,7 @@ function App(): JSX.Element {
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
             <Route path="/categories/:categoryId" element={<Category />} />
+            <Route path='/basket' element={<Basket />} />
           </Route>
           <Route path="/auth/logout" element={<Logout />} />
           <Route path="/auth/reg" element={<Registration />} />

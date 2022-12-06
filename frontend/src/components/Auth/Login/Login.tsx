@@ -4,9 +4,10 @@ import * as Yup from 'yup';
 import { TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Authlayput } from '../AuthLayout/AuthLayout';
-import { addAsyncUser } from '../Registration/authSlice';
-import { useAppDispatch } from '../../store';
-import { checkAsyncUser } from './logSlice';
+import { addAsyncUser } from '../authSlice';
+import { useAppDispatch } from '../../../store';
+import { checkAsyncUser } from '../authSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Login(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,6 +17,7 @@ function Login(): JSX.Element {
       email: '',
       password: '',
     },
+
     validationSchema: Yup.object({
       password: Yup.string()
         .min(8, 'Пароль должен содержать минимум 8 символов')

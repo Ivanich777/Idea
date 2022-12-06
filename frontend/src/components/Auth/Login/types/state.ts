@@ -14,3 +14,8 @@ export interface State {
     message?:string;
   }
 }
+
+export interface LoginUser {
+    email: string;
+    password: string;
+}

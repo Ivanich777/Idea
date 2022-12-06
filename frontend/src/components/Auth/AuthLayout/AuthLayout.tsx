@@ -1,5 +1,6 @@
 import { Button, Link } from '@mui/material';
 // import img from './cool-background.png';
+import { useNavigate } from "react-router-dom";
 import './reg.css';
 
 interface AuthlayputProps {
@@ -13,6 +14,7 @@ interface AuthlayputProps {
 
 function AuthLayout(props: AuthlayputProps):JSX.Element {
   const { children, handleSubmit, buttonTitle, title, href, linkTitle } = props;
+  const navigate = useNavigate()
 
   return (
     <div className="top">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import { AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -9,8 +9,10 @@ import { RootState } from '../../store';
 import './header.css';
 
 export default function Header(): JSX.Element {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+  
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);
   };
@@ -20,9 +22,7 @@ export default function Header(): JSX.Element {
   };
 
   const { user } = useSelector((state: RootState) => state.users);
-  // const user = {
-  //   id: 1,
-  // };
+  
 
   return (
     <>
@@ -96,7 +96,7 @@ export default function Header(): JSX.Element {
                   </MenuItem>
                 </>
               )}
-              {user && (
+              {!user && (
                 <>
                   <MenuItem>
                     <Typography textAlign="center">
@@ -117,27 +117,27 @@ export default function Header(): JSX.Element {
             </Menu>
           </Box>
 
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            IDEA
-          </Typography>
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href=""
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              IDEA
+            </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-            {user.id !== 0 && (
+            {user && (
               <>
                 <Button
                   variant="outlined"
@@ -162,13 +162,13 @@ export default function Header(): JSX.Element {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="/logout" style={{ textDecoration: 'none', color: 'white' }}>
+                  <NavLink to="auth/logout" style={{ textDecoration: 'none', color: 'white' }}>
                     Выход
                   </NavLink>
                 </Button>
               </>
             )}
-            {user.id === 0 && (
+            {!user && (
               <>
                 <Button
                   onClick={handleCloseNavMenu}
@@ -209,6 +209,5 @@ export default function Header(): JSX.Element {
     <Outlet />
 
     </>
-
   );
 }

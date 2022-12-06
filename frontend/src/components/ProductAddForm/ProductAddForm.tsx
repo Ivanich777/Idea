@@ -2,10 +2,20 @@ import React, { useRef } from 'react';
 import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
-import { addAsyncProduct, editAsyncProduct, addAsyncProduct } from '../ProductList/productSlice';
+import { editAsyncProduct, addAsyncProduct, addAsyncImages } from '../ProductList/productSlice';
 
+interface INewProduct {
+  id?: number,
+  article: string | any,
+  title: string | any,
+  description: string | any,
+  category: string | any,
+  images: string | any,
+  count: string | any,
+  price: string | any,
+}
 
-export default function ProductAddForm({ id } : { id:number }): JSX.Element {
+export default function ProductAddForm({ id }: { id: number }): JSX.Element {
   const [category, setCategory] = React.useState('');
   const [article, setArticle] = React.useState('');
   const [title, setTitle] = React.useState('');
@@ -36,25 +46,33 @@ export default function ProductAddForm({ id } : { id:number }): JSX.Element {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    let newProduct = {};
-    if (!id) {
-newProduct = {
-      article: data.get('article'),
-      title: data.get('title'),
-      description: data.get('description'),
-      category: categories?.find((item) => item?.title === category)?.id,
-      images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
-      count: data.get('count'),
-      price: data.get('price'),
+    let newProduct: INewProduct = {
+      article: '',
+      title: '',
+      description: '',
+      category: '',
+      images: '',
+      count: '',
+      price: '',
     };
-} else {
+    if (!id) {
+      newProduct = {
+        article: data.get('article'),
+        title: data.get('title'),
+        description: data.get('description'),
+        category: categories?.find((item) => item?.title === category)?.id,
+        images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
+        count: data.get('count'),
+        price: data.get('price'),
+      };
+    } else {
       newProduct = {
         id,
         article: data.get('article'),
         title: data.get('title'),
         description: data.get('description'),
         category: categories?.find((item) => item?.title === category)?.id,
-        image: data.get('image'),
+        images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
         count: data.get('count'),
         price: data.get('price'),
       };
@@ -63,22 +81,22 @@ newProduct = {
     if (products.find((item) => Number(item.article) === Number(newProduct.article))) {
       alert('Артикул не уникален');
     } else if (!id) {
-        dispatch(addAsyncProduct(newProduct));
-        setArticle('');
-        setTitle('');
-        setDescription('');
-        setImage('');
-        setCount('');
-        setPrice('');
-      } else {
-        dispatch(editAsyncProduct(newProduct));
-        setArticle('');
-        setTitle('');
-        setDescription('');
-        setImage('');
-        setCount('');
-        setPrice('');
-      }
+      dispatch(addAsyncProduct(newProduct));
+      setArticle('');
+      setTitle('');
+      setDescription('');
+      setImage('');
+      setCount('');
+      setPrice('');
+    } else {
+      dispatch(editAsyncProduct(newProduct));
+      setArticle('');
+      setTitle('');
+      setDescription('');
+      setImage('');
+      setCount('');
+      setPrice('');
+    }
   };
 
   return (
@@ -149,8 +167,9 @@ newProduct = {
               label="Цена"
               fullWidth
               variant="outlined"
-              sx={{ mb: 1 }}/>
-            
+              sx={{ mb: 1 }}
+            />
+
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -176,7 +195,7 @@ newProduct = {
               fullWidth
               variant="contained"
             >
-             {id ? ('Изменить') : ('Добавить товар')}
+              {id ? ('Изменить') : ('Добавить товар')}
             </Button>
           </Grid>
         </Grid>

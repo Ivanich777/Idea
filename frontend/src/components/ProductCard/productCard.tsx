@@ -23,14 +23,14 @@ function ProductCard({ product }: {
   admin: true,
 };
 
-  function handleNav(): void {
+  const handleNav = (): void => {
     navigate(`/product/${product.id}`);
-  }
+  };
 
   const dispatch = useAppDispatch();
-  function handleDel():void {
-    dispatch(delAsyncProduct(product.id));
-  }
+  const handleDel = ():void => {
+    dispatch(delAsyncProduct(product.id!));
+  };
 
   return (
     <Card sx={{ width: 250, height: 350 }}>
@@ -58,7 +58,7 @@ function ProductCard({ product }: {
               <Button onClick={handleDel} size="small" color="primary">
                 Удалить
               </Button>
-              <EditModal id={product.id} />
+              <EditModal id={product.id!} />
             </>
           ) : (
             <Button size="small" color="primary">

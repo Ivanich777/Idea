@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const db = require('../db/models');
 const path = require('path');
+const db = require('../db/models');
 
 router.get('/profile', async (req, res) => {
   const id = req.session.userId;
@@ -77,7 +77,7 @@ router.post('/product', async (req, res) => {
 });
 
 router.post('/images', async (req, res) => {
-  const fileArray = req.files.homesImg;
+  const fileArray = (Array.isArray(req.files.homesImg)) ? req.files.homesImg : [req.files.homesImg];
   const newArr = fileArray.map((ph) => {
     const fileSize = ph.size;
     const extension = path.extname(ph.name);
@@ -119,7 +119,7 @@ router.put('/product/:id', async (req, res) => {
     title,
     description,
     category,
-    image,
+    images,
     count,
     price,
   } = req.body;
@@ -132,11 +132,15 @@ router.put('/product/:id', async (req, res) => {
     price: Number(price),
   }, { where: { id } });
   const newProduct = await db.Product.findOne({ where: { id } });
-  await db.Image.update({
-    idProduct: newProduct.dataValues.id,
-    path: image,
-  }, { where: { idProduct: id } });
-  newProduct.dataValues.images = [{ path: image }];
+  await db.Image.destroy({ where: { idProduct: id } });
+
+  images.forEach(async (img) => {
+    await db.Image.create({
+      idProduct: newProduct.dataValues.id,
+      path: img.path,
+    });
+  });
+  newProduct.dataValues.images = images;
   res.json(newProduct);
 });
 module.exports = router;

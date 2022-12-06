@@ -45,7 +45,6 @@ function AuthLayout(props: AuthlayputProps): JSX.Element {
             </div>
             {children}
             <Button type="submit">{buttonTitle}</Button>
-
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <Link href={href}>{linkTitle}</Link>
               <Link href="/">На главную</Link>

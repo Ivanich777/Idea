@@ -56,12 +56,12 @@ console.log(user);
           }}
             component="div"
           >
-            {product?.article}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
             {product?.title}
-
           </Typography>
+          {/* <Typography variant="body2" color="text.secondary">
+            {product?.article}
+
+          </Typography> */}
           <Typography
             gutterBottom
             variant="h6"
@@ -87,7 +87,7 @@ console.log(user);
               >
                 Удалить
               </Button>
-              <EditModal id={product.id!} />
+              <EditModal id={product.id!}/>
             </>
           ) : (
             <Button

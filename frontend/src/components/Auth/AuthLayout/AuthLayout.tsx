@@ -24,7 +24,7 @@ function AuthLayout(props: AuthlayputProps):JSX.Element {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            paddingTop: '15%',
+            paddingTop: '10%',
           }}
         >
           <div
@@ -44,7 +44,7 @@ function AuthLayout(props: AuthlayputProps):JSX.Element {
               <h3 style={{ color: 'black', textAlign: 'center' }}>{title}</h3>
             </div>
             {children}
-            <Button type="submit">{buttonTitle}</Button>
+            <Button className="button" type="submit">{buttonTitle}</Button>
 
             <div>
               <Link href={href}>{linkTitle}</Link>

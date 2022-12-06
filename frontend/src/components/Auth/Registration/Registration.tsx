@@ -13,6 +13,9 @@ import { RootState, useAppDispatch } from '../../../store';
 import { addAsyncUser } from '../authSlice';
 import { FormInputs } from './types/state';
 import AuthLayout from '../AuthLayout/AuthLayout';
+import './registr.css'
+
+
 
 function Registration(): JSX.Element {
   // const { name } = useParams();

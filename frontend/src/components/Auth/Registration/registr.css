@@ -1,0 +1,13 @@
+.button {
+    color:black
+}
+
+#outlined-name {
+    /* border-color: red !important;
+    color: red !important;  */
+    /* --webkit-tap-highlight-color: none !important; */
+}
+
+#outlined-name {
+    -webkit-tap-highlight-color: none !important;
+}

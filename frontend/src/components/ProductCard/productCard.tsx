@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
 import { Product } from '../ProductList/types/state';
 import { delAsyncProduct } from '../ProductList/productSlice';
+import EditModal from './editModal/editModal';
 
 function ProductCard({ product }: {
   product: Product
@@ -57,9 +58,7 @@ function ProductCard({ product }: {
               <Button onClick={handleDel} size="small" color="primary">
                 Удалить
               </Button>
-              <Button size="small" color="primary">
-                Изменить
-              </Button>
+              <EditModal id={product.id} />
             </>
           ) : (
             <Button size="small" color="primary">

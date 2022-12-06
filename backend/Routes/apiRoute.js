@@ -81,4 +81,31 @@ router.delete('/product/:id', async (req, res) => {
   await db.Product.destroy({ where: { id } });
   res.json(Number(id));
 });
+router.put('/product/:id', async (req, res) => {
+  const {
+    id,
+    article,
+    title,
+    description,
+    category,
+    image,
+    count,
+    price,
+  } = req.body;
+  await db.Product.update({
+    article: Number(article),
+    title,
+    description,
+    idCategory: Number(category),
+    count: Number(count),
+    price: Number(price),
+  }, { where: { id } });
+  const newProduct = await db.Product.findOne({ where: { id } });
+  await db.Image.update({
+    idProduct: newProduct.dataValues.id,
+    path: image,
+  }, { where: { idProduct: id } });
+  newProduct.dataValues.images = [{ path: image }];
+  res.json(newProduct);
+});
 module.exports = router;

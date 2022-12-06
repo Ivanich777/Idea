@@ -21,8 +21,6 @@ export default function Header(): JSX.Element {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
-
-
   
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);
@@ -33,11 +31,7 @@ export default function Header(): JSX.Element {
   };
 
   const { user } = useSelector((state: RootState) => state.users);
-  console.log(user);
   
-  // const user = {
-  //   id: 1,
-  // };
 
   return (
     <>
@@ -121,7 +115,7 @@ export default function Header(): JSX.Element {
                     </MenuItem>
                   </>
                 )}
-                {user && (
+                {!user && (
                   <>
                     <MenuItem>
                       <Typography textAlign="center">
@@ -178,7 +172,7 @@ export default function Header(): JSX.Element {
                 justifyContent: "flex-end",
               }}
             >
-              {user.id !== 0 && (
+              {user && (
                 <>
                   <Button
                     variant="outlined"
@@ -210,7 +204,7 @@ export default function Header(): JSX.Element {
                     sx={{ my: 2, color: "white", display: "block" }}
                   >
                     <NavLink
-                      to="auth/logout"
+                      to="/auth/logout"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Выход
@@ -218,7 +212,7 @@ export default function Header(): JSX.Element {
                   </Button>
                 </>
               )}
-              {user.id === 0 && (
+              {!user && (
                 <>
                   <Button
                     onClick={handleCloseNavMenu}

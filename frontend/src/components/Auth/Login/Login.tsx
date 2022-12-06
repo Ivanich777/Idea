@@ -3,9 +3,9 @@ import { useFormik, Formik } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
 import { Authlayput } from '../AuthLayout/AuthLayout';
-import { addAsyncUser } from '../Registration/authSlice';
-import { useAppDispatch } from '../../store';
-import { checkAsyncUser } from './logSlice';
+import { addAsyncUser } from '../authSlice';
+import { useAppDispatch } from '../../../store';
+import { checkAsyncUser } from '../authSlice';
 import { useNavigate } from 'react-router-dom';
 
 function Login(): JSX.Element {
@@ -16,6 +16,7 @@ function Login(): JSX.Element {
       email: '',
       password: '',
     },
+
     validationSchema: Yup.object({
       password: Yup.string()
         .min(8, 'Пароль должен содержать минимум 8 символов')
@@ -35,7 +36,7 @@ function Login(): JSX.Element {
         label="Email"
         value={formik.values.email}
         onChange={formik.handleChange}
-        error={formik.touched.email && formik.errors.email}
+        // error={formik.touched.email && formik.errors.email}
       />
       {formik.touched.email && formik.errors.email ? (
         <div style={{ color: 'red' }}>{formik.errors.email}</div>

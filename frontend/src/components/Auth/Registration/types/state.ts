@@ -12,7 +12,7 @@ export interface Res {
   message: string, user: string
 }
 export interface State {
-  user: User;
+  user?: User;
   error:{
     message?:string;
   }
@@ -26,4 +26,13 @@ export interface FormInputs {
   surname:string;
 }
 
+export interface RegUser {
+  // id: number,
+  email:string,
+  password: string,
+  name: string,
+  surname: string,
+  // admin: boolean,
+  phone: string,
+}
 export type UserId = User['id'];

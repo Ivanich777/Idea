@@ -9,8 +9,8 @@ import FormControl from "@mui/material/FormControl";
 import { Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import { borderRadius } from "@mui/system";
-import { RootState, useAppDispatch } from "../../store";
-import { addAsyncUser } from "./authSlice";
+import { RootState, useAppDispatch } from "../../../store";
+import { addAsyncUser } from "../authSlice";
 import { FormInputs } from "./types/state";
 import { Authlayput } from "../AuthLayout/AuthLayout";
 
@@ -44,6 +44,7 @@ function Registration(): JSX.Element {
         .required("Обязательное поле"),
     }),
     onSubmit: (values) => {
+      console.log(values)
       dispatch(addAsyncUser(values));
       navigate("/");
     },
@@ -62,7 +63,7 @@ function Registration(): JSX.Element {
         label="Email"
         value={formik.values.email}
         onChange={formik.handleChange}
-        error={formik.touched.email && formik.errors.email}
+        // error={formik.touched.email && formik.errors.email}
       />
       {formik.touched.email && formik.errors.email ? (
         <div style={{ color: "red" }}>{formik.errors.email}</div>

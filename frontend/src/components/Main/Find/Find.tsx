@@ -2,8 +2,9 @@ import { Box, TextField, Modal, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import Fuse from 'fuse.js';
 import ProductCard from '../../ProductCard/productCard';
+import { Product } from '../../ProductList/types/state';
 
-function Find({ products }) {
+function Find({ products }:{products:Product[]}):JSX.Element {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -23,8 +24,8 @@ function Find({ products }) {
         keys: ['title'],
       });
       const [str, setStr] = useState('');
-      const [matches, setMatch] = useState([]);
-      const searh = (a) => {
+      const [matches, setMatch] = useState<Product[]>([]);
+      const searh = (a:string):void => {
         setStr(a);
         fuse.search(str);
         const match = fuse.search(str); 

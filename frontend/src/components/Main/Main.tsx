@@ -8,7 +8,7 @@ import Find from './Find/Find';
 import Scroll from './Scroll/Scroll';
 
 function Main():JSX.Element {
-  const { products } = useSelector((state) => state.products);
+  const { products } = useSelector((state:any) => state.products);
     return (
         <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <Box style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: '5px' }}>

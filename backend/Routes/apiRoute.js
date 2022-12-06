@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const path = require('path');
 const db = require('../db/models');
 
 router.get('/profile', async (req, res) => {
@@ -45,10 +46,11 @@ router.post('/product', async (req, res) => {
     title,
     description,
     category,
-    image,
+    images,
     count,
     price,
   } = req.body;
+  console.log(images);
   try {
     const newProduct = await db.Product.create({
       article: Number(article),
@@ -58,11 +60,14 @@ router.post('/product', async (req, res) => {
       count: Number(count),
       price: Number(price),
     });
-    await db.Image.create({
-      idProduct: newProduct.dataValues.id,
-      path: image,
+
+    images.forEach(async (img) => {
+      await db.Image.create({
+        idProduct: newProduct.dataValues.id,
+        path: img.path,
+      });
     });
-    newProduct.dataValues.images = [{ path: image }];
+    newProduct.dataValues.images = images;
     console.log(newProduct);
     res.json(newProduct);
   } catch (e) {
@@ -71,9 +76,71 @@ router.post('/product', async (req, res) => {
   res.end();
 });
 
+router.post('/images', async (req, res) => {
+  const fileArray = (Array.isArray(req.files.homesImg)) ? req.files.homesImg : [req.files.homesImg];
+  const newArr = fileArray.map((ph) => {
+    const fileSize = ph.size;
+    const extension = path.extname(ph.name);
+    const allowedExtensions = /.png|.jpeg|.jpg|.gif|.webp/;
+    if (!allowedExtensions.test(extension)) {
+      return ('Unsupported extension !');
+    }
+    if (fileSize > 5000000) {
+      return ('File must be less than 5MB');
+    }
+    const { md5 } = ph;
+
+    const URL = `/upload/${md5}${extension}`;
+
+    ph.mv(`./public${URL}`, (err) => {
+      if (err) { return res.status(500).send(err); }
+      return URL;
+    });
+    return URL;
+  });
+  console.log(newArr);
+  res.json(newArr);
+});
+
 router.get('/category', async (req, res) => {
   const categories = await db.Category.findAll({ raw: true });
   res.json(categories);
 });
+router.delete('/product/:id', async (req, res) => {
+  const { id } = req.params;
+  await db.Image.destroy({ where: { idProduct: id } });
+  await db.Product.destroy({ where: { id } });
+  res.json(Number(id));
+});
+router.put('/product/:id', async (req, res) => {
+  const {
+    id,
+    article,
+    title,
+    description,
+    category,
+    images,
+    count,
+    price,
+  } = req.body;
+  await db.Product.update({
+    article: Number(article),
+    title,
+    description,
+    idCategory: Number(category),
+    count: Number(count),
+    price: Number(price),
+  }, { where: { id } });
+  const newProduct = await db.Product.findOne({ where: { id } });
+  await db.Image.destroy({ where: { idProduct: id } });
 
+  images.forEach(async (img) => {
+    await db.Image.create({
+      idProduct: newProduct.dataValues.id,
+      path: img.path,
+    });
+  });
+  newProduct.dataValues.images = images;
+  res.json(newProduct);
+});
 module.exports = router;

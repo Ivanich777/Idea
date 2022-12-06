@@ -5,16 +5,32 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { RootState } from '../../store';
+import userEvent from '@testing-library/user-event';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../../store';
 import { Product } from '../ProductList/types/state';
+import { delAsyncProduct } from '../ProductList/productSlice';
+import EditModal from './editModal/editModal';
 
-function ProductCard({ product }: { product:Product
- }):JSX.Element {
-    const navigate = useNavigate();
+function ProductCard({ product }: {
+  product: Product
+}): JSX.Element {
+  const navigate = useNavigate();
 
-    function handleNav():void {
-      navigate(`/product/${product.id}`);
-    }
+ // const { user } = useSelector((state:RootState) => state.users)
+ const user = {
+  id: 1,
+  admin: true,
+};
+
+  const handleNav = (): void => {
+    navigate(`/product/${product.id}`);
+  };
+
+  const dispatch = useAppDispatch();
+  const handleDel = ():void => {
+    dispatch(delAsyncProduct(product.id!));
+  };
 
   return (
     <Card sx={{ width: 250, height: 350, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite' }}>
@@ -27,10 +43,8 @@ function ProductCard({ product }: { product:Product
           style={{ backgroundColor: 'AntiqueWhite', minHeight: '220px', maxHeight: '220px' }}
         />
         <CardContent onClick={handleNav}>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            style={{
+          <Typography gutterBottom variant="h6" 
+          style={{
             fontFamily: 'Georgia, serif',
             fontSize: '20px',
             letterSpacing: '1.6px',
@@ -41,9 +55,12 @@ function ProductCard({ product }: { product:Product
             fontStyle: 'normal',
             fontVariant: 'small-caps',
             textTransform: 'none',
-          }}
-          >
-           {product?.title}
+          }} component="div">
+            {product?.article}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {product?.title}
+
           </Typography>
           <Typography
             gutterBottom
@@ -59,13 +76,29 @@ function ProductCard({ product }: { product:Product
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
-        >
-          В корзину
-        </Button>
+        {
+          user.admin ? (
+            <>
+              <Button 
+              onClick={handleDel} 
+              size="small" 
+              color="primary"
+              style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+              >
+                Удалить
+              </Button>
+              <EditModal id={product.id!} />
+            </>
+          ) : (
+            <Button 
+            size="small" 
+            color="primary"
+            style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+            >
+              В корзину
+            </Button>
+          )
+        }
       </CardActions>
     </Card>
   );

@@ -1,5 +1,5 @@
 export interface Product {
-  id: number,
+  id?: number,
   article: number,
   title: string,
   description: string,
@@ -8,9 +8,12 @@ export interface Product {
   images: [{
     path: string
   }],
+  image?:string
 }
+
 export interface State {
-  products: Product []
+  products: Product [],
+  images: [],
 }
 
 export type productId = Product['id'];

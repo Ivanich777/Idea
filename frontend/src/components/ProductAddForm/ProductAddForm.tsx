@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
-import { addAsyncProduct } from '../ProductList/productSlice';
+import { editAsyncProduct, addAsyncProduct, addAsyncImages } from '../ProductList/productSlice';
 
-export default function ProductAddForm(): JSX.Element {
+interface INewProduct {
+  id?: number,
+  article: string | any,
+  title: string | any,
+  description: string | any,
+  category: string | any,
+  images: string | any,
+  count: string | any,
+  price: string | any,
+}
+
+export default function ProductAddForm({ id }: { id: number }): JSX.Element {
   const [category, setCategory] = React.useState('');
   const [article, setArticle] = React.useState('');
   const [title, setTitle] = React.useState('');
-  const [description, setDescription] = React.useState('');
   const [image, setImage] = React.useState('');
+  const [description, setDescription] = React.useState('');
   const [count, setCount] = React.useState('');
   const [price, setPrice] = React.useState('');
 
@@ -20,25 +31,65 @@ export default function ProductAddForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const { categories } = useSelector((state: RootState) => state.categories);
-  const { products } = useSelector((state: RootState) => state.products);
+  const { products, images } = useSelector((state: RootState) => state.products);
+
+  const handleChangleFiles = (event: any): void => {
+    setImage(event.target.value);
+    const pictures = [...event.target.files];
+    const newFile = new FormData();
+    pictures.forEach((img) => {
+      newFile.append('homesImg', img);
+    });
+    dispatch(addAsyncImages(newFile));
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const newProduct = {
-      article: data.get('article'),
-      title: data.get('title'),
-      description: data.get('description'),
-      category: categories?.find((item) => item?.title === category)?.id,
-      image: data.get('image'),
-      count: data.get('count'),
-      price: data.get('price'),
+    let newProduct: INewProduct = {
+      article: '',
+      title: '',
+      description: '',
+      category: '',
+      images: '',
+      count: '',
+      price: '',
     };
+    if (!id) {
+      newProduct = {
+        article: data.get('article'),
+        title: data.get('title'),
+        description: data.get('description'),
+        category: categories?.find((item) => item?.title === category)?.id,
+        images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
+        count: data.get('count'),
+        price: data.get('price'),
+      };
+    } else {
+      newProduct = {
+        id,
+        article: data.get('article'),
+        title: data.get('title'),
+        description: data.get('description'),
+        category: categories?.find((item) => item?.title === category)?.id,
+        images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
+        count: data.get('count'),
+        price: data.get('price'),
+      };
+    }
 
     if (products.find((item) => Number(item.article) === Number(newProduct.article))) {
-      setArticle('Артикул не уникален!!!');
-    } else {
+      alert('Артикул не уникален');
+    } else if (!id) {
       dispatch(addAsyncProduct(newProduct));
+      setArticle('');
+      setTitle('');
+      setDescription('');
+      setImage('');
+      setCount('');
+      setPrice('');
+    } else {
+      dispatch(editAsyncProduct(newProduct));
       setArticle('');
       setTitle('');
       setDescription('');
@@ -118,6 +169,7 @@ export default function ProductAddForm(): JSX.Element {
               variant="outlined"
               sx={{ mb: 1 }}
             />
+
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -130,23 +182,20 @@ export default function ProductAddForm(): JSX.Element {
               rows={6}
               sx={{ width: '100%', mb: 1 }}
             />
-            <TextField
-              required
+            <input
               value={image}
-              onChange={(e) => setImage(e.target.value)}
-              id="image"
-              name="image"
-              label="Изображение"
-              fullWidth
-              variant="outlined"
-              sx={{ mb: 1 }}
+              name="images"
+              type="file"
+              onChange={handleChangleFiles}
+              multiple
+              required
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
             >
-              Добавить товар
+              {id ? ('Изменить') : ('Добавить товар')}
             </Button>
           </Grid>
         </Grid>

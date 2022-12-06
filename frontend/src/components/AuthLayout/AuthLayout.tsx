@@ -1,5 +1,6 @@
 import { Button, Link } from '@mui/material';
 // import img from './cool-background.png';
+import './reg.css';
 
 interface AuthlayputProps {
   children: React.ReactNode;
@@ -10,21 +11,11 @@ interface AuthlayputProps {
   linkTitle: string;
 }
 
-function Authlayput(props: AuthlayputProps):JSX.Element {
+function AuthLayout(props: AuthlayputProps):JSX.Element {
   const { children, handleSubmit, buttonTitle, title, href, linkTitle } = props;
 
   return (
-    <div
-      style={{
-        background: '#FDCA90',
-        background: '-moz-linear-gradient(top, #FDCA90 0%, #5A341C 0%, #F3C28A 100%)',
-        background: '-webkit-linear-gradient(top, #FDCA90 0%, #5A341C 0%, #F3C28A 100%)',
-        background: 'linear-gradient(to bottom, #FDCA90 0%, #5A341C 0%, #F3C28A 100%)',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
-        height: '100vh',
-      }}
-    >
+    <div className="top">
       <form onSubmit={handleSubmit}>
         <div
           style={{
@@ -63,4 +54,4 @@ function Authlayput(props: AuthlayputProps):JSX.Element {
   );
 }
 
-export default Authlayput;
+export default AuthLayout;

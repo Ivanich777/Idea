@@ -12,7 +12,7 @@ import { borderRadius } from '@mui/system';
 import { RootState, useAppDispatch } from '../../store';
 import { addAsyncUser } from './authSlice';
 import { FormInputs } from './types/state';
-import { Authlayput } from '../AuthLayout/AuthLayout';
+import { AuthLayout } from '../AuthLayout/AuthLayout';
 // import './reg.css';
 
 function Registration(): JSX.Element {

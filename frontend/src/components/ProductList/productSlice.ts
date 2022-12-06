@@ -13,6 +13,7 @@ export const addAsyncProduct = createAsyncThunk('products/addAsyncProduct', (pro
     .then((result) => result.json())
     .then((data) => data));
 
+
 export const delAsyncProduct = createAsyncThunk('products/delAsyncProducts', (id:number) => fetch(`http://localhost:4000/api/product/${id}`, {
     method: 'delete'
 })
@@ -26,8 +27,17 @@ export const delAsyncProduct = createAsyncThunk('products/delAsyncProducts', (id
         .then((result) => result.json())
         .then((data) => data));
 
+export const addAsyncImages = createAsyncThunk('products/addAsyncImages', (files: any) => fetch('http://localhost:4000/api/images', {
+    method: 'post',
+    body: files,
+})
+    .then((result) => result.json())
+    .then((data) => data));
+
+
 const initialState: State = {
-    products: []
+    products: [],
+    images: [],
 };
 
 const productSlice = createSlice({
@@ -43,7 +53,7 @@ const productSlice = createSlice({
             });
         })
         .addCase(addAsyncProduct.fulfilled, (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
             state.products.push(action.payload);
         })
         .addCase(delAsyncProduct.fulfilled, (state, action) => {
@@ -59,7 +69,12 @@ const productSlice = createSlice({
                     return item;
             });
             state.products = arr;
-         });
+         })
+        .addCase(addAsyncImages.fulfilled, (state, action) => {
+            // console.log(action.payload);
+            state.images = action.payload;
+        });
+
     }
  });
 

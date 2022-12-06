@@ -10,8 +10,10 @@ export interface Product {
   }],
   image?:string
 }
+
 export interface State {
-  products: Product []
+  products: Product [],
+  images: [],
 }
 
 export type productId = Product['id'];

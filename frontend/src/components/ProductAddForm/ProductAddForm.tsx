@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
-import { addAsyncProduct, editAsyncProduct } from '../ProductList/productSlice';
+import { addAsyncProduct, editAsyncProduct, addAsyncProduct } from '../ProductList/productSlice';
+
 
 export default function ProductAddForm({ id } : { id:number }): JSX.Element {
   const [category, setCategory] = React.useState('');
   const [article, setArticle] = React.useState('');
   const [title, setTitle] = React.useState('');
-  const [description, setDescription] = React.useState('');
   const [image, setImage] = React.useState('');
+  const [description, setDescription] = React.useState('');
   const [count, setCount] = React.useState('');
   const [price, setPrice] = React.useState('');
 
@@ -20,7 +21,17 @@ export default function ProductAddForm({ id } : { id:number }): JSX.Element {
   const dispatch = useAppDispatch();
 
   const { categories } = useSelector((state: RootState) => state.categories);
-  const { products } = useSelector((state: RootState) => state.products);
+  const { products, images } = useSelector((state: RootState) => state.products);
+
+  const handleChangleFiles = (event: any): void => {
+    setImage(event.target.value);
+    const pictures = [...event.target.files];
+    const newFile = new FormData();
+    pictures.forEach((img) => {
+      newFile.append('homesImg', img);
+    });
+    dispatch(addAsyncImages(newFile));
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -32,7 +43,7 @@ newProduct = {
       title: data.get('title'),
       description: data.get('description'),
       category: categories?.find((item) => item?.title === category)?.id,
-      image: data.get('image'),
+      images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
       count: data.get('count'),
       price: data.get('price'),
     };
@@ -129,38 +140,6 @@ newProduct = {
               variant="outlined"
               sx={{ mb: 1 }}
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-            >
-             {id ? ('Изменить') : ('Добавить товар')}
-            </Button>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              id="outlined-multiline-flexible"
-              name="description"
-              label="Описание"
-              multiline
-              maxRows={6}
-              rows={6}
-              sx={{ width: '100%', mb: 1 }}
-            />
-            <TextField
-              required
-              // type="file"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              id="image"
-              name="image"
-              label="Картинка"
-              fullWidth
-              variant="outlined"
-              sx={{ mb: 1 }}
-            />
             <TextField
               required
               value={price}
@@ -170,8 +149,35 @@ newProduct = {
               label="Цена"
               fullWidth
               variant="outlined"
-              sx={{ mb: 1 }}
+              sx={{ mb: 1 }}/>
+            
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              id="outlined-multiline-flexible"
+              name="description"
+              label="Описание"
+              multiline
+              rows={6}
+              sx={{ width: '100%', mb: 1 }}
             />
+            <input
+              value={image}
+              name="images"
+              type="file"
+              onChange={handleChangleFiles}
+              multiple
+              required
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+            >
+             {id ? ('Изменить') : ('Добавить товар')}
+            </Button>
           </Grid>
         </Grid>
       </Box>

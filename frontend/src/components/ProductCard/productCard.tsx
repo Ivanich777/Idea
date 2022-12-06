@@ -7,6 +7,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { Product } from '../ProductList/types/state';
+import './card.css';
 
 function ProductCard({ product }: { product:Product
  }):JSX.Element {
@@ -17,7 +18,7 @@ function ProductCard({ product }: { product:Product
     }
 
   return (
-    <Card sx={{ width: 250, height: 350 }}>
+    <Card sx={{ width: 250, height: 350, margin: '15px', borderRadius: '20px' }}>
       <CardActionArea>
         <CardMedia
           component="img"

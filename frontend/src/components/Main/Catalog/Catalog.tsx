@@ -22,10 +22,11 @@ function Catalog({ categories } : { categories: Category[] }):JSX.Element {
     const btn = {
         width: 200,
         height: 50,
-        background: 'white',
+        background: '#FFE4B5',
         marginRight: 30,
         marginLeft: 30,
-        border: 'solid 1px #1976d2'
+        border: 'solid 1px black',
+        color: 'black'
     };
     return (
         <div>

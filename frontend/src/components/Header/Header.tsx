@@ -6,6 +6,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Outlet, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import './header.css';
 
 export default function Header(): JSX.Element {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -25,8 +26,10 @@ export default function Header(): JSX.Element {
 
   return (
     <>
-    <AppBar position="sticky">
-      <Container maxWidth="xl">
+    <AppBar position="sticky" style={{ backgroundColor: 'black' }}>
+      <Container
+        maxWidth="xl"
+      >
         <Toolbar disableGutters>
           <Typography
             variant="h6"
@@ -36,9 +39,9 @@ export default function Header(): JSX.Element {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              fontFamily: 'Playfair Display SC',
               fontWeight: 700,
-              letterSpacing: '.3rem',
+              letterSpacing: '.5rem',
               color: 'inherit',
               textDecoration: 'none',
             }}

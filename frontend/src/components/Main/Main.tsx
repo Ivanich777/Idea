@@ -19,14 +19,14 @@ function Main():JSX.Element {
             }}
         >
             <Box style={{
-                width: '1340px',
+                width: '1300px',
                 height: '320px',
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
                 marginTop: '25px',
-                background: 'url("https://postila.ru/data/ad/5b/77/b7/ad5b77b79ebf7e5263b4c6ccf0e202bfdfae5baa88b2cbc59fdaa54de83e3dc2.jpg")' }}
+                background: 'url("https://bigfoto.name/uploads/posts/2022-03/1648579364_7-bigfoto-name-p-oboi-estetika-bezhevii-minimalizm-v-intere-12.jpg") no-repeat' }}
             >
                 <Catalog categories={categories} />
                 <Find products={products} />

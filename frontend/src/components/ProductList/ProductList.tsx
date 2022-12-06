@@ -13,7 +13,7 @@ function ProductList():JSX.Element {
 
   return (
    <div className="box">
-    <ul style={{ display: 'flex', flexDirection: 'row' }}>
+    <ul style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', marginTop: '60px' }}>
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

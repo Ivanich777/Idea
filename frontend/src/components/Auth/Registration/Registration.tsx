@@ -44,7 +44,6 @@ function Registration(): JSX.Element {
         .required('Обязательное поле'),
     }),
     onSubmit: (values) => {
-      console.log(values);
       dispatch(addAsyncUser(values));
       navigate('/');
     },

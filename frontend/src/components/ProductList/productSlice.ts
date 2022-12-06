@@ -53,7 +53,6 @@ const productSlice = createSlice({
             });
         })
         .addCase(addAsyncProduct.fulfilled, (state, action) => {
-            // console.log(action.payload);
             state.products.push(action.payload);
         })
         .addCase(delAsyncProduct.fulfilled, (state, action) => {
@@ -71,7 +70,6 @@ const productSlice = createSlice({
             state.products = arr;
          })
         .addCase(addAsyncImages.fulfilled, (state, action) => {
-            // console.log(action.payload);
             state.images = action.payload;
         });
 

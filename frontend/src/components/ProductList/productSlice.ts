@@ -13,6 +13,12 @@ export const addAsyncProduct = createAsyncThunk('products/addAsyncProduct', (pro
     .then((result) => result.json())
     .then((data) => data));
 
+export const delAsyncProduct = createAsyncThunk('products/delAsyncProducts', (id:number) => fetch(`http://localhost:4000/api/product/${id}`,{
+    method: 'delete'
+})
+    .then((result) => result.json())
+    .then((data) => data));
+
 const initialState: State = {
     products: []
 };
@@ -32,7 +38,11 @@ const productSlice = createSlice({
         .addCase(addAsyncProduct.fulfilled, (state, action) => {
             console.log(action.payload);
             state.products.push(action.payload);
-        });
+        })
+        .addCase(delAsyncProduct.fulfilled, (state, action) => {
+           const arr = state.products.filter((item) => item.id !== action.payload);
+           state.products = arr
+        })
     }
  });
 

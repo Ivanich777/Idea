@@ -129,7 +129,7 @@ export default function ProductAddForm(): JSX.Element {
             />
             <TextField
               required
-              type="file"
+              //type="file"
               value={image}
               onChange={(e) => setImage(e.target.value)}
               id="image"

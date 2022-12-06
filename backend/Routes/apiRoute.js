@@ -62,7 +62,7 @@ router.post('/product', async (req, res) => {
       idProduct: newProduct.dataValues.id,
       path: image,
     });
-    newProduct.dataValues.Images = [{ path: image }];
+    newProduct.dataValues.images = [{ path: image }];
     console.log(newProduct);
     res.json(newProduct);
   } catch (e) {
@@ -75,5 +75,10 @@ router.get('/category', async (req, res) => {
   const categories = await db.Category.findAll({ raw: true });
   res.json(categories);
 });
-
+router.delete('/product/:id', async (req, res) => {
+  const { id } = req.params;
+  await db.Image.destroy({ where: { idProduct: id } });
+  await db.Product.destroy({ where: { id } });
+  res.json(Number(id));
+});
 module.exports = router;

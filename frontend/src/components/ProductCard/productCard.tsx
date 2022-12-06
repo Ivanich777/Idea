@@ -11,20 +11,21 @@ import { RootState, useAppDispatch } from '../../store';
 import { Product } from '../ProductList/types/state';
 import { delAsyncProduct } from '../ProductList/productSlice';
 import EditModal from './editModal/editModal';
+import AuthModal from './authModal/AuthModal';
 
 function ProductCard({ product }: {
   product: Product
 }): JSX.Element {
   const navigate = useNavigate();
 
- const { user } = useSelector((state:RootState) => state.users);
-console.log(user);
+  const { user } = useSelector((state: RootState) => state.users);
+  console.log(user);
   const handleNav = (): void => {
     navigate(`/product/${product.id}`);
   };
 
   const dispatch = useAppDispatch();
-  const handleDel = ():void => {
+  const handleDel = (): void => {
     dispatch(delAsyncProduct(product.id!));
   };
 
@@ -43,17 +44,17 @@ console.log(user);
             gutterBottom
             variant="h6"
             style={{
-            fontFamily: 'Georgia, serif',
-            fontSize: '20px',
-            letterSpacing: '1.6px',
-            wordSpacing: '0.8px',
-            color: '#000000',
-            fontWeight: 'normal',
-            textDecoration: 'none',
-            fontStyle: 'normal',
-            fontVariant: 'small-caps',
-            textTransform: 'none',
-          }}
+              fontFamily: 'Georgia, serif',
+              fontSize: '20px',
+              letterSpacing: '1.6px',
+              wordSpacing: '0.8px',
+              color: '#000000',
+              fontWeight: 'normal',
+              textDecoration: 'none',
+              fontStyle: 'normal',
+              fontVariant: 'small-caps',
+              textTransform: 'none',
+            }}
             component="div"
           >
             {product?.article}
@@ -67,9 +68,9 @@ console.log(user);
             variant="h6"
             component="div"
             style={{
-            fontSize: '16px',
-            letterSpacing: '1.7px',
-          }}
+              fontSize: '16px',
+              letterSpacing: '1.7px',
+            }}
           >
             {product?.article}
           </Typography>
@@ -90,13 +91,18 @@ console.log(user);
               <EditModal id={product.id!} />
             </>
           ) : (
-            <Button
-              size="small"
-              color="primary"
-              style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
-            >
-              В корзину
-            </Button>
+            <>
+              {user ? (<Button
+                size="small"
+                color="primary"
+                style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+              >
+                В корзину
+              </Button>) : (
+                <AuthModal />
+              )}
+
+            </>
           )
         }
       </CardActions>

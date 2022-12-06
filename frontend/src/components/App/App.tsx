@@ -35,7 +35,6 @@ function App(): JSX.Element {
   useEffect(() => {
     dispatch(addAsyncProducts());
     dispatch(addAsyncCategories());
-    dispatch(actualOrder(user.id!))
   }, []);
 
   return (

@@ -44,3 +44,11 @@ body {
   height: auto;
   object-fit: cover;
 }
+
+.swiper-button-prev::after{
+  color: black;
+}
+
+.swiper-button-next::after{
+  color: black;
+}

@@ -23,7 +23,7 @@ function App(): JSX.Element {
 
   const user = {
     id: 1,
-    isAdmin: true,
+    isAdmin: false,
   };
 
   return (

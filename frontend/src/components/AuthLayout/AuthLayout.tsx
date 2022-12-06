@@ -1,5 +1,6 @@
 import { Button, Link } from '@mui/material';
-import img from './cool-background.png';
+// import img from './cool-background.png';
+import './reg.css';
 
 interface AuthlayputProps {
   children: React.ReactNode;
@@ -10,25 +11,18 @@ interface AuthlayputProps {
   linkTitle: string;
 }
 
-export function Authlayput(props: AuthlayputProps) {
+function AuthLayout(props: AuthlayputProps):JSX.Element {
   const { children, handleSubmit, buttonTitle, title, href, linkTitle } = props;
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${img})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
-        height: '100vh'
-      }}
-    >
+    <div className="top">
       <form onSubmit={handleSubmit}>
         <div
           style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            paddingTop: '20%',
+            paddingTop: '15%',
           }}
         >
           <div
@@ -45,7 +39,7 @@ export function Authlayput(props: AuthlayputProps) {
             }}
           >
             <div>
-              <h3 style={{ color: '#67c1ff' }}>{title}</h3>
+              <h3 style={{ color: 'black', textAlign: 'center' }}>{title}</h3>
             </div>
             {children}
             <Button type="submit">{buttonTitle}</Button>
@@ -59,3 +53,5 @@ export function Authlayput(props: AuthlayputProps) {
     </div>
   );
 }
+
+export default AuthLayout;

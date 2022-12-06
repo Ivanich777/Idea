@@ -48,7 +48,13 @@ function Find({ products }: { products: Product[] }): JSX.Element {
   };
   return (
     <div>
-      <TextField sx={inp} onClick={handleOpen} disabled={open} placeholder="Поиск" />
+      <TextField
+        sx={inp}
+        onClick={handleOpen}
+        disabled={open}
+        placeholder="Поиск"
+        style={{ borderRadius: '10px' }}
+      />
       <Modal
         open={open}
         onClose={handleClose}
@@ -56,7 +62,12 @@ function Find({ products }: { products: Product[] }): JSX.Element {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <TextField sx={inp} onChange={(e) => searh(e.target.value)} placeholder="Поиск" />
+          <TextField
+            sx={inp}
+            onChange={(e) => searh(e.target.value)}
+            placeholder="Поиск"
+            style={{ display: 'flex', justifyContent: 'center' }}
+          />
           <Box sx={bx}>
             {
               matches.map((match, i) => <ProductCard key={i} product={match} />)

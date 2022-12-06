@@ -16,16 +16,19 @@ function Catalog({ categories } : { categories: Category[] }):JSX.Element {
         width: 400,
         bgcolor: 'background.paper',
         border: '2px solid #000',
+        borderRadius: '15px',
         boxShadow: 24,
+        backgroundColor: '#FAEBD7',
         p: 4,
     };
     const btn = {
         width: 200,
         height: 50,
-        background: 'white',
+        background: '#FFE4B5',
         marginRight: 30,
         marginLeft: 30,
-        border: 'solid 1px #1976d2'
+        border: 'solid 1px black',
+        color: 'black'
     };
     return (
         <div>
@@ -45,7 +48,7 @@ function Catalog({ categories } : { categories: Category[] }):JSX.Element {
                         {
                             categories.map((el) => (
                                 <ListItem key={el.id}>
-                                    <NavLink to={`/categories/${el.title}`} style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                                    <NavLink to={`/categories/${el.title}`} style={{ textDecoration: 'none', color: 'var(--color-active)', fontFamily: 'Comfortaa, cursive', fontSize: '20px' }}>
                                         {el.title}
                                     </NavLink>
                                 </ListItem>

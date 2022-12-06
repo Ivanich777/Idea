@@ -32,7 +32,7 @@ router.post('/registration', async (req, res) => {
   if (password && email && name && checkPassword && surname && phone) {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      res.json({ message: 'Пользователь с таким email уже существует' });
+      res.json({ message: 'Пользователь с такой почтой уже существует' });
     } else if (password === checkPassword) {
       const hash = await bcrypt.hash(password, 10);
       const newUser = await User.create({
@@ -80,7 +80,7 @@ router.post('/login', async (req, res) => {
         });
       }
     } else {
-      res.json({ message: 'Ваш login или password указаны не верно' });
+      res.json({ message: 'Ваша почта или пароль указаны не верно' });
     }
   }
 });

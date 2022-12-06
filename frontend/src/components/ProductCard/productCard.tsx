@@ -18,7 +18,7 @@ function ProductCard({ product }: {
   const navigate = useNavigate();
 
  const { user } = useSelector((state:RootState) => state.users);
-console.log(user);
+// console.log(user);
   const handleNav = (): void => {
     navigate(`/product/${product.id}`);
   };

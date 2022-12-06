@@ -185,14 +185,6 @@ export default function Header(): JSX.Element {
                     Войти
                   </NavLink>
                 </Button>
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  <NavLink to="/basket" style={{ textDecoration: 'none', color: 'white' }}>
-                    Корзина
-                  </NavLink>
-                </Button>
               </>
             )}
 

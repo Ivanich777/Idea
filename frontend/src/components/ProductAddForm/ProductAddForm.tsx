@@ -2,9 +2,10 @@ import React, { useRef } from 'react';
 import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
-import { addAsyncImages, addAsyncProduct } from '../ProductList/productSlice';
+import { addAsyncProduct, editAsyncProduct, addAsyncProduct } from '../ProductList/productSlice';
 
-export default function ProductAddForm(): JSX.Element {
+
+export default function ProductAddForm({ id } : { id:number }): JSX.Element {
   const [category, setCategory] = React.useState('');
   const [article, setArticle] = React.useState('');
   const [title, setTitle] = React.useState('');
@@ -35,7 +36,9 @@ export default function ProductAddForm(): JSX.Element {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const newProduct = {
+    let newProduct = {};
+    if (!id) {
+newProduct = {
       article: data.get('article'),
       title: data.get('title'),
       description: data.get('description'),
@@ -44,19 +47,38 @@ export default function ProductAddForm(): JSX.Element {
       count: data.get('count'),
       price: data.get('price'),
     };
+} else {
+      newProduct = {
+        id,
+        article: data.get('article'),
+        title: data.get('title'),
+        description: data.get('description'),
+        category: categories?.find((item) => item?.title === category)?.id,
+        image: data.get('image'),
+        count: data.get('count'),
+        price: data.get('price'),
+      };
+    }
 
     if (products.find((item) => Number(item.article) === Number(newProduct.article))) {
-      setArticle('Артикул не уникален!!!');
-    } else {
-      dispatch(addAsyncProduct(newProduct));
-      setArticle('');
-      setTitle('');
-      setImage('');
-      // uploadFiles?.current.value = '';
-      setDescription('');
-      setCount('');
-      setPrice('');
-    }
+      alert('Артикул не уникален');
+    } else if (!id) {
+        dispatch(addAsyncProduct(newProduct));
+        setArticle('');
+        setTitle('');
+        setDescription('');
+        setImage('');
+        setCount('');
+        setPrice('');
+      } else {
+        dispatch(editAsyncProduct(newProduct));
+        setArticle('');
+        setTitle('');
+        setDescription('');
+        setImage('');
+        setCount('');
+        setPrice('');
+      }
   };
 
   return (
@@ -127,8 +149,8 @@ export default function ProductAddForm(): JSX.Element {
               label="Цена"
               fullWidth
               variant="outlined"
-              sx={{ mb: 1 }}
-            />
+              sx={{ mb: 1 }}/>
+            
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -154,7 +176,7 @@ export default function ProductAddForm(): JSX.Element {
               fullWidth
               variant="contained"
             >
-              Добавить товар
+             {id ? ('Изменить') : ('Добавить товар')}
             </Button>
           </Grid>
         </Grid>

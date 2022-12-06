@@ -67,7 +67,6 @@ router.post('/product', async (req, res) => {
         path: img.path,
       });
     });
-
     newProduct.dataValues.images = images;
     console.log(newProduct);
     res.json(newProduct);
@@ -107,5 +106,37 @@ router.get('/category', async (req, res) => {
   const categories = await db.Category.findAll({ raw: true });
   res.json(categories);
 });
-
+router.delete('/product/:id', async (req, res) => {
+  const { id } = req.params;
+  await db.Image.destroy({ where: { idProduct: id } });
+  await db.Product.destroy({ where: { id } });
+  res.json(Number(id));
+});
+router.put('/product/:id', async (req, res) => {
+  const {
+    id,
+    article,
+    title,
+    description,
+    category,
+    image,
+    count,
+    price,
+  } = req.body;
+  await db.Product.update({
+    article: Number(article),
+    title,
+    description,
+    idCategory: Number(category),
+    count: Number(count),
+    price: Number(price),
+  }, { where: { id } });
+  const newProduct = await db.Product.findOne({ where: { id } });
+  await db.Image.update({
+    idProduct: newProduct.dataValues.id,
+    path: image,
+  }, { where: { idProduct: id } });
+  newProduct.dataValues.images = [{ path: image }];
+  res.json(newProduct);
+});
 module.exports = router;

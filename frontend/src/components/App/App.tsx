@@ -23,7 +23,7 @@ function App(): JSX.Element {
 
   const user = {
     id: 1,
-    isAdmin: false,
+    isAdmin: true,
   };
 
   return (
@@ -46,6 +46,7 @@ function App(): JSX.Element {
           <Route path="/" element={<HeaderAdmin />}>
             <Route path="/orders" element={<Orders />} />
             <Route path="/product" element={<><ProductAddForm /><ProductList /></>} />
+            <Route path="/product/:productId" element={<ProductItem />} />
           </Route>
         </Routes>
       )}

@@ -8,17 +8,41 @@ import Find from './Find/Find';
 import Scroll from './Scroll/Scroll';
 
 function Main():JSX.Element {
-  const { products } = useSelector((state:any) => state.products);
+  const { products } = useSelector((state:RootState) => state.products);
+  const { categories } = useSelector((state:RootState) => state.categories);
     return (
-        <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <Box style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: '5px' }}>
-                <Catalog />
+        <Box style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
+            }}
+        >
+            <Box style={{
+                width: '1300px',
+                height: '320px',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                marginTop: '25px',
+                background: 'url("https://bigfoto.name/uploads/posts/2022-03/1648579364_7-bigfoto-name-p-oboi-estetika-bezhevii-minimalizm-v-intere-12.jpg") no-repeat' }}
+            >
+                <Catalog categories={categories} />
                 <Find products={products} />
             </Box>
-            <Box style={{ width: '1500px', height: '350px', margin: '15px' }}>
-                <Scroll />
+            <Box style={{
+                width: '1340px',
+                height: '420px',
+                margin: '75px' }}
+            >
+                <Scroll products={products} />
             </Box>
-            <Box style={{ width: '800px', height: '400px', margin: '15px' }}>
+            <Box style={{
+                width: '1340px',
+                height: '320px',
+                marginBottom: '45px' }}
+            >
                 <Auto />
             </Box>
 

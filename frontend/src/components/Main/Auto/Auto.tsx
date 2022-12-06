@@ -14,25 +14,21 @@ function Auto():JSX.Element {
           spaceBetween={30}
           centeredSlides
           autoplay={{
-                    delay: 2500,
+                    delay: 5000,
                     disableOnInteraction: false,
                 }}
           pagination={{
                     clickable: true,
                 }}
           navigation
-          modules={[Autoplay, Pagination, Navigation]}
+          modules={[Autoplay, Navigation]}
           className="mySwiper"
         >
-                <SwiperSlide><img src="https://www.richardfarrar.com/wp-content/uploads/2008/06/mona300-thumb.jpg" alt="..." /></SwiperSlide>
-                <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
-                <SwiperSlide><img src="https://avatars.mds.yandex.net/i?id=8b89c7abde7de2009ee942d78f3fe8973836bdbe-4715150-images-thumbs&n=13" alt="." /></SwiperSlide>
-                <SwiperSlide><img src="https://www.richardfarrar.com/wp-content/uploads/2008/06/mona300-thumb.jpg" alt="..." /></SwiperSlide>
-                <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
-                <SwiperSlide><img src="https://avatars.mds.yandex.net/i?id=8b89c7abde7de2009ee942d78f3fe8973836bdbe-4715150-images-thumbs&n=13" alt="." /></SwiperSlide>
-                <SwiperSlide><img src="https://www.richardfarrar.com/wp-content/uploads/2008/06/mona300-thumb.jpg" alt="..." /></SwiperSlide>
-                <SwiperSlide><img src="https://www.themebeta.com/files/picture/201603/14/2366ba3ee6f8d8820c3fdad237c850f7.png" alt="..." /></SwiperSlide>
-                <SwiperSlide><img src="https://avatars.mds.yandex.net/i?id=8b89c7abde7de2009ee942d78f3fe8973836bdbe-4715150-images-thumbs&n=13" alt="." /></SwiperSlide>
+                <SwiperSlide><img className='img' src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2021/svetodiodnye-lampy-d-new-main-0102.jpg" alt="..." /></SwiperSlide>
+                <SwiperSlide><img className='img' src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/vygodnaya-pokupka-1210-d.jpg" alt="..." /></SwiperSlide>
+                <SwiperSlide><img className='img' src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/stilnaya-kuhnya-0112-d.jpg" alt="." /></SwiperSlide>
+                <SwiperSlide><img className='img' src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/tovary-dlya-sada-i-dachi-zima-2811-d.jpg" alt="..." /></SwiperSlide>
+                <SwiperSlide><img className='img'src="https://res.cloudinary.com/lmru-test/image/upload/f_auto,q_auto,w_1180,dpr_0.9,d_photoiscoming.png/elbrus/images/main-new/carousel/2022/super-ceny-0606-d-new.jpg" alt="..." /></SwiperSlide>
         </Swiper>
     );
 }

@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { RootState, useAppDispatch } from '../../store';
+import { RootState } from '../../store';
 import ProductCard from '../ProductCard/productCard';
-import { addAsyncProducts } from './productSlice';
 
 function ProductList():JSX.Element {
 //   const dispatch = useAppDispatch();
@@ -13,10 +11,9 @@ function ProductList():JSX.Element {
 //    []);
   const { products } = useSelector((state: RootState) => state.products);
 
-
   return (
    <div className="box">
-    <ul>
+    <ul style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', marginTop: '60px' }}>
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

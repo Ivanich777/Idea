@@ -9,6 +9,9 @@ export default function Footer(): JSX.Element {
       bgcolor="text.secondary"
       color="white"
       sx={{ flexShrink: 0 }}
+      style={{
+        backgroundColor: 'black'
+      }}
     >
       <Container maxWidth="lg">
         <Grid container spacing={5}>

@@ -1,7 +1,10 @@
-import { Box, Button, Modal, Typography } from '@mui/material';
+import { withTheme } from '@emotion/react';
+import { Box, Button, List, ListItem, Modal, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { Category } from '../../ProductAddForm/types/state';
 
-function Catalog() {
+function Catalog({ categories } : { categories: Category[] }):JSX.Element {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -13,12 +16,27 @@ function Catalog() {
         width: 400,
         bgcolor: 'background.paper',
         border: '2px solid #000',
+        borderRadius: '15px',
         boxShadow: 24,
+        backgroundColor: '#FAEBD7',
         p: 4,
+    };
+    const btn = {
+        width: 200,
+        height: 50,
+        background: '#FFE4B5',
+        marginRight: 30,
+        marginLeft: 30,
+        border: 'solid 1px black',
+        color: 'black'
     };
     return (
         <div>
-            <Button onClick={handleOpen}>Каталог</Button>
+            <Button
+              sx={btn}
+              onClick={handleOpen}
+            >Каталог
+            </Button>
             <Modal
               open={open}
               onClose={handleClose}
@@ -26,13 +44,17 @@ function Catalog() {
               aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                    </ul>
+                    <List>
+                        {
+                            categories.map((el) => (
+                                <ListItem key={el.id}>
+                                    <NavLink to={`/categories/${el.title}`} style={{ textDecoration: 'none', color: 'var(--color-active)', fontFamily: 'Comfortaa, cursive', fontSize: '20px' }}>
+                                        {el.title}
+                                    </NavLink>
+                                </ListItem>
+                            ))
+                        }
+                    </List>
                 </Box>
             </Modal>
         </div>

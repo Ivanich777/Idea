@@ -12,7 +12,7 @@ import { borderRadius } from "@mui/system";
 import { RootState, useAppDispatch } from "../../../store";
 import { addAsyncUser } from "../authSlice";
 import { FormInputs } from "./types/state";
-import { Authlayput } from "../AuthLayout/AuthLayout";
+import { AuthLayout } from "../AuthLayout/AuthLayout";
 
 function Registration(): JSX.Element {
   // const { name } = useParams();
@@ -50,19 +50,21 @@ function Registration(): JSX.Element {
     },
   });
   return (
-    <Authlayput
+    <AuthLayout
       linkTitle="У вас уже есть аккаунт?"
       href="/auth/login"
       title="Регистрация"
       handleSubmit={formik.handleSubmit}
       buttonTitle="Регистрация"
     >
+
       <TextField
         id="outlined-name"
         name="email"
         label="Email"
         value={formik.values.email}
         onChange={formik.handleChange}
+        error={formik.touched.email}
         // error={formik.touched.email && formik.errors.email}
       />
       {formik.touched.email && formik.errors.email ? (
@@ -119,7 +121,7 @@ function Registration(): JSX.Element {
       {formik.touched.phone && formik.errors.phone ? (
         <div style={{ color: "red" }}>{formik.errors.phone}</div>
       ) : null}
-    </Authlayput>
+    </AuthLayout>
   );
 }
 

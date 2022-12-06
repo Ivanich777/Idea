@@ -1,13 +1,19 @@
 export interface Product {
-  id: number,
+  id?: number,
   article: number,
   title: string,
   description: string,
   price: number,
-  image: string
+  idCategory: number,
+  images: [{
+    path: string
+  }],
+  image?:string
 }
+
 export interface State {
-  products: Product []
+  products: Product [],
+  images: [],
 }
 
 export type productId = Product['id'];

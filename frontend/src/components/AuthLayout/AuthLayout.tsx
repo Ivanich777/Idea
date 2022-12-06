@@ -1,5 +1,5 @@
 import { Button, Link } from '@mui/material';
-import img from './cool-background.png';
+// import img from './cool-background.png';
 
 interface AuthlayputProps {
   children: React.ReactNode;
@@ -10,16 +10,19 @@ interface AuthlayputProps {
   linkTitle: string;
 }
 
-export function Authlayput(props: AuthlayputProps) {
+function Authlayput(props: AuthlayputProps):JSX.Element {
   const { children, handleSubmit, buttonTitle, title, href, linkTitle } = props;
 
   return (
     <div
       style={{
-        backgroundImage: `url(${img})`,
+        background: '#FDCA90',
+        background: '-moz-linear-gradient(top, #FDCA90 0%, #5A341C 0%, #F3C28A 100%)',
+        background: '-webkit-linear-gradient(top, #FDCA90 0%, #5A341C 0%, #F3C28A 100%)',
+        background: 'linear-gradient(to bottom, #FDCA90 0%, #5A341C 0%, #F3C28A 100%)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: '100%',
-        height: '100vh'
+        height: '100vh',
       }}
     >
       <form onSubmit={handleSubmit}>
@@ -28,7 +31,7 @@ export function Authlayput(props: AuthlayputProps) {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            paddingTop: '20%',
+            paddingTop: '15%',
           }}
         >
           <div
@@ -45,7 +48,7 @@ export function Authlayput(props: AuthlayputProps) {
             }}
           >
             <div>
-              <h3 style={{ color: '#67c1ff' }}>{title}</h3>
+              <h3 style={{ color: 'black', textAlign: 'center' }}>{title}</h3>
             </div>
             {children}
             <Button type="submit">{buttonTitle}</Button>
@@ -59,3 +62,5 @@ export function Authlayput(props: AuthlayputProps) {
     </div>
   );
 }
+
+export default Authlayput;

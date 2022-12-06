@@ -7,7 +7,6 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { Product } from '../ProductList/types/state';
-import './card.css';
 
 function ProductCard({ product }: { product:Product
  }):JSX.Element {

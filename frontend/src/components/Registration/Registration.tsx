@@ -13,6 +13,7 @@ import { RootState, useAppDispatch } from '../../store';
 import { addAsyncUser } from './authSlice';
 import { FormInputs } from './types/state';
 import { Authlayput } from '../AuthLayout/AuthLayout';
+// import './reg.css';
 
 function Registration(): JSX.Element {
   // const { name } = useParams();
@@ -47,7 +48,13 @@ function Registration(): JSX.Element {
     },
   });
   return (
-    <Authlayput linkTitle="У вас уже есть аккаунт?" href="/auth/login" title="Регистрация" handleSubmit={formik.handleSubmit} buttonTitle="Регистрация">
+    <Authlayput
+      linkTitle="У вас уже есть аккаунт?"
+      href="/auth/login"
+      title="Регистрация"
+      handleSubmit={formik.handleSubmit}
+      buttonTitle="Регистрация"
+    >
 
       <TextField
         id="outlined-name"

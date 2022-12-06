@@ -169,8 +169,11 @@ router.post('/basket', async (req, res) => {
 router.get('/basket', async (req, res) => {
   const { id } = req.query;
   const order = await db.Order.findOne({ where: { idUser: id, status: 'Не оформлен' } });
-  const basket = await db.OrderItem.findAll({ where: { idOrder: order.id } });
-  res.json(basket);
+  if (order) {
+    const basket = await db.OrderItem.findAll({ where: { idOrder: order.id } });
+    return res.json(basket);
+  }
+  res.json();
 });
 
 module.exports = router;

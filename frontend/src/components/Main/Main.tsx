@@ -26,8 +26,9 @@ function Main():JSX.Element {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-                marginTop: '25px',
-                background: 'url("https://bigfoto.name/uploads/posts/2022-03/1648579364_7-bigfoto-name-p-oboi-estetika-bezhevii-minimalizm-v-intere-12.jpg") no-repeat' }}
+                marginTop: '30px',
+                background: 'url("https://bigfoto.name/uploads/posts/2022-03/1648579364_7-bigfoto-name-p-oboi-estetika-bezhevii-minimalizm-v-intere-12.jpg") no-repeat',
+                borderRadius:'10px' }}
             >
                 <Catalog categories={categories} />
                 <Find products={products} />

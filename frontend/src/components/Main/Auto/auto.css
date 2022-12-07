@@ -47,8 +47,10 @@ body {
 
 .swiper-button-prev::after{
   color: black;
+  padding-right: 20px;
 }
 
 .swiper-button-next::after{
   color: black;
+  padding-left: 20px;
 }

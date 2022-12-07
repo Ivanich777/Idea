@@ -59,6 +59,15 @@ function ProductItem(): JSX.Element {
         <Typography
           margin="10px"
           style={{
+            fontSize: '20px',
+            fontFamily: 'Georgia, serif',
+            letterSpacing: '1.2px',
+          }}
+        >{`art.${product?.article}`}
+        </Typography>
+        <Typography
+          margin="10px"
+          style={{
             fontSize: '25px',
             fontFamily: 'Georgia, serif',
 

@@ -35,16 +35,18 @@ function AuthLayout(props: AuthlayputProps):JSX.Element {
               width: '30%',
               height: 'fitContent',
               background: 'white',
-              boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+              boxShadow: '0 0 10px black',
               padding: '1.5rem',
               borderRadius: '20px',
+              borderColor:'black'
             }}
           >
             <div>
               <h3 style={{ color: 'black', textAlign: 'center' }}>{title}</h3>
             </div>
             {children}
-            <Button className="button" type="submit">{buttonTitle}</Button>
+            <Button className="button" type="submit"
+            style={{color:'black'}}>{buttonTitle}</Button>
 
             <div>
               <Link href={href}>{linkTitle}</Link>

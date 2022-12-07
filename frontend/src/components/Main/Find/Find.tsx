@@ -4,6 +4,7 @@ import Fuse from 'fuse.js';
 import { flexbox } from '@mui/system';
 import ProductCard from '../../ProductCard/productCard';
 import { Product } from '../../ProductList/types/state';
+import './find.css'
 
 function Find({ products }: { products: Product[] }): JSX.Element {
   const [open, setOpen] = useState(false);
@@ -62,14 +63,17 @@ function Find({ products }: { products: Product[] }): JSX.Element {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}
-        style={{position: 'fixed',left: '50%',top: '50%', width:'1200px', height:'600px'}}>
+        style={{position: 'fixed',left: '50%',top: '50%', width:'1200px', height:'600px', backgroundColor:'#FFFAF0', borderRadius:'30px'}}>
           <TextField
             sx={inp}
+            id='find'
             onChange={(e) => searh(e.target.value)}
             placeholder="Поиск"
+            color='warning'
+            style={{display:'flex', flexDirection:'column',paddingLeft:'400px', backgroundColor:'#FFFAF0'}}
           />
           <Box sx={bx}
-          style={{position:'absolute', marginTop:'80px'}}
+          style={{position:'absolute', marginTop:'80px', backgroundColor:'#FFFAF0'}}
           >
             {
               matches.map((match, i) => <ProductCard key={i} product={match} style={{position:'absolute'}}/>)

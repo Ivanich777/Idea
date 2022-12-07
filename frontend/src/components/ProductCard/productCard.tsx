@@ -5,7 +5,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
 import { Product } from '../ProductList/types/state';
@@ -19,7 +18,6 @@ function ProductCard({ product }: {
 }): JSX.Element {
   const navigate = useNavigate();
 
-
   const { user } = useSelector((state: RootState) => state.users);
 
   const handleNav = (): void => {
@@ -31,12 +29,11 @@ function ProductCard({ product }: {
     dispatch(delAsyncProduct(product.id!));
   };
 
-  const handleClick = ():void => {
-    const obj = {idProduct: product.id, userId: user.id}
-    dispatch(addNewOrder(obj))
-  }
+  const handleClick = (): void => {
+    const obj = { idProduct: product.id, userId: user?.id };
+    dispatch(addNewOrder(obj));
+  };
 
-  
   return (
     <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite' }}>
       <CardActionArea>
@@ -100,14 +97,16 @@ function ProductCard({ product }: {
             </>
           ) : (
             <>
-              {user ? (<Button
-                size="small"
-                color="primary"
-                style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
-                onClick={handleClick}
-              >
-                В корзину
-              </Button>) : (
+              {user ? (
+                <Button
+                  size="small"
+                  color="primary"
+                  style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+                  onClick={handleClick}
+                >
+                  В корзину
+                </Button>
+              ) : (
                 <AuthModal />
               )}
 

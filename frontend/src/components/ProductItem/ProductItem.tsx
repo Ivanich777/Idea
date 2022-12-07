@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 
 
 
-import {Pagination} from "swiper";
+import { Pagination } from "swiper";
 
 function ProductItem(): JSX.Element {
   const { productId } = useParams();
@@ -30,17 +30,17 @@ function ProductItem(): JSX.Element {
 
         <Box sx={{ width: '300px', height: '350px' }}>
           <Swiper
-        direction={"vertical"}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
+            direction={"vertical"}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Pagination]}
+            className="mySwiper"
           >
             {
               product?.images.map((img) =>
                 <SwiperSlide >
-                  <img style={{width:'300px', height:'350px'}} src={img.path} />
+                  <img style={{ width: '300px', height: '350px' }} src={img.path} />
                 </SwiperSlide>
               )
             }
@@ -106,7 +106,14 @@ function ProductItem(): JSX.Element {
           }}
         >{product?.description}
         </Typography>
+        {product?.features.length! > 0 && product?.features.map((item: any) => (
+          <Box sx={{ display: 'flex' }}>
+            <Box sx={{ marginRight: '5px', fontSize: '20px', fontFamily: 'Georgia, serif', letterSpacing: '1.2px', marginLeft: '10px' }}>{item.title}:</Box>
+            <Box sx={{ fontSize: '20px', fontFamily: 'Georgia, serif', letterSpacing: '1.2px', marginLeft: '10px' }}>{item.description}</Box>
+          </Box>
+        ))}
       </Box>
+
     </Box>
   );
 }

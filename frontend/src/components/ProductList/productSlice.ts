@@ -50,6 +50,8 @@ const productSlice = createSlice({
             state.products = action.payload;
             state.products.forEach((item, i) => {
                  item.images = action.payload[i].Images;
+                 item.features = action.payload[i].Features;
+                 item.category = action.payload[i].Category.title;
             });
         })
         .addCase(addAsyncProduct.fulfilled, (state, action) => {
@@ -60,19 +62,19 @@ const productSlice = createSlice({
            state.products = arr;
         })
         .addCase(editAsyncProduct.fulfilled, (state, action) => {
-            const arr = state.products.map((item) => {
-                if (item.id === action.payload.id) {
-                    return action.payload;
-                }
-
-                    return item;
-            });
-            state.products = arr;
+            // const arr = state.products.map((item) => {
+            //     if (item.id === action.payload.id) {
+            //         return action.payload;
+            //     }
+            //         return item;
+            // });
+            // state.products = arr;
+            const index = state.products.findIndex((item) => item.id === action.payload.id);
+            state.products[index] = { ...state.products[index], ...action.payload };
          })
         .addCase(addAsyncImages.fulfilled, (state, action) => {
             state.images = action.payload;
         });
-
     }
  });
 

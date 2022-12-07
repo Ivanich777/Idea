@@ -3,7 +3,7 @@ body {
 }
 
 NavLink {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 font-size: 33px;
 letter-spacing: 3px;
 word-spacing: 1.6px;

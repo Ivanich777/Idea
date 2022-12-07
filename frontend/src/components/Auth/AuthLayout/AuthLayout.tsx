@@ -24,7 +24,7 @@ function AuthLayout(props: AuthlayputProps): JSX.Element {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            paddingTop: '15%',
+            paddingTop: '10%',
           }}
         >
           <div
@@ -35,17 +35,18 @@ function AuthLayout(props: AuthlayputProps): JSX.Element {
               width: '30%',
               height: 'fitContent',
               background: 'white',
-              boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+              boxShadow: '0 0 10px black',
               padding: '1.5rem',
               borderRadius: '20px',
+              borderColor:'black'
             }}
           >
             <div>
               <h3 style={{ color: 'black', textAlign: 'center' }}>{title}</h3>
             </div>
             {children}
-            <Button type="submit">{buttonTitle}</Button>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Button className="button" type="submit" style={{color:'black'}}>{buttonTitle}</Button>
+            <div>
               <Link href={href}>{linkTitle}</Link>
               <Link href="/">На главную</Link>
             </div>

@@ -23,15 +23,22 @@ import { addAsyncCategories } from '../ProductAddForm/categorySlice';
 import Category from '../Category/Category';
 import { addAsyncUser, checkAsyncUser, getUser } from '../Auth/authSlice';
 import Logout from '../Auth/Logout/Logout';
+
 import { actualOrder } from '../ProductCard/basketSlice';
 import Basket from '../Basket/Basket';
+import './app.css'
+import { addAsyncOrders } from '../Orders/orderSlice';
 
 function App(): JSX.Element {
   const { user } = useSelector((state: RootState) => state.users);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getUser());
+    dispatch(addAsyncProducts());
+    dispatch(addAsyncOrders());
+    dispatch(addAsyncCategories());
   }, []);
+
   useEffect(() => {
     dispatch(addAsyncProducts());
     dispatch(addAsyncCategories());
@@ -45,6 +52,7 @@ function App(): JSX.Element {
             <Route path="/" element={<Main />} />
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
+            <Route path="/categories/:categoryId" element={<Category />} />
           </Route>
           <Route path="/auth/reg" element={<Registration />} />
           <Route path="/auth/login" element={<Login />} />

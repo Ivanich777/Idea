@@ -213,7 +213,19 @@ router.put('/decreaseCount', async (req, res) => {
     },
     order: [['createdAt']],
   });
-  console.log(updateOrderItems);
+  res.json(updateOrderItems);
+});
+
+router.put('/increaseCount', async (req, res) => {
+  const { id } = req.body;
+  const actualOrderItem = await db.OrderItem.findOne({ where: { id } });
+  await db.OrderItem.update({ count: Number(actualOrderItem.count) + 1 }, { where: { id } });
+  const updateOrderItems = await db.OrderItem.findAll({
+    where: {
+      idOrder: actualOrderItem.idOrder,
+    },
+    order: [['createdAt']],
+  });
   res.json(updateOrderItems);
 });
 

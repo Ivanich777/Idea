@@ -35,6 +35,16 @@ export const decreaseCount = createAsyncThunk('orders/decreaseCount', (id: numbe
 })
   .then((result) => result.json())
 )
+
+export const increaseCount = createAsyncThunk('orders/increaseCount', (id: number) => fetch(`http://localhost:4000/api/increaseCount`, {
+  method: 'put',
+  headers: { 'Content-type': 'application/json' },
+  body: JSON.stringify({ id })
+})
+  .then((result) => result.json())
+)
+
+
 const initialState: State = {
   basket: [],
 };
@@ -56,12 +66,11 @@ const orderItemsSlice = createSlice({
       })
       .addCase(makeOrder.fulfilled, (state, action) => {
         state.basket = [];
-        // return {
-        //   ...state,
-        //   basket: state.basket.map((el) => el.idOrder === action.payload.id ? { ...el, status: action.payload.status } : el)
-        // }
       })
       .addCase(decreaseCount.fulfilled, (state, action) => {
+        state.basket = action.payload;
+      })
+      .addCase(increaseCount.fulfilled, (state, action) => {
         state.basket = action.payload;
       })
   }

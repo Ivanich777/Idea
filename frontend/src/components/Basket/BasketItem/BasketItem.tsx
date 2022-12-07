@@ -3,7 +3,7 @@ import { Box, Button, IconButton, ListItem, ListItemText, Stack, Typography } fr
 import DeleteIcon from '@mui/icons-material/Delete';
 import { BasketItem } from './State/state';
 import { RootState, useAppDispatch } from '../../../store';
-import { actualOrder, decreaseCount, deleteBasketItem } from '../../ProductCard/basketSlice';
+import { actualOrder, decreaseCount, deleteBasketItem, increaseCount } from '../../ProductCard/basketSlice';
 import { useSelector } from 'react-redux';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -29,9 +29,12 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
 
   const handleDecreaseCount = () => {
     if (item.orderCount > 1) {      
-      // setCountItem((prev: number) => prev - 1);
       dispatch(decreaseCount(item.idOrderItem));
     }   
+  }
+
+  const handleIncreaseCount = () => {
+    dispatch(increaseCount(item.idOrderItem));
   }
 
   return (
@@ -71,6 +74,7 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
               </ListItemText>
               <Button
                 aria-label="increase"
+                onClick={handleIncreaseCount}
               >
                 <AddIcon fontSize="small" />
               </Button>

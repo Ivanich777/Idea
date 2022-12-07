@@ -79,7 +79,7 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
                 <AddIcon fontSize="small" />
               </Button>
           </div>
-          <ListItemText primary={`Итого: ${item?.orderCount * item?.price}`} />
+          <ListItemText primary={`Итого: ${item?.orderCount * item?.price}₽`} />
         </div>
       </ListItem>
     </Box >

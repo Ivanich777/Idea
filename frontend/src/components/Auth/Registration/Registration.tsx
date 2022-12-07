@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 // import { useForm, SubmitHandler } from 'react-hook-form';
 // import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -19,9 +19,14 @@ import './registr.css'
 
 function Registration(): JSX.Element {
   // const { name } = useParams();
-  // const { user } = useSelector((state: RootState) => state);
+  const { user, error } = useSelector((srt:RootState) => srt.users);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+      }, [user]);
 
   const formik = useFormik({
     initialValues: {
@@ -47,9 +52,8 @@ function Registration(): JSX.Element {
         .required('Обязательное поле'),
     }),
     onSubmit: (values) => {
-      console.log(values);
       dispatch(addAsyncUser(values));
-      navigate('/');
+      // navigate('/');
     },
   });
   return (
@@ -79,6 +83,7 @@ function Registration(): JSX.Element {
         id="outlined-name"
         name="password"
         label="Password"
+        type="password"
         value={formik.values.password}
         onChange={formik.handleChange}
         color='warning'
@@ -90,6 +95,7 @@ function Registration(): JSX.Element {
         id="outlined-name"
         name="checkPassword"
         label="Check Password"
+        type="password"
         value={formik.values.checkPassword}
         onChange={formik.handleChange}
         color='warning'
@@ -130,6 +136,18 @@ function Registration(): JSX.Element {
       {formik.touched.phone && formik.errors.phone ? (
         <div style={{ color: 'red' }}>{formik.errors.phone}</div>
       ) : null}
+            <p style={{ fontFamily: 'Times New Roman, Times, serif',
+fontSize: '21px',
+letterSpacing: '1.6px',
+wordSpacing: '-1.4px',
+color: '#000000',
+fontWeight: '400',
+textDecoration: 'none',
+fontStyle: 'normal',
+fontVariant: 'normal',
+textTransform: 'none' }}
+            >{error.message}
+            </p>
     </AuthLayout>
   );
 }

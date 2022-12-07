@@ -124,9 +124,6 @@ router.put('/product/:id', async (req, res) => {
     price,
   } = req.body;
   await db.Product.update({
-    article: Number(article),
-    title,
-    description,
     idCategory: Number(category),
     count: Number(count),
     price: Number(price),
@@ -143,4 +140,37 @@ router.put('/product/:id', async (req, res) => {
   newProduct.dataValues.images = images;
   res.json(newProduct);
 });
+
+router.post('/basket', async (req, res) => {
+  const { idProduct, userId } = req.body;
+  const order = await db.Order.findOne({ where: { idUser: userId, status: 'Не оформлен' } });
+  if (order) {
+    const newItem = await db.OrderItem.create({
+      idProduct,
+      count: 1,
+      idOrder: order.id,
+    });
+
+    return res.json(newItem);
+  }
+  const newOrder = await db.Order.create({
+    idUser: userId,
+    status: 'Не оформлен',
+  });
+  const newItem = await db.OrderItem.create({
+    idProduct,
+    count: 1,
+    idOrder: newOrder.id,
+  });
+
+  res.json(newItem);
+});
+
+router.get('/basket', async (req, res) => {
+  const { id } = req.query;
+  const order = await db.Order.findOne({ where: { idUser: id, status: 'Не оформлен' } });
+  const basket = await db.OrderItem.findAll({ where: { idOrder: order.id } });
+  res.json(basket);
+});
+
 module.exports = router;

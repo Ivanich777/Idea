@@ -45,6 +45,7 @@ function App(): JSX.Element {
             <Route path="/" element={<Main />} />
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
+            <Route path="/categories/:categoryId" element={<Category />} />
           </Route>
           <Route path="/auth/reg" element={<Registration />} />
           <Route path="/auth/login" element={<Login />} />

@@ -17,7 +17,7 @@ export default function Header(): JSX.Element {
 
   return (
     <>
-      <AppBar position="sticky">
+      <AppBar position="sticky" style={{ backgroundColor: 'black' }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -28,9 +28,9 @@ export default function Header(): JSX.Element {
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
+                fontFamily: 'Playfair Display SC',
                 fontWeight: 700,
-                letterSpacing: '.3rem',
+                letterSpacing: '.5rem',
                 color: 'inherit',
                 textDecoration: 'none',
               }}
@@ -116,7 +116,7 @@ export default function Header(): JSX.Element {
               <Button
                 variant="outlined"
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', borderStyle:'none' }}
               >
                 <NavLink to="/orders" style={{ textDecoration: 'none', color: 'white' }}>
                   Заказы
@@ -125,7 +125,7 @@ export default function Header(): JSX.Element {
               <Button
                 variant="outlined"
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', borderStyle:'none' }}
               >
                 <NavLink to="/product" style={{ textDecoration: 'none', color: 'white' }}>
                   Товары
@@ -134,7 +134,7 @@ export default function Header(): JSX.Element {
               <Button
                 variant="outlined"
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', borderStyle:'none' }}
               >
                 <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'white' }}>
                   Выход

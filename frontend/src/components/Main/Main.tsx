@@ -20,14 +20,14 @@ function Main():JSX.Element {
             }}
         >
             <Box style={{
-                width: '1400px',
+                width: '1250px',
                 height: '320px',
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
                 marginTop: '30px',
-                background: 'url("https://idme-marketplace.s3.amazonaws.com/ac1w1vy35p49a4st9yn4hd2w1rjv") no-repeat',
+                background: 'url("./kar.jpeg") no-repeat',
                 borderRadius:'10px' }}
             >
                 <Catalog categories={categories} />

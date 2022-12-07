@@ -213,7 +213,7 @@ router.get('/basket', async (req, res) => {
   const { id } = req.query;
   const order = await db.Order.findOne({ where: { idUser: id, status: 'Не оформлен' } });
   if (order) {
-    const basket = await db.OrderItem.findAll({ where: { idOrder: order.id } });
+    const basket = await db.OrderItem.findAll({ where: { idOrder: order.id }, order: [['createdAt']] });
     return res.json(basket);
   }
   return res.json();
@@ -224,6 +224,32 @@ router.put('/makeOrder', async (req, res) => {
   await db.Order.update({ status: 'Принят' }, { where: { id } });
   const updateOrder = await db.Order.findAll({ where: { id } });
   res.json(updateOrder);
+});
+
+router.put('/decreaseCount', async (req, res) => {
+  const { id } = req.body;
+  const actualOrderItem = await db.OrderItem.findOne({ where: { id } });
+  await db.OrderItem.update({ count: Number(actualOrderItem.count) - 1 }, { where: { id } });
+  const updateOrderItems = await db.OrderItem.findAll({
+    where: {
+      idOrder: actualOrderItem.idOrder,
+    },
+    order: [['createdAt']],
+  });
+  res.json(updateOrderItems);
+});
+
+router.put('/increaseCount', async (req, res) => {
+  const { id } = req.body;
+  const actualOrderItem = await db.OrderItem.findOne({ where: { id } });
+  await db.OrderItem.update({ count: Number(actualOrderItem.count) + 1 }, { where: { id } });
+  const updateOrderItems = await db.OrderItem.findAll({
+    where: {
+      idOrder: actualOrderItem.idOrder,
+    },
+    order: [['createdAt']],
+  });
+  res.json(updateOrderItems);
 });
 
 module.exports = router;

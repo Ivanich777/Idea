@@ -19,14 +19,31 @@ export const deleteBasketItem = createAsyncThunk('orders/deleteBasketItem', (id:
   fetch(`http://localhost:4000/api/basket/${id}`, { method: 'DELETE' });
 })
 
-export const makeOrder = createAsyncThunk('orders/makeOrder', (numberOfOrder: number):Promise<{id: number, status: string }> => {
+export const makeOrder = createAsyncThunk('orders/makeOrder', (numberOfOrder: number): Promise<{ id: number, status: string }> => {
   return fetch(`http://localhost:4000/api/makeOrder`, {
     method: 'put',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify({ id: numberOfOrder }),
   })
-  .then((result)=> result.json())
+    .then((result) => result.json())
 })
+
+export const decreaseCount = createAsyncThunk('orders/decreaseCount', (id: number) => fetch(`http://localhost:4000/api/decreaseCount`, {
+  method: 'put',
+  headers: { 'Content-type': 'application/json' },
+  body: JSON.stringify({ id })
+})
+  .then((result) => result.json())
+)
+
+export const increaseCount = createAsyncThunk('orders/increaseCount', (id: number) => fetch(`http://localhost:4000/api/increaseCount`, {
+  method: 'put',
+  headers: { 'Content-type': 'application/json' },
+  body: JSON.stringify({ id })
+})
+  .then((result) => result.json())
+)
+
 
 const initialState: State = {
   basket: [],
@@ -39,8 +56,6 @@ const orderItemsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addNewOrder.fulfilled, (state, action) => {
-        console.log(action.payload, 'action.payload');
-        console.log(state.basket, 'state.basket');
         return {
           ...state,
           basket: state.basket.concat([action.payload])
@@ -50,11 +65,13 @@ const orderItemsSlice = createSlice({
         state.basket = action.payload;
       })
       .addCase(makeOrder.fulfilled, (state, action) => {
-                
-        return {
-          ...state,
-          basket: state.basket.map((el) =>  el.idOrder === action.payload.id ? {...el, status: action.payload.status } : el )
-          }
+        state.basket = [];
+      })
+      .addCase(decreaseCount.fulfilled, (state, action) => {
+        state.basket = action.payload;
+      })
+      .addCase(increaseCount.fulfilled, (state, action) => {
+        state.basket = action.payload;
       })
   }
 });

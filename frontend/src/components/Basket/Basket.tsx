@@ -23,14 +23,14 @@ function Basket() {
     }
   }, []);
   const { basket } = useSelector((state: RootState) => state.basket);
-  console.log(basket);
-
+  
   const { products } = useSelector((state: RootState) => state.products);
-
-  const bs = basket.map((item: any) => {
+  
+  const bs = basket.map((item: any, index:number) => {
     const product = products.find((el) => el.id === item.idProduct);
-    return { ...product, orderCount: item.count };
+    return { ...product, orderCount: item.count, idOrderItem: basket[index]?.id! };
   })
+  // console.log(bs);
 
 
   function sum () {

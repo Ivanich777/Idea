@@ -1,4 +1,4 @@
-import { Box, Typography, TextField, FormControl, Select, MenuItem, FormLabel } from '@mui/material';
+import { Box, Typography, TextField, FormControl, Select, MenuItem, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
@@ -16,36 +16,61 @@ function Orders(): JSX.Element {
 
   const handleSearchNumber = (event: any): void => {
     setSearchNumber((event.target.value));
+    let fOrders = orders;
     if (event.target.value) {
-      setOrderList(orderList.filter((item) => String(item.id).includes(event.target.value)));
-    } else {
-      setOrderList(orders);
+      fOrders = fOrders.filter((item) => String(item.id).includes(event.target.value));
     }
+    if (searchUser) {
+      fOrders = fOrders.filter((item) => String(item.email).includes(searchUser));
+    }
+    if (searchStatus !== 'Все') {
+      fOrders = fOrders.filter((item) => item.status === searchStatus);
+    }
+    setOrderList(fOrders);
   };
 
   const handleSearchUser = (event: any): void => {
     setSearchUser((event.target.value));
+    let fOrders = orders;
     if (event.target.value) {
-      setOrderList(orderList.filter((item) => String(item.email).includes(event.target.value)));
-    } else {
-      setOrderList(orders);
+      fOrders = fOrders.filter((item) => String(item.email).includes(event.target.value));
     }
+    if (searchNumber) {
+      fOrders = fOrders.filter((item) => String(item.id).includes(searchNumber));
+    }
+    if (searchStatus !== 'Все') {
+      fOrders = fOrders.filter((item) => item.status === searchStatus);
+    }
+    setOrderList(fOrders);
   };
 
   const handleSearchStatus = (event: any): void => {
     setSearchStatus((event.target.value));
+    let fOrders = orders;
     if (event.target.value !== 'Все') {
-      setOrderList(orders.filter((item) => item.status === event.target.value));
-    } else {
-      setOrderList(orders);
+      fOrders = fOrders.filter((item) => item.status === event.target.value);
     }
+    if (searchNumber) {
+      fOrders = fOrders.filter((item) => String(item.id).includes(searchNumber));
+    }
+    if (searchUser) {
+      fOrders = fOrders.filter((item) => String(item.email).includes(searchUser));
+    }
+    setOrderList(fOrders);
+  };
+
+  const handleDefault = (): void => {
+    setSearchNumber('');
+    setSearchUser('');
+    setSearchStatus(('Все'));
+    setOrderList(orders);
   };
 
   useEffect(() => {
     if (user?.admin) {
       setOrderList(orders);
     } else {
-      setOrderList(orders.filter((order: Order) => order.idUser === user?.id));
+      setOrderList(orderList.filter((order: Order) => order.idUser === user?.id));
     }
   }, []);
 
@@ -85,6 +110,7 @@ function Orders(): JSX.Element {
                 <MenuItem value="Принят">Принят</MenuItem>
               </Select>
             </FormControl>
+            <Button onClick={handleDefault}>Сбросить фильтры</Button>
           </Box>
         </>
       )}

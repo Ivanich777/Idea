@@ -147,9 +147,6 @@ router.put('/product/:id', async (req, res) => {
     price,
   } = req.body;
   await db.Product.update({
-    article: Number(article),
-    title,
-    description,
     idCategory: Number(category),
     count: Number(count),
     price: Number(price),
@@ -166,4 +163,67 @@ router.put('/product/:id', async (req, res) => {
   newProduct.dataValues.images = images;
   res.json(newProduct);
 });
+
+router.delete('/basket/:id', async (req, res) => {
+  const { id } = req.params;
+  await db.OrderItem.destroy({ where: { idProduct: id } });
+});
+
+router.post('/basket', async (req, res) => {
+  const { idProduct, userId } = req.body;
+  const order = await db.Order.findOne({ where: { idUser: userId, status: 'Не оформлен' } });
+  if (order) {
+    const currentOrderItem = await db.OrderItem.findOne({
+      where: {
+        idOrder: order.id,
+        idProduct,
+      },
+    });
+    if (currentOrderItem) {
+      await db.OrderItem.update({
+        count: currentOrderItem.count + 1,
+      }, { where: { idProduct, idOrder: order.id } });
+
+      const currentRow = await db.OrderItem.findOne({ where: { idProduct, idOrder: order.id } });
+      return res.json(currentRow);
+    }
+
+    const newItem = await db.OrderItem.create({
+      idProduct,
+      count: 1,
+      idOrder: order.id,
+    });
+
+    return res.json(newItem);
+  }
+  const newOrder = await db.Order.create({
+    idUser: userId,
+    status: 'Не оформлен',
+  });
+  const newItem = await db.OrderItem.create({
+    idProduct,
+    count: 1,
+    idOrder: newOrder.id,
+  });
+
+  return res.json(newItem);
+});
+
+router.get('/basket', async (req, res) => {
+  const { id } = req.query;
+  const order = await db.Order.findOne({ where: { idUser: id, status: 'Не оформлен' } });
+  if (order) {
+    const basket = await db.OrderItem.findAll({ where: { idOrder: order.id } });
+    return res.json(basket);
+  }
+  return res.json();
+});
+
+router.put('/makeOrder', async (req, res) => {
+  const { id } = req.body;
+  await db.Order.update({ status: 'Принят' }, { where: { id } });
+  const updateOrder = await db.Order.findAll({ where: { id } });
+  res.json(updateOrder);
+});
+
 module.exports = router;

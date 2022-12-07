@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 // import { useForm, SubmitHandler } from 'react-hook-form';
 // import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -13,12 +13,20 @@ import { RootState, useAppDispatch } from '../../../store';
 import { addAsyncUser } from '../authSlice';
 import { FormInputs } from './types/state';
 import AuthLayout from '../AuthLayout/AuthLayout';
+import './registr.css'
+
+
 
 function Registration(): JSX.Element {
   // const { name } = useParams();
-  // const { user } = useSelector((state: RootState) => state);
+  const { user, error } = useSelector((srt:RootState) => srt.users);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+      }, [user]);
 
   const formik = useFormik({
     initialValues: {
@@ -44,9 +52,8 @@ function Registration(): JSX.Element {
         .required('Обязательное поле'),
     }),
     onSubmit: (values) => {
-      console.log(values);
       dispatch(addAsyncUser(values));
-      navigate('/');
+      // navigate('/');
     },
   });
   return (
@@ -65,6 +72,7 @@ function Registration(): JSX.Element {
         value={formik.values.email}
         onChange={formik.handleChange}
         error={formik.touched.email}
+        color='warning'
         // error={formik.touched.email && formik.errors.email}
       />
       {formik.touched.email && formik.errors.email ? (
@@ -75,8 +83,10 @@ function Registration(): JSX.Element {
         id="outlined-name"
         name="password"
         label="Password"
+        type="password"
         value={formik.values.password}
         onChange={formik.handleChange}
+        color='warning'
       />
       {formik.touched.password && formik.errors.password ? (
         <div style={{ color: 'red' }}>{formik.errors.password}</div>
@@ -85,8 +95,10 @@ function Registration(): JSX.Element {
         id="outlined-name"
         name="checkPassword"
         label="Check Password"
+        type="password"
         value={formik.values.checkPassword}
         onChange={formik.handleChange}
+        color='warning'
       />
       {formik.touched.checkPassword && formik.errors.checkPassword ? (
         <div style={{ color: 'red' }}>{formik.errors.checkPassword}</div>
@@ -97,6 +109,7 @@ function Registration(): JSX.Element {
         label="Name"
         value={formik.values.name}
         onChange={formik.handleChange}
+        color='warning'
       />
       {formik.touched.name && formik.errors.name ? (
         <div style={{ color: 'red' }}>{formik.errors.name}</div>
@@ -107,6 +120,7 @@ function Registration(): JSX.Element {
         label="Surname"
         value={formik.values.surname}
         onChange={formik.handleChange}
+        color='warning'
       />
       {formik.touched.surname && formik.errors.surname ? (
         <div style={{ color: 'red' }}>{formik.errors.surname}</div>
@@ -117,10 +131,23 @@ function Registration(): JSX.Element {
         label="Phone"
         value={formik.values.phone}
         onChange={formik.handleChange}
+        color='warning'
       />
       {formik.touched.phone && formik.errors.phone ? (
         <div style={{ color: 'red' }}>{formik.errors.phone}</div>
       ) : null}
+            <p style={{ fontFamily: 'Times New Roman, Times, serif',
+fontSize: '21px',
+letterSpacing: '1.6px',
+wordSpacing: '-1.4px',
+color: '#000000',
+fontWeight: '400',
+textDecoration: 'none',
+fontStyle: 'normal',
+fontVariant: 'normal',
+textTransform: 'none' }}
+            >{error.message}
+            </p>
     </AuthLayout>
   );
 }

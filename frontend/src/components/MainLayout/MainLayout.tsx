@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 function MainLayout(): JSX.Element {
   const isAuth = useSelector(state => state)
-  console.log(isAuth)
 
   return (
     <Box sx={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}>

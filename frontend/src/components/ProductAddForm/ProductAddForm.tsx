@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
 import { editAsyncProduct, addAsyncProduct, addAsyncImages } from '../ProductList/productSlice';
 
+
 const styleModal = {
   position: 'absolute' as 'absolute',
   top: '50%',
@@ -221,12 +222,14 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
               onChange={handleChangleFiles}
               multiple
               required
+              style={{paddingTop:'15px', paddingBottom:'15px'}}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 2 }}
+              style={{backgroundColor:'black'}}
             >
               {id ? ('Изменить') : ('Добавить товар')}
             </Button>

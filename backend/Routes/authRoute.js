@@ -5,7 +5,6 @@ const { User } = require('../db/models');
 router.get('/user', async (req, res) => {
   if (req.session?.userId) {
     const { userId } = req.session;
-    // console.log(req.session.userId);
     const user = await User.findOne({ where: { id: userId } });
     res.json({
       isLoggedIn: true,
@@ -32,14 +31,13 @@ router.post('/registration', async (req, res) => {
   if (password && email && name && checkPassword && surname && phone) {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      res.json({ message: 'Пользователь с таким именем уже существует' });
+      res.json({ message: 'Пользователь с такой почтой уже существует' });
     } else if (password === checkPassword) {
       const hash = await bcrypt.hash(password, 10);
       const newUser = await User.create({
         password: hash, email, name, phone, surname, admin: false,
       });
       req.session.userId = newUser.id;
-      // console.log(req.session);
       res.status(200).json({
         message: 'все ок',
         user: {
@@ -57,16 +55,12 @@ router.post('/registration', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { password, email } = req.body;
-  // console.log(req.body);
   if (password && email) {
     const newUser = await User.findOne({ where: { email } });
-    console.log(newUser);
     if (newUser) {
       const isSame = await bcrypt.compare(password, newUser.password);
-      console.log(isSame);
       if (isSame) {
         req.session.userId = newUser.id;
-        // console.log(req.session.userId);
         res.json({
           message: 'успех',
           user: {
@@ -80,7 +74,7 @@ router.post('/login', async (req, res) => {
         });
       }
     } else {
-      res.json({ message: 'Ваш login или password указаны не верно' });
+      res.json({ message: 'Ваша почта или пароль указаны не верно' });
     }
   }
 });

@@ -23,31 +23,36 @@ import { addAsyncCategories } from '../ProductAddForm/categorySlice';
 import Category from '../Category/Category';
 import { addAsyncUser, checkAsyncUser, getUser } from '../Auth/authSlice';
 import Logout from '../Auth/Logout/Logout';
+
+import { actualOrder } from '../ProductCard/basketSlice';
+import Basket from '../Basket/Basket';
+import './app.css'
 import { addAsyncOrders } from '../Orders/orderSlice';
 
 function App(): JSX.Element {
-  const { user } = useSelector((state:RootState) => state.users);
-
+  const { user } = useSelector((state: RootState) => state.users);
   const dispatch = useAppDispatch();
   useEffect(() => {
+    dispatch(getUser());
     dispatch(addAsyncProducts());
     dispatch(addAsyncOrders());
     dispatch(addAsyncCategories());
   }, []);
 
   useEffect(() => {
-    dispatch(getUser());
+    dispatch(addAsyncProducts());
+    dispatch(addAsyncCategories());
   }, []);
 
   return (
     <div className="App">
-         {!user && (
+      {!user && (
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<Main />} />
-             {/* <Route path="/profile" element={<Orders />} /> */}
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
+            <Route path="/categories/:categoryId" element={<Category />} />
           </Route>
           <Route path="/auth/reg" element={<Registration />} />
           <Route path="/auth/login" element={<Login />} />
@@ -61,6 +66,7 @@ function App(): JSX.Element {
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
             <Route path="/categories/:categoryId" element={<Category />} />
+            <Route path='/basket' element={<Basket />} />
           </Route>
           <Route path="/auth/logout" element={<Logout />} />
           <Route path="/auth/reg" element={<Registration />} />
@@ -70,7 +76,7 @@ function App(): JSX.Element {
       {user?.admin && (
         <Routes>
           <Route path="/" element={<HeaderAdmin />}>
-          <Route path="/auth/logout" element={<Logout />} />
+            <Route path="/auth/logout" element={<Logout />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/product" element={<><ProductAddForm id={0} /><ProductList /></>} />
             <Route path="/product/:productId" element={<ProductItem />} />

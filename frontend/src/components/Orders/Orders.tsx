@@ -127,6 +127,7 @@ function Orders(): JSX.Element {
           </Box>
         )}
       {(!user?.admin && answerFromBack.error.message === 'У вас нет заказов') && (
+
         <Typography>{answerFromBack.error.message}</Typography>
       )}
       {(!user?.admin && answerFromBack.error.message !== 'У вас нет заказов') && (

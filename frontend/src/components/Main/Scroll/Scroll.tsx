@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
 import 'swiper/css';
@@ -10,9 +10,15 @@ import ProductCard from '../../ProductCard/productCard';
 import { Product } from '../../ProductList/types/state';
 
 function Scroll({ products }: { products: Product[] }): JSX.Element {
-  const scrollItem = products.slice(0, 11);
+  // const scrollItem = products.slice(0, 11);
+  const [productsScrollList, setProductsScrollList] = useState<any>([]);
 
-  return (
+  useEffect(() => {
+    if (products) {
+      setProductsScrollList(products.slice(0, 11));
+    }
+  }, [products]);
+  return (productsScrollList.length > 0 ?
     <Swiper
       slidesPerView={5}
       spaceBetween={30}
@@ -26,15 +32,15 @@ function Scroll({ products }: { products: Product[] }): JSX.Element {
       modules={[Navigation]}
       className="mySwiper"
     >
-      {
-        scrollItem.map((item) => (
+      {productsScrollList.length > 0 &&
+        productsScrollList.map((item: any) => (
         <SwiperSlide key={item.id}>
           <ProductCard product={item} />
         </SwiperSlide>
       )
         )
       }
-    </Swiper>
+    </Swiper> : <></>
   );
 }
 

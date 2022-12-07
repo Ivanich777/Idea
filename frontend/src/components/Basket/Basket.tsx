@@ -1,4 +1,4 @@
-import { Avatar, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
+import { Avatar, Box, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import FolderIcon from '@mui/icons-material/Folder';
@@ -24,14 +24,15 @@ function Basket() {
   }, []);
   const { basket } = useSelector((state: RootState) => state.basket);
   // console.log(basket);
-  
+
   const { products } = useSelector((state: RootState) => state.products);
 
   const bs = basket.map((item: any) => {
     const product = products.find((el) => el.id === item.idProduct);
-    return {...product, orderCount: item.count};
+    return { ...product, orderCount: item.count };
   })
 
+  console.log(bs);
 
   return (
     <div>
@@ -44,11 +45,15 @@ function Basket() {
             {/* WARNING!!! AHTUNG! wasd123 */}
             {bs &&
               bs.map((item: any) =>
-              (<BasketItem item={item} key={item.id}/>)
+                (<BasketItem item={item} key={item.id} />)
               )
             }
           </List>
+
         </Demo>
+        <Box>
+          <Typography>{`Итоговая сумма заказа: `}</Typography>
+        </Box>
       </Grid>
     </div>
   )

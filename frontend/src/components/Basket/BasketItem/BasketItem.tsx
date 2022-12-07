@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Box, IconButton, ListItem, ListItemText, Typography } from '@mui/material'
+import { Box, IconButton, ListItem, ListItemText, Stack, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { BasketItem } from './State/state';
 import { RootState, useAppDispatch } from '../../../store';
@@ -26,22 +26,24 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
         clearTimeout(timer);
       }
     }
-  }  
+  }
 
   return (
-    <Box>
+    <Box >
       <ListItem
         secondaryAction={
           <IconButton edge="end" aria-label="delete">
-            <DeleteIcon onClick={handleDeleteBasketItem}/>
+            <DeleteIcon onClick={handleDeleteBasketItem} />
           </IconButton>
         }
       >
-        <img src={`${item.Images[0].path}`} style={{width: '100px'}}></img>
+        <img src={`${item.Images[0].path}`} style={{ width: '100px' }}></img>
         <ListItemText
           primary={`${item?.title}`}
         />
-                <ListItemText
+        <ListItemText primary={`Артикул: ${item?.article}`} />
+
+        <ListItemText
           primary={`${item?.price} рублей`}
         />
         <ListItemText primary={`${item?.orderCount}`} />

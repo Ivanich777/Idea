@@ -47,7 +47,7 @@ function ModalInfo({ order, orderItems, showModal, handleManualClose }: IModel):
     return wasd;
   }
 
-  const getDate = (string: string): string => `${string.slice(0, 10)} ${string.slice(11, 19)}`;
+  const getDate = (string: string): string => new Date(string).toLocaleString("en-GB", { timeZone: 'Europe/Moscow' }); 
 
   const { user } = useSelector((state: RootState) => state.users);
 

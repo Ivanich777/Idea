@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
 import { actualOrder, makeOrder } from '../ProductCard/basketSlice';
 import BasketItem from './BasketItem/BasketItem';
+import { addAsyncOrders } from '../Orders/orderSlice';
 
 
 function Basket() {
@@ -28,7 +29,8 @@ function Basket() {
   
   const bs = basket.map((item: any, index:number) => {
     const product = products.find((el) => el.id === item.idProduct);
-    return { ...product, orderCount: item.count, idOrderItem: basket[index]?.id! };
+    const id: number = basket[index]?.id!;
+    return { ...product, orderCount: item.count, idOrderItem: id };
   })
   // console.log(bs);
 
@@ -41,6 +43,7 @@ function Basket() {
   const handleClickMakeOrder = () => {
     const numberOfOrder:number = Number(basket[0]?.idOrder);   
     dispatch(makeOrder(numberOfOrder));
+    dispatch(addAsyncOrders());
   }
 
   return (

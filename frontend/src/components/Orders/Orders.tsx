@@ -70,11 +70,12 @@ function Orders(): JSX.Element {
     if (user?.admin) {
       setOrderList(orders);
     } else {
-      setOrderList(orderList.filter((order: Order) => order.idUser === user?.id));
+      setOrderList(orders.filter((order: Order) => order.idUser === user?.id));
     }
   }, []);
 
   const answerFromBack = useSelector((state: RootState) => state.orders);
+  console.log('sdfsdfsafasdf');
   return (
     <div>
       {user?.admin && (
@@ -127,7 +128,6 @@ function Orders(): JSX.Element {
           </Box>
         )}
       {(!user?.admin && answerFromBack.error.message === 'У вас нет заказов') && (
-
         <Typography>{answerFromBack.error.message}</Typography>
       )}
       {(!user?.admin && answerFromBack.error.message !== 'У вас нет заказов') && (

@@ -76,6 +76,7 @@ function App(): JSX.Element {
       {user?.admin && (
         <Routes>
           <Route path="/" element={<HeaderAdmin />}>
+            <Route path="/" element={<Orders />} />
             <Route path="/auth/logout" element={<Logout />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/orders" element={<Orders />} />

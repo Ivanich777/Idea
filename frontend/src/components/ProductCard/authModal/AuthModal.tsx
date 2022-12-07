@@ -3,8 +3,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import ProductAddForm from '../../ProductAddForm/ProductAddForm';
 import { NavLink } from 'react-router-dom';
+import ProductAddForm from '../../ProductAddForm/ProductAddForm';
+
+import RegistrationDesktop from '../../Auth/Registration/RegistrationDesktop';
+
+import LoginDesktop from '../../Auth/Login/LoginDesktop';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -29,7 +33,8 @@ export default function AuthModal(): JSX.Element {
         onClick={handleOpen}
         size="small"
         color="primary"
-        style={{ color: 'black', textAlign: 'center', margin: 'auto' }}>
+        style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+      >
         В корзину
       </Button>
       <Modal
@@ -41,14 +46,13 @@ export default function AuthModal(): JSX.Element {
         <Box sx={style}>
           <Typography>
             Чтобы добавить товар в коризину, пройдите{' '}
-            <NavLink to='/auth/reg' style={{ color: 'var(--color-active)' }}>
-              регистрацию 
+            <NavLink to="/auth/reg" style={{ color: 'var(--color-active)' }}>
+              регистрацию
             </NavLink>
             {' '} или {' '}
-            <NavLink to='/auth/login' style={{ color: 'var(--color-active)' }}>
+            <NavLink to="/auth/login" style={{ color: 'var(--color-active)' }}>
               авторизируйтесь.
             </NavLink>
-
 
           </Typography>
         </Box>

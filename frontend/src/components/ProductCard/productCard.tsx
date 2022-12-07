@@ -32,10 +32,9 @@ function ProductCard({ product }: {
   };
 
   const handleClick = ():void => {
-    const obj = {idProduct: product.id, userId: user.id}
+    const obj = {idProduct: product.id, userId: user?.id}
     dispatch(addNewOrder(obj))
   }
-
   
   return (
     <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite' }}>

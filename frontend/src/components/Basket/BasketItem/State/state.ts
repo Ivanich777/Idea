@@ -1,8 +1,10 @@
-export interface BasketItem {
+export type BasketItem = {
   images: string,
   article: number,
   title: string,
   price: number,
+  id: number,
+  count: number,
 }
 
 export interface State {

@@ -40,9 +40,10 @@ export default function Header(): JSX.Element {
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'Playfair Display SC',
                 fontWeight: 700,
-                letterSpacing: '.5rem',
+                letterSpacing: '0.9rem',
                 color: 'inherit',
                 textDecoration: 'none',
+                fontSize:'20px'
               }}
             >
               IDEA

@@ -15,7 +15,7 @@ function Orders(): JSX.Element {
   return (
     <div>
       <div><h1
-      style={{textAlign:'center'}}>Заказы</h1></div>
+      style={{textAlign:'center',paddingTop:'10px'}}>Заказы</h1></div>
       {(answerFromBack.error.message === 'У вас нет заказов') ? (
         <Typography>{answerFromBack.error.message}</Typography>
       ) : (

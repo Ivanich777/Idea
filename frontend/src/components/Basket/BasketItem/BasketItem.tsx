@@ -35,7 +35,7 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
           <IconButton edge="end" aria-label="delete"
           >
             <DeleteIcon onClick={handleDeleteBasketItem} 
-            style={{paddingRight:'30px'}}/>
+            style={{marginRight:'30px'}}/>
           </IconButton>
         }
         style={{borderBottom:'2px solid #FFE4C4', borderRadius:'10px'}}
@@ -54,7 +54,7 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
           primary={`${item?.price} ₽`}
         />
         <ListItemText primary={`кол-во:${item?.orderCount}`} />
-        <ListItemText primary={`Итого: ${item?.orderCount * item?.price}`} />
+        <ListItemText primary={`Итого: ${item?.orderCount * item?.price}₽`} />
         </div>     
       </ListItem>
     </Box >

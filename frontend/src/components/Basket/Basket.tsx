@@ -44,13 +44,17 @@ function Basket() {
   }
 
   return (
-    <div>
-      <Grid item xs={12} md={6} sx={{ width: '800px', margin: '100px' }}>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+    <div
+    style={{display:'flex', justifyContent:'center'}}
+    >
+      <Grid item xs={12} md={6} sx={{ width: '800px'}}>
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div"
+        style={{fontFamily:'Georgia, serif',fontSize:'40px', letterSpacing:'4.6px',
+        color:'#000000', fontWeight:'normal',textDecoration:'none', fontStyle:'normal',fontVariant:'small-caps', textAlign:'center'}}>
           Корзина
         </Typography>
-        <Demo>
-          <List >
+        <Demo style={{borderRadius:'20px', backgroundColor:'AntiqueWhite', width:'800px'}}>
+          <List>
             {/* WARNING!!! AHTUNG! wasd123 */}
             {bs &&
               bs.map((item: any) =>
@@ -61,7 +65,10 @@ function Basket() {
 
         </Demo>
         <Box>
-          <Typography>{`Итоговая сумма заказа: ${sum()}`}</Typography>
+          <Typography
+          style={{fontFamily:'Georgia, serif', letterSpacing:'2.0px', marginTop:'10px',marginBottom:'30px'}}>
+          {`Итоговая сумма заказа: ${sum()}`}
+          </Typography>
           <Button onClick={handleClickMakeOrder}>Оформить заказ</Button>
         </Box>
       </Grid>

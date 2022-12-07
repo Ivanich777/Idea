@@ -32,23 +32,30 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
     <Box >
       <ListItem
         secondaryAction={
-          <IconButton edge="end" aria-label="delete">
-            <DeleteIcon onClick={handleDeleteBasketItem} />
+          <IconButton edge="end" aria-label="delete"
+          >
+            <DeleteIcon onClick={handleDeleteBasketItem} 
+            style={{paddingRight:'30px'}}/>
           </IconButton>
         }
+        style={{borderBottom:'2px solid #FFE4C4', borderRadius:'10px'}}
       >
-        <img src={`${item.Images[0].path}`} style={{ width: '100px' }}></img>
+        <img src={`${item.Images[0].path}`} style={{ width: '100px',height:'100px' ,borderRadius:'10px'}}></img>
+        <div className='component' style={{display:'flex',flexDirection:'column', paddingLeft:'60px'}}>
         <ListItemText
           primary={`${item?.title}`}
         />
-        <ListItemText primary={`Артикул: ${item?.article}`} />
-
-        <ListItemText
-          primary={`${item?.price} рублей`}
+        <ListItemText primary={`Артикул: ${item?.article}`}
+        style={{fontFamily:'Georgia, serif', letterSpacing:'2.0px'}}
         />
-        <ListItemText primary={`${item?.orderCount}`} />
+         </div>
+         <div className='component_two' style={{display:'flex',flexDirection:'column',paddingLeft:'300px'}}>
+        <ListItemText
+          primary={`${item?.price} ₽`}
+        />
+        <ListItemText primary={`кол-во:${item?.orderCount}`} />
         <ListItemText primary={`Итого: ${item?.orderCount * item?.price}`} />
-
+        </div>     
       </ListItem>
     </Box >
   )

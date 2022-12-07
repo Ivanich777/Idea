@@ -25,6 +25,7 @@ import { addAsyncUser, checkAsyncUser, getUser } from '../Auth/authSlice';
 import Logout from '../Auth/Logout/Logout';
 import { actualOrder } from '../ProductCard/basketSlice';
 import Basket from '../Basket/Basket';
+import './app.css'
 
 function App(): JSX.Element {
   const { user } = useSelector((state: RootState) => state.users);

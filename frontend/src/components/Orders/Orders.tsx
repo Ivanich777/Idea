@@ -14,7 +14,8 @@ function Orders(): JSX.Element {
   const answerFromBack = useSelector((state: RootState) => state.orders);
   return (
     <div>
-      <div>Заказы</div>
+      <div><h1
+      style={{textAlign:'center'}}>Заказы</h1></div>
       {(answerFromBack.error.message === 'У вас нет заказов') ? (
         <Typography>{answerFromBack.error.message}</Typography>
       ) : (

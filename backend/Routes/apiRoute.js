@@ -48,6 +48,7 @@ router.put('/order/:idOrder', async (req, res) => {
 });
 
 router.get('/products', async (req, res) => {
+  res.setHeader('Acess-Control-Allow-Origin', '*');
   try {
     const products = await db.Product.findAll({
       include: [{

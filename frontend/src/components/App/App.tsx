@@ -39,10 +39,10 @@ function App(): JSX.Element {
     dispatch(addAsyncCategories());
   }, []);
 
-  useEffect(() => {
-    dispatch(addAsyncProducts());
-    dispatch(addAsyncCategories());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(addAsyncProducts());
+  //   dispatch(addAsyncCategories());
+  // }, []);
 
   return (
     <div className="App">

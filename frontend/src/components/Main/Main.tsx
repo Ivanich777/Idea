@@ -20,14 +20,14 @@ function Main():JSX.Element {
             }}
         >
             <Box style={{
-                width: '1300px',
+                width: '1400px',
                 height: '320px',
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
                 marginTop: '30px',
-                background: 'url("https://bigfoto.name/uploads/posts/2022-03/1648579364_7-bigfoto-name-p-oboi-estetika-bezhevii-minimalizm-v-intere-12.jpg") no-repeat',
+                background: 'url("https://idme-marketplace.s3.amazonaws.com/ac1w1vy35p49a4st9yn4hd2w1rjv") no-repeat',
                 borderRadius:'10px' }}
             >
                 <Catalog categories={categories} />

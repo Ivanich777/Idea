@@ -34,7 +34,7 @@ function ProductCard({ product }: {
   }
   
   return (
-    <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite' }}>
+    <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite', position:'absolute' }}> 
       <CardActionArea>
         <CardMedia
           component="img"

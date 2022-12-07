@@ -4,7 +4,6 @@ import Fuse from 'fuse.js';
 import { flexbox } from '@mui/system';
 import ProductCard from '../../ProductCard/productCard';
 import { Product } from '../../ProductList/types/state';
-import './find.css'
 
 function Find({ products }: { products: Product[] }): JSX.Element {
   const [open, setOpen] = useState(false);
@@ -76,7 +75,7 @@ function Find({ products }: { products: Product[] }): JSX.Element {
           style={{position:'absolute', marginTop:'80px', backgroundColor:'#FFFAF0'}}
           >
             {
-              matches.map((match, i) => <ProductCard key={i} product={match} style={{position:'absolute'}}/>)
+              matches.map((match, i) => <ProductCard key={i} product={match} />)
             }
           
           </Box>

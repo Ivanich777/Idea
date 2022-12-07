@@ -3,7 +3,6 @@ import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Selec
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
 import { editAsyncProduct, addAsyncProduct, addAsyncImages } from '../ProductList/productSlice';
-import './product.css'
 interface INewProduct {
   id?: number,
   article: string | any,

@@ -157,11 +157,10 @@ router.post('/basket', async (req, res) => {
       },
     });
     if (currentOrderItem) {
-      const newItem = await db.OrderItem.update({
+      await db.OrderItem.update({
         count: currentOrderItem.count + 1,
       }, { where: { idProduct, idOrder: order.id } });
 
-      console.log(newItem, '123');
       const currentRow = await db.OrderItem.findOne({ where: { idProduct, idOrder: order.id } });
       return res.json(currentRow);
     }
@@ -184,7 +183,7 @@ router.post('/basket', async (req, res) => {
     idOrder: newOrder.id,
   });
 
-  res.json(newItem);
+  return res.json(newItem);
 });
 
 router.get('/basket', async (req, res) => {
@@ -194,7 +193,14 @@ router.get('/basket', async (req, res) => {
     const basket = await db.OrderItem.findAll({ where: { idOrder: order.id } });
     return res.json(basket);
   }
-  res.json();
+  return res.json();
+});
+
+router.put('/makeOrder', async (req, res) => {
+  const { id } = req.body;
+  await db.Order.update({ status: 'Принят' }, { where: { id } });
+  const updateOrder = await db.Order.findAll({ where: { id } });
+  res.json(updateOrder);
 });
 
 module.exports = router;

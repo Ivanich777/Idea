@@ -1,11 +1,11 @@
-import { Avatar, Box, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
+import { Avatar, Box, Button, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import FolderIcon from '@mui/icons-material/Folder';
 import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
-import { actualOrder } from '../ProductCard/basketSlice';
+import { actualOrder, makeOrder } from '../ProductCard/basketSlice';
 import BasketItem from './BasketItem/BasketItem';
 
 
@@ -23,7 +23,7 @@ function Basket() {
     }
   }, []);
   const { basket } = useSelector((state: RootState) => state.basket);
-  // console.log(basket);
+  console.log(basket);
 
   const { products } = useSelector((state: RootState) => state.products);
 
@@ -32,7 +32,16 @@ function Basket() {
     return { ...product, orderCount: item.count };
   })
 
-  console.log(bs);
+
+  function sum () {
+    const orderPrice = bs.map((el: any) => el.orderCount * el.price);
+    return orderPrice.reduce((sum, el) => sum + el, 0);
+  }
+
+  const handleClickMakeOrder = () => {
+    const numberOfOrder:number = Number(basket[0]?.idOrder);   
+    dispatch(makeOrder(numberOfOrder));
+  }
 
   return (
     <div>
@@ -52,7 +61,8 @@ function Basket() {
 
         </Demo>
         <Box>
-          <Typography>{`Итоговая сумма заказа: `}</Typography>
+          <Typography>{`Итоговая сумма заказа: ${sum()}`}</Typography>
+          <Button onClick={handleClickMakeOrder}>Оформить заказ</Button>
         </Box>
       </Grid>
     </div>

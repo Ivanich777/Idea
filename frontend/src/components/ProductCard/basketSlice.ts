@@ -19,6 +19,15 @@ export const deleteBasketItem = createAsyncThunk('orders/deleteBasketItem', (id:
   fetch(`http://localhost:4000/api/basket/${id}`, { method: 'DELETE' });
 })
 
+export const makeOrder = createAsyncThunk('orders/makeOrder', (numberOfOrder: number):Promise<{id: number, status: string }> => {
+  return fetch(`http://localhost:4000/api/makeOrder`, {
+    method: 'put',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify({ id: numberOfOrder }),
+  })
+  .then((result)=> result.json())
+})
+
 const initialState: State = {
   basket: [],
 };
@@ -40,9 +49,13 @@ const orderItemsSlice = createSlice({
       .addCase(actualOrder.fulfilled, (state, action) => {
         state.basket = action.payload;
       })
-    // .addCase(addNewOrder.rejected, (state, action) => {
-    //   state.error.message = action.error.message;
-    // });
+      .addCase(makeOrder.fulfilled, (state, action) => {
+                
+        return {
+          ...state,
+          basket: state.basket.map((el) =>  el.idOrder === action.payload.id ? {...el, status: action.payload.status } : el )
+          }
+      })
   }
 });
 

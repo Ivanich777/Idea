@@ -5,6 +5,7 @@ export interface ProductOrder {
   sale: number,
   idOrder: number,
   status: string,
+  idOrderItem: number
 }
 
 export interface State {

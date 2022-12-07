@@ -23,20 +23,26 @@ import { addAsyncCategories } from '../ProductAddForm/categorySlice';
 import Category from '../Category/Category';
 import { addAsyncUser, checkAsyncUser, getUser } from '../Auth/authSlice';
 import Logout from '../Auth/Logout/Logout';
+
 import { actualOrder } from '../ProductCard/basketSlice';
 import Basket from '../Basket/Basket';
 import './app.css'
+import { addAsyncOrders } from '../Orders/orderSlice';
 
 function App(): JSX.Element {
   const { user } = useSelector((state: RootState) => state.users);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getUser());
-  }, []);
-  useEffect(() => {
     dispatch(addAsyncProducts());
+    dispatch(addAsyncOrders());
     dispatch(addAsyncCategories());
   }, []);
+
+  // useEffect(() => {
+  //   dispatch(addAsyncProducts());
+  //   dispatch(addAsyncCategories());
+  // }, []);
 
   return (
     <div className="App">
@@ -47,9 +53,9 @@ function App(): JSX.Element {
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
             <Route path="/categories/:categoryId" element={<Category />} />
-          </Route>
           <Route path="/auth/reg" element={<Registration />} />
           <Route path="/auth/login" element={<Login />} />
+          </Route>
         </Routes>
       )}
       {user && !user.admin && (
@@ -60,7 +66,7 @@ function App(): JSX.Element {
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
             <Route path="/categories/:categoryId" element={<Category />} />
-            <Route path='/basket' element={<Basket />} />
+            <Route path="/basket" element={<Basket />} />
           </Route>
           <Route path="/auth/logout" element={<Logout />} />
           <Route path="/auth/reg" element={<Registration />} />
@@ -71,6 +77,7 @@ function App(): JSX.Element {
         <Routes>
           <Route path="/" element={<HeaderAdmin />}>
             <Route path="/auth/logout" element={<Logout />} />
+            <Route path="/auth/login" element={<Login />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/product" element={<><ProductAddForm id={0} /><ProductList /></>} />
             <Route path="/product/:productId" element={<ProductItem />} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import { useParams } from 'react-router-dom';
@@ -6,6 +6,13 @@ import { Button, CardActions, Typography } from '@mui/material';
 import { RootState, useAppDispatch } from '../../store';
 import AuthModal from '../ProductCard/authModal/AuthModal';
 import { addNewOrder } from '../ProductCard/basketSlice';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+
+
+
+import {Pagination} from "swiper";
 
 function ProductItem(): JSX.Element {
   const { productId } = useParams();
@@ -21,7 +28,24 @@ function ProductItem(): JSX.Element {
     <Box sx={{ display: 'flex', justifyContent: 'center', margin: '50px' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', margin: '20px' }}>
 
-        <img src={product?.images[0].path} alt="prod_img" style={{ width: '300px', height: '350px', borderRadius: '20px' }} />
+        <Box sx={{ width: '300px', height: '350px' }}>
+          <Swiper
+        direction={"vertical"}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Pagination]}
+        className="mySwiper"
+          >
+            {
+              product?.images.map((img) =>
+                <SwiperSlide >
+                  <img style={{width:'300px', height:'350px'}} src={img.path} />
+                </SwiperSlide>
+              )
+            }
+          </Swiper>
+        </Box>
         <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
           {user ? (
             <Button

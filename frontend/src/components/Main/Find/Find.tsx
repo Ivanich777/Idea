@@ -44,7 +44,8 @@ function Find({ products }: { products: Product[] }): JSX.Element {
     fuse.search(str);
     const match = fuse.search(str);
     const res = match.map((el) => el.item);
-    setMatch(res);
+    const prod = res.filter((el, i)=> i <= 4)
+    setMatch(prod);
   };
   return (
     <div>

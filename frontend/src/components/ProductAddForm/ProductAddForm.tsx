@@ -1,8 +1,22 @@
 import React, { useRef } from 'react';
-import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem, Modal, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
 import { editAsyncProduct, addAsyncProduct, addAsyncImages } from '../ProductList/productSlice';
+
+
+const styleModal = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 interface INewProduct {
   id?: number,
   article: string | any,
@@ -15,6 +29,7 @@ interface INewProduct {
 }
 
 export default function ProductAddForm({ id }: { id: number }): JSX.Element {
+  const [open, setOpen] = React.useState(false);
   const [category, setCategory] = React.useState('');
   const [article, setArticle] = React.useState('');
   const [title, setTitle] = React.useState('');
@@ -22,6 +37,9 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
   const [description, setDescription] = React.useState('');
   const [count, setCount] = React.useState('');
   const [price, setPrice] = React.useState('');
+
+  const handleOpen = (): void => setOpen(true);
+  const handleClose = (): void => setOpen(false);
 
   const handleChange = (event: any): void => {
     setCategory(event.target.value as string);
@@ -78,7 +96,8 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
     }
 
     if (products.find((item) => Number(item.article) === Number(newProduct.article))) {
-      alert('Артикул не уникален');
+      handleOpen();
+      setImage('');
     } else if (!id) {
       dispatch(addAsyncProduct(newProduct));
       setArticle('');
@@ -99,8 +118,22 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
   };
 
   return (
-    <Container maxWidth="lg" 
-    sx={{paddingTop:'40px'}}>
+    <Container maxWidth="lg">
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={styleModal}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Артикул не уникален
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Товар с таким артикулом уже существует
+          </Typography>
+        </Box>
+      </Modal>
       <Box component="form" onSubmit={handleSubmit} sx={{ m: 1 }}>
         <Grid container spacing={5}>
           <Grid item xs={12} sm={6}>
@@ -195,6 +228,7 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
               type="submit"
               fullWidth
               variant="contained"
+              sx={{ mt: 2 }}
               style={{backgroundColor:'black'}}
             >
               {id ? ('Изменить') : ('Добавить товар')}

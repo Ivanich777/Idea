@@ -105,7 +105,7 @@ function ModalInfo({ order, orderItems, showModal, handleManualClose }: IModel):
                 <TableCell />
                 <TableCell />
                 <TableCell />
-                <TableCell align="right">{`${sum()} ₽`}</TableCell>
+                <TableCell align="right">{`Итого: ${sum()} ₽`}</TableCell>
               </TableFooter>
             </Table>
           </TableContainer>

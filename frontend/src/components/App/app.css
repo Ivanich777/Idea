@@ -1,0 +1,23 @@
+h1 {
+  font-family: Georgia, serif;
+  font-size:40px;
+  letter-spacing: 4.6px;
+  word-spacing: 0.8px;
+  color: #000000;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: small-caps;
+}
+
+/* .basket {
+    font-family: Georgia, serif;
+    font-size:large
+    letter-spacing: 4.6px;
+    word-spacing: 0.8px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style:normal;
+    font-variant: small-caps;
+} */

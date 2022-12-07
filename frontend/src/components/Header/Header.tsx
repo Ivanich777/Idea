@@ -141,7 +141,6 @@ export default function Header(): JSX.Element {
               {user && (
                 <>
                   <Button
-                    variant="outlined"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
@@ -150,7 +149,6 @@ export default function Header(): JSX.Element {
                     </NavLink>
                   </Button>
                   <Button
-                    variant="outlined"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
@@ -159,7 +157,6 @@ export default function Header(): JSX.Element {
                     </NavLink>
                   </Button>
                   <Button
-                    variant="outlined"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >

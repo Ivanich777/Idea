@@ -42,6 +42,7 @@ function Catalog({ categories } : { categories: Category[] }):JSX.Element {
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
+
             >
                 <Box sx={style}>
                     <List>

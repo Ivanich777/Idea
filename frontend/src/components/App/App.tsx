@@ -45,9 +45,9 @@ function App(): JSX.Element {
             <Route path="/" element={<Main />} />
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
-          </Route>
           <Route path="/auth/reg" element={<Registration />} />
           <Route path="/auth/login" element={<Login />} />
+          </Route>
         </Routes>
       )}
       {user && !user.admin && (
@@ -58,7 +58,7 @@ function App(): JSX.Element {
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
             <Route path="/categories/:categoryId" element={<Category />} />
-            <Route path='/basket' element={<Basket />} />
+            <Route path="/basket" element={<Basket />} />
           </Route>
           <Route path="/auth/logout" element={<Logout />} />
           <Route path="/auth/reg" element={<Registration />} />

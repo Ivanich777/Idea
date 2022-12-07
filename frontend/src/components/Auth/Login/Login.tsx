@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import AuthLayout from '../AuthLayout/AuthLayout';
 import { addAsyncUser, checkAsyncUser } from '../authSlice';
 import { useAppDispatch, RootState } from '../../../store';
+import '../AuthLayout/reg.css';
 
 function Login(): JSX.Element {
   const dispatch = useAppDispatch();

@@ -1,26 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
+import { Modal, AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Outlet, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import './header.css';
+import RegistrationDesktop from '../Auth/Registration/RegistrationDesktop';
+import Login from '../Auth/Login/Login';
+import LoginDesktop from '../Auth/Login/LoginDesktop';
 
 export default function Header(): JSX.Element {
+  const [open, setOpen] = useState(false);
+  const [logopen, setLogopen] = useState(false);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
-    setAnchorElNav(event.currentTarget);
-  };
+    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
+      setAnchorElNav(event.currentTarget);
+    };
 
-  const handleCloseNavMenu = (): void => {
-    setAnchorElNav(null);
-  };
+    const handleCloseNavMenu = (): void => {
+      setAnchorElNav(null);
+    };
+function handleRegOpen() {
+ setOpen(true);
+}
 
+function handleRegClose() {
+  setOpen(false);
+  }
+  function handleLogOpen() {
+    setLogopen(true);
+   }
+
+   function handleLogClose() {
+    setLogopen(false);
+     }
+
+     function regToLog() {
+      setOpen(false);
+      setLogopen(true);
+     }
+function logToReg() {
+  setLogopen(false);
+  setOpen(true);
+}
   const { user } = useSelector((state: RootState) => state.users);
 
   return (
@@ -170,20 +197,23 @@ export default function Header(): JSX.Element {
             {!user && (
               <>
                 <Button
-                  onClick={handleCloseNavMenu}
+                  onClick={handleRegOpen}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'white' }}>
+                  <p style={{ textDecoration: 'none', color: 'white' }}>Регистрация</p>
+                  {/* <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'white' }}>
                     Регистрация
-                  </NavLink>
+                  </NavLink> */}
                 </Button>
+                {/* <Button onClick={handleOpen}></Button> */}
                 <Button
-                  onClick={handleCloseNavMenu}
+                  onClick={handleLogOpen}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  <NavLink to="/auth/login" style={{ textDecoration: 'none', color: 'white' }}>
+                  <p style={{ textDecoration: 'none', color: 'white' }}>Логин</p>
+                  {/* <NavLink to="/auth/login" style={{ textDecoration: 'none', color: 'white' }}>
                     Войти
-                  </NavLink>
+                  </NavLink> */}
                 </Button>
                 <Button
                   onClick={handleCloseNavMenu}
@@ -206,7 +236,8 @@ export default function Header(): JSX.Element {
 
     </AppBar>
     <Outlet />
-
+    <RegistrationDesktop handleRegClose={handleRegClose} open={open} regToLog={regToLog} />
+    <LoginDesktop handleLogClose={handleLogClose} logopen={logopen} logToReg={logToReg} />
     </>
   );
 }

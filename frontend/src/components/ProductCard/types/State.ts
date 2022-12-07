@@ -3,6 +3,8 @@ export interface ProductOrder {
   count: number,
   price: number,
   sale: number,
+  idOrder: number,
+  status: string,
 }
 
 export interface State {

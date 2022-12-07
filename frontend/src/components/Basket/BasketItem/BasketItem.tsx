@@ -47,6 +47,7 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
           primary={`${item?.price} рублей`}
         />
         <ListItemText primary={`${item?.orderCount}`} />
+        <ListItemText primary={`Итого: ${item?.orderCount * item?.price}`} />
 
       </ListItem>
     </Box >

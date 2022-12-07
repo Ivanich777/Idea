@@ -28,10 +28,7 @@ function OrderCard({ order }: { order: Order }): JSX.Element {
     setOrderStatus(event.target.value);
   };
 
-  const getDate = (string: string): string => {
-    const date = new Date(Date.parse(string));
-    return `${date.toLocaleDateString()}  ${date.toLocaleTimeString()}`;
-  };
+  const getDate = (string: string): string => `${string.slice(0, 10)} ${string.slice(11, 19)}`;
 
   const { orderItems } = useSelector((state: RootState) => state.orderItems);
   const { user } = useSelector((state: RootState) => state.users);
@@ -41,7 +38,13 @@ function OrderCard({ order }: { order: Order }): JSX.Element {
       <p>Номер заказа: {order.id}</p>
       <p>Дата: {getDate(order.createdAt)}</p>
 
-      {user?.admin && <p>Пользователь: {order.email}</p>}
+      {user?.admin &&
+      (
+        <>
+          <p>Пользователь: {order.email}</p>
+          <p>Телефон: {order.phone}</p>
+        </>
+      )}
       <Button onClick={handleManualOpen}>Подробнее</Button>
       <ModalInfo
         order={order}

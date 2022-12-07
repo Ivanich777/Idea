@@ -47,10 +47,7 @@ function ModalInfo({ order, orderItems, showModal, handleManualClose }: IModel):
     return wasd;
   }
 
-  const getDate = (string: string): string => {
-    const date = new Date(Date.parse(string));
-    return `${date.toLocaleDateString()}  ${date.toLocaleTimeString()}`;
-  };
+  const getDate = (string: string): string => `${string.slice(0, 10)} ${string.slice(11, 19)}`;
 
   const { user } = useSelector((state: RootState) => state.users);
 
@@ -69,7 +66,9 @@ function ModalInfo({ order, orderItems, showModal, handleManualClose }: IModel):
                 <>
                   Номер: {order.id}<br />
                   Дата: {getDate(order.createdAt)}<br />
-                  Пользователь: {order.email}
+                  Пользователь: {`${order.surname} ${order.name}`}<br />
+                  e-mail: {order.email}<br />
+                  Телефон: {order.phone}
                 </>
               )
               : 'Ваш заказ'}
@@ -106,7 +105,7 @@ function ModalInfo({ order, orderItems, showModal, handleManualClose }: IModel):
                 <TableCell />
                 <TableCell />
                 <TableCell />
-                <TableCell align="right">{sum()}</TableCell>
+                <TableCell align="right">{`${sum()} ₽`}</TableCell>
               </TableFooter>
             </Table>
           </TableContainer>

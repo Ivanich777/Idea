@@ -2,6 +2,9 @@ export interface Order {
   id: number,
   idUser: number,
   email?: string,
+  name?: string,
+  surname?: string,
+  phone?: string,
   status: string,
   createdAt: string,
 }

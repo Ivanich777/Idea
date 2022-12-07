@@ -33,8 +33,12 @@ const orderSlice = createSlice({
           state.orders = action.payload;
           state.orders.forEach((order, i) => {
             order.email = action.payload[i].User.email;
+            order.name = action.payload[i].User.name;
+            order.surname = action.payload[i].User.surname;
+            order.phone = action.payload[i].User.phone;
             order.createdAt = action.payload[i].createdAt;
           });
+          state.orders.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
         } else {
           state.error.message = action.payload.error.message;
         }
@@ -43,8 +47,8 @@ const orderSlice = createSlice({
         state.error.message = action.error.message;
       })
       .addCase(editAsyncOrder.fulfilled, (state, action) => {
-        console.log(action.payload);
-        // state.orders
+        const index = state.orders.findIndex((item) => item.id === Number(action.payload.id));
+        state.orders[index].status = action.payload.status;
       });
   }
 });

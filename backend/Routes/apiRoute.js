@@ -14,7 +14,7 @@ router.get('/profile', async (req, res) => {
   const orders = await db.Order.findAll({
     include: {
       model: db.User,
-      attributes: ['email'],
+      attributes: ['email', 'name', 'surname', 'phone'],
       raw: true,
     },
   });
@@ -44,7 +44,7 @@ router.put('/order/:idOrder', async (req, res) => {
     where: { id: Number(idOrder) },
     raw: true,
   });
-  res.json('success');
+  res.json({ id: idOrder, status });
 });
 
 router.get('/products', async (req, res) => {

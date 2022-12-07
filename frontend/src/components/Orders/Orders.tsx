@@ -35,7 +35,7 @@ function Orders(): JSX.Element {
   const handleSearchStatus = (event: any): void => {
     setSearchStatus((event.target.value));
     if (event.target.value !== 'Все') {
-      setOrderList(orderList.filter((item) => item.status === event.target.value));
+      setOrderList(orders.filter((item) => item.status === event.target.value));
     } else {
       setOrderList(orders);
     }
@@ -65,7 +65,7 @@ function Orders(): JSX.Element {
             />
             <TextField
               id="outlined-required"
-              label="Имя пользователя"
+              label="Пользователь"
               defaultValue=""
               value={searchUser}
               onChange={handleSearchUser}

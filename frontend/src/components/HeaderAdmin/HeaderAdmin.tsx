@@ -67,27 +67,29 @@ export default function Header(): JSX.Element {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                <MenuItem >
-                  <Typography textAlign="center">
-                    <NavLink to="/orders" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                      Заказы
-                    </NavLink>
-                  </Typography>
-                </MenuItem>
-                <MenuItem>
-                  <Typography textAlign="center">
-                    <NavLink to="/product" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                      Товары
-                    </NavLink>
-                  </Typography>
-                </MenuItem>
-                <MenuItem>
-                  <Typography textAlign="center">
-                    <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                      Выход
-                    </NavLink>
-                  </Typography>
-                </MenuItem>
+                <>
+                  <MenuItem>
+                    <Typography textAlign="center">
+                      <NavLink to="/orders" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                        Заказы
+                      </NavLink>
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography textAlign="center">
+                      <NavLink to="/product" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                        Товары
+                      </NavLink>
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography textAlign="center">
+                      <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                        Выход
+                      </NavLink>
+                    </Typography>
+                  </MenuItem>
+                </>
               </Menu>
             </Box>
 

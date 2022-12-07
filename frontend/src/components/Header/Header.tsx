@@ -52,102 +52,104 @@ function logToReg() {
 
   return (
     <>
-    <AppBar position="sticky" style={{ backgroundColor: 'black' }}>
-      <Container
-        maxWidth="xl"
-      >
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'Playfair Display SC',
-              fontWeight: 700,
-              letterSpacing: '.5rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            IDEA
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+      <AppBar position="sticky" style={{ backgroundColor: 'black' }}>
+        <Container
+          maxWidth="xl"
+        >
+          <Toolbar disableGutters>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
               sx={{
-                display: { xs: 'block', md: 'none' },
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'Playfair Display SC',
+                fontWeight: 700,
+                letterSpacing: '.5rem',
+                color: 'inherit',
+                textDecoration: 'none',
               }}
             >
-              {user && (
+              IDEA
+            </Typography>
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
                 <>
-                  <MenuItem>
-                    <Typography textAlign="center">
-                      <NavLink to="/profile" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                        Профиль
-                      </NavLink>
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem>
-                    <Typography textAlign="center">
-                      <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                        Выход
-                      </NavLink>
-                    </Typography>
-                  </MenuItem>
+                  {user && (
+                    <>
+                      <MenuItem>
+                        <Typography textAlign="center">
+                          <NavLink to="/profile" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                            Профиль
+                          </NavLink>
+                        </Typography>
+                      </MenuItem>
+                      <MenuItem>
+                        <Typography textAlign="center">
+                          <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                            Выход
+                          </NavLink>
+                        </Typography>
+                      </MenuItem>
+                    </>
+                  )}
+                  {!user && (
+                    <>
+                      <MenuItem>
+                        <Typography textAlign="center">
+                          <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                            Регистрация
+                          </NavLink>
+                        </Typography>
+                      </MenuItem>
+                      <MenuItem>
+                        <Typography textAlign="center" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                          <NavLink to="/auth/login">
+                            Войти
+                          </NavLink>
+                        </Typography>
+                      </MenuItem>
+                    </>
+                  )}
                 </>
-              )}
-              {!user && (
-                <>
-                  <MenuItem>
-                    <Typography textAlign="center">
-                      <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                        Регистрация
-                      </NavLink>
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem>
-                    <Typography textAlign="center" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                      <NavLink to="/auth/login">
-                        Войти
-                      </NavLink>
-                    </Typography>
-                  </MenuItem>
-                </>
-              )}
-            </Menu>
-          </Box>
+              </Menu>
+            </Box>
 
             <Typography
               variant="h5"
               noWrap
               component="a"
-              href=""
+              href="/"
               sx={{
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
@@ -161,7 +163,6 @@ function logToReg() {
             >
               IDEA
             </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
             {user && (
               <>
@@ -226,18 +227,19 @@ function logToReg() {
               </>
             )}
 
-          </Box>
-          <IconButton color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <ShoppingCartIcon />
-          </IconButton>
 
-        </Toolbar>
-      </Container>
+            </Box>
+            <IconButton color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
+              <ShoppingCartIcon />
+            </IconButton>
 
+          </Toolbar>
+        </Container>
     </AppBar>
     <Outlet />
     <RegistrationDesktop handleRegClose={handleRegClose} open={open} regToLog={regToLog} />
     <LoginDesktop handleLogClose={handleLogClose} logopen={logopen} logToReg={logToReg} />
+
     </>
   );
 }

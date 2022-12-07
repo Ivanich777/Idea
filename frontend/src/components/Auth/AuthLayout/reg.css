@@ -5,8 +5,9 @@
     background: linear-gradient(to bottom, #FDCA90 0%, #5A341C 0%, #F3C28A 100%);
     background-repeat: no-repeat;
     background-size: 100%;
-    height: 100vh;
+    height: 100vh;  
 }
+
 
 .button {
     color:black;

@@ -3,7 +3,6 @@ import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Selec
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
 import { editAsyncProduct, addAsyncProduct, addAsyncImages } from '../ProductList/productSlice';
-
 interface INewProduct {
   id?: number,
   article: string | any,
@@ -100,7 +99,8 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" 
+    sx={{paddingTop:'40px'}}>
       <Box component="form" onSubmit={handleSubmit} sx={{ m: 1 }}>
         <Grid container spacing={5}>
           <Grid item xs={12} sm={6}>
@@ -189,11 +189,13 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
               onChange={handleChangleFiles}
               multiple
               required
+              style={{paddingTop:'15px', paddingBottom:'15px'}}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              style={{backgroundColor:'black'}}
             >
               {id ? ('Изменить') : ('Добавить товар')}
             </Button>

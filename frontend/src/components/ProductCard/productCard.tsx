@@ -5,7 +5,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
 import { Product } from '../ProductList/types/state';
@@ -19,7 +18,6 @@ function ProductCard({ product }: {
 }): JSX.Element {
   const navigate = useNavigate();
 
-
   const { user } = useSelector((state: RootState) => state.users);
 
   const handleNav = (): void => {
@@ -30,15 +28,13 @@ function ProductCard({ product }: {
   const handleDel = (): void => {
     dispatch(delAsyncProduct(product.id!));
   };
-
   const handleClick = ():void => {
-    const obj = {idProduct: product.id, userId: user.id}
+    const obj = {idProduct: product.id, userId: user?.id}
     dispatch(addNewOrder(obj))
   }
-
   
   return (
-    <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite' }}>
+    <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite', position:'absolute' }}> 
       <CardActionArea>
         <CardMedia
           component="img"
@@ -65,12 +61,12 @@ function ProductCard({ product }: {
             }}
             component="div"
           >
-            {product?.article}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
             {product?.title}
-
           </Typography>
+          {/* <Typography variant="body2" color="text.secondary">
+            {product?.article}
+
+          </Typography> */}
           <Typography
             gutterBottom
             variant="h6"
@@ -96,18 +92,20 @@ function ProductCard({ product }: {
               >
                 Удалить
               </Button>
-              <EditModal id={product.id!} />
+              <EditModal id={product.id!}/>
             </>
           ) : (
             <>
-              {user ? (<Button
-                size="small"
-                color="primary"
-                style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
-                onClick={handleClick}
-              >
-                В корзину
-              </Button>) : (
+              {user ? (
+                <Button
+                  size="small"
+                  color="primary"
+                  style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+                  onClick={handleClick}
+                >
+                  В корзину
+                </Button>
+              ) : (
                 <AuthModal />
               )}
 

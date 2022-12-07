@@ -11,7 +11,6 @@ import { useAppDispatch, RootState } from '../../../store';
 function Login(): JSX.Element {
   const dispatch = useAppDispatch();
   const { user, error } = useSelector((srt:RootState) => srt.users);
-  console.log(user);
   const navigate = useNavigate();
 
   useEffect(() => {

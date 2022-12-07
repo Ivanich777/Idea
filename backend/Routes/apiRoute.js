@@ -141,10 +141,31 @@ router.put('/product/:id', async (req, res) => {
   res.json(newProduct);
 });
 
+router.delete('/basket/:id', async (req, res) => {
+  const { id } = req.params;
+  await db.OrderItem.destroy({ where: { idProduct: id } });
+});
+
 router.post('/basket', async (req, res) => {
   const { idProduct, userId } = req.body;
   const order = await db.Order.findOne({ where: { idUser: userId, status: 'Не оформлен' } });
   if (order) {
+    const currentOrderItem = await db.OrderItem.findOne({
+      where: {
+        idOrder: order.id,
+        idProduct,
+      },
+    });
+    if (currentOrderItem) {
+      const newItem = await db.OrderItem.update({
+        count: currentOrderItem.count + 1,
+      }, { where: { idProduct, idOrder: order.id } });
+
+      console.log(newItem, '123');
+      const currentRow = await db.OrderItem.findOne({ where: { idProduct, idOrder: order.id } });
+      return res.json(currentRow);
+    }
+
     const newItem = await db.OrderItem.create({
       idProduct,
       count: 1,

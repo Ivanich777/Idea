@@ -1,17 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, IconButton, ListItem, ListItemText, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { State } from './State/state';
+import { BasketItem } from './State/state';
+import { RootState, useAppDispatch } from '../../../store';
+import { actualOrder, deleteBasketItem } from '../../ProductCard/basketSlice';
+import { useSelector } from 'react-redux';
 
-function BasketItem({ item }: { item: State }): JSX.Element {
+function BasketElement({ item }: BasketItem | any): JSX.Element {
+  const { user } = useSelector((state: RootState) => state.users);
+  const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+  //   dispatch(actualOrder(user?.id!));
+  // }, [])
   // console.log(item.Images);
-  
+  const handleDeleteBasketItem = () => {
+    if (user) {
+      dispatch(deleteBasketItem(item.id));
+
+      const timer = setTimeout(() => {
+        dispatch(actualOrder(user?.id!));
+      }, 250);
+
+      return () => {
+        clearTimeout(timer);
+      }
+    }
+  }  
+
   return (
     <Box>
       <ListItem
         secondaryAction={
           <IconButton edge="end" aria-label="delete">
-            <DeleteIcon />
+            <DeleteIcon onClick={handleDeleteBasketItem}/>
           </IconButton>
         }
       >
@@ -22,8 +44,10 @@ function BasketItem({ item }: { item: State }): JSX.Element {
                 <ListItemText
           primary={`${item?.price} рублей`}
         />
+        <ListItemText primary={`${item?.orderCount}`} />
+
       </ListItem>
     </Box >
   )
 }
-export default BasketItem;
+export default BasketElement;

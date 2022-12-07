@@ -16,18 +16,22 @@ function Basket() {
 
   const { user } = useSelector((state: RootState) => state.users);
   const dispatch = useAppDispatch();
+  // wasd123
   useEffect(() => {
-    dispatch(actualOrder(user.id!));
+    if (user) {
+      dispatch(actualOrder(user.id!));
+    }
   }, []);
   const { basket } = useSelector((state: RootState) => state.basket);
+  // console.log(basket);
+  
   const { products } = useSelector((state: RootState) => state.products);
 
-  const bs = basket.map((item) => {
+  const bs = basket.map((item: any) => {
     const product = products.find((el) => el.id === item.idProduct);
-    return product;
+    return {...product, orderCount: item.count};
   })
 
-  console.log(bs);
 
   return (
     <div>
@@ -37,8 +41,9 @@ function Basket() {
         </Typography>
         <Demo>
           <List >
-            {
-              bs.map((item) =>
+            {/* WARNING!!! AHTUNG! wasd123 */}
+            {bs &&
+              bs.map((item: any) =>
               (<BasketItem item={item} key={item.id}/>)
               )
             }

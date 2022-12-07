@@ -8,6 +8,7 @@ function Category():JSX.Element {
   const { categoryId } = useParams();
   const { products } = useSelector((state: RootState) => state.products);
   const { categories } = useSelector((state:RootState) => state.categories);
+  
   const catObj = categories.find((el) => el.title === categoryId);
   const list = products.filter((el) => el.idCategory === catObj?.id);
 

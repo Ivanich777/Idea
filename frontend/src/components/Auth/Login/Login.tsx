@@ -15,7 +15,7 @@ function Login(): JSX.Element {
 
   useEffect(() => {
 if (user) {
-  navigate('/');
+ user.admin ? navigate('/product') : navigate('/')
 }
   }, [user]);
   const formik = useFormik({

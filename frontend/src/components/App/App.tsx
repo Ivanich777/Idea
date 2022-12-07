@@ -77,6 +77,7 @@ function App(): JSX.Element {
         <Routes>
           <Route path="/" element={<HeaderAdmin />}>
             <Route path="/auth/logout" element={<Logout />} />
+            <Route path="/auth/login" element={<Login />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/product" element={<><ProductAddForm id={0} /><ProductList /></>} />
             <Route path="/product/:productId" element={<ProductItem />} />

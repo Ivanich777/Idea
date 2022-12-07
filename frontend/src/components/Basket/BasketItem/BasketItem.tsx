@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, IconButton, ListItem, ListItemText, Stack, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { BasketItem } from './State/state';
 import { RootState, useAppDispatch } from '../../../store';
-import { actualOrder, deleteBasketItem } from '../../ProductCard/basketSlice';
+import { actualOrder, decreaseCount, deleteBasketItem } from '../../ProductCard/basketSlice';
 import { useSelector } from 'react-redux';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -11,11 +11,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 function BasketElement({ item }: BasketItem | any): JSX.Element {
   const { user } = useSelector((state: RootState) => state.users);
   const dispatch = useAppDispatch();
+  const [countItem, setCountItem] = useState(item.orderCount)
 
-  // useEffect(() => {
-  //   dispatch(actualOrder(user?.id!));
-  // }, [])
-  // console.log(item.Images);
   const handleDeleteBasketItem = () => {
     if (user) {
       dispatch(deleteBasketItem(item.id));
@@ -28,6 +25,13 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
         clearTimeout(timer);
       }
     }
+  }
+
+  const handleDecreaseCount = () => {
+    if (item.orderCount > 1) {      
+      // setCountItem((prev: number) => prev - 1);
+      dispatch(decreaseCount(item.idOrderItem));
+    }   
   }
 
   return (
@@ -56,21 +60,20 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
             primary={`${item?.price} ₽`}
           />
           <div style={{ display: 'flex', flexDirection: 'row' }}>
-            {/* <ListItemText > */}
               <Button
                 aria-label="reduce"
+                onClick={handleDecreaseCount}
               >
                 <RemoveIcon fontSize="small" />
               </Button>
               <ListItemText>
-                {`кол-во: ${item?.orderCount}`}
+                {`кол-во: ${item.orderCount}`}
               </ListItemText>
               <Button
                 aria-label="increase"
               >
                 <AddIcon fontSize="small" />
               </Button>
-            {/* </ListItemText> */}
           </div>
           <ListItemText primary={`Итого: ${item?.orderCount * item?.price}`} />
         </div>

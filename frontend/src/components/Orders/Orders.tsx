@@ -36,9 +36,9 @@ function Orders(): JSX.Element {
       setOrderList(orders);
     } else {
       setOrderList(orders.filter((order: Order) => order.idUser === user?.id));
-      dispatch(addAsyncOrders())
+      // dispatch(addAsyncOrders())
     }
-  }, [orders]);
+  }, []);
 
   const handleSearchNumber = (event: any): void => {
     setSearchNumber((event.target.value));

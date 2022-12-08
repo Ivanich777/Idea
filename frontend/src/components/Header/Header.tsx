@@ -182,9 +182,9 @@ const dispatch = useAppDispatch();
               {user && (
                 <>
                   <Button
-                    // variant="outlined"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
+                    style={{marginRight:'25px', marginTop:'0px', marginBottom:'0px'}}
                   >
                     <Badge
                       color="success"
@@ -200,16 +200,15 @@ const dispatch = useAppDispatch();
                     </Badge>
                   </Button>
                   <Button
-                    // variant="outlined"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
+                    style={{marginRight:'25px', marginTop:'0px', marginBottom:'0px'}}
                   >
                     <NavLink to="/profile" style={{ textDecoration: 'none', color: 'white' }}>
                       Профиль
                     </NavLink>
                   </Button>
                   <Button
-                    // variant="outlined"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
@@ -225,7 +224,7 @@ const dispatch = useAppDispatch();
                     onClick={handleRegOpen}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
-                    <p style={{ textDecoration: 'none', color: 'white' }}>Регистрация</p>
+                    <p style={{ textDecoration: 'none', color: 'white' ,marginRight:'25px', marginTop:'0px', marginBottom:'0px'}}>Регистрация</p>
                     {/* <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'white' }}>
                     Регистрация
                   </NavLink> */}

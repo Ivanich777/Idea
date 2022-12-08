@@ -95,15 +95,19 @@ function ProductCard({ product }: {
         {
           user?.admin ? (
             <>
+           
               <Button
                 onClick={handleDel}
                 size="small"
                 color="primary"
-                style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+                style={{ color: 'black', textAlign: 'center', margin: 'auto',backgroundColor:'#FAEBD7' }}
               >
                 Удалить
               </Button>
-              <EditModal id={product.id!} />
+
+              <EditModal id={product.id!}/>
+             
+
             </>
           ) : (
             <>
@@ -111,7 +115,7 @@ function ProductCard({ product }: {
                 <Button
                   size="small"
                   color="primary"
-                  style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+                  style={{ color: 'black', textAlign: 'center', margin: 'auto', backgroundColor:'#FAEBD7', borderRadius:'10px'}}
                   onClick={handleClick}
                 >
                   В корзину

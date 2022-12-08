@@ -31,15 +31,21 @@ const orderSlice = createSlice({
       .addCase(addAsyncOrders.fulfilled, (state, action) => {
         if (!action.payload.error) {
           state.orders = action.payload;
+          
           state.orders.forEach((order, i) => {
-            order.email = action.payload[i].User.email;
-            order.name = action.payload[i].User.name;
-            order.surname = action.payload[i].User.surname;
-            order.phone = action.payload[i].User.phone;
-            order.createdAt = action.payload[i].createdAt;
+            state.orders[i].email = action.payload[i].User.email;
+            state.orders[i].name = action.payload[i].User.name;
+            state.orders[i].surname = action.payload[i].User.surname;
+            state.orders[i].phone = action.payload[i].User.phone;
+            state.orders[i].createdAt = action.payload[i].createdAt;
           });
-          state.orders.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
-          state.orders = state.orders.filter((order) => order.status !== 'Не оформлен');
+          
+          console.log(action.payload);
+
+          const pre = state.orders.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
+          state.orders = pre;
+          const res = state.orders.filter((order) => order.status !== 'Не оформлен');
+          state.orders = res;
         } else {
           state.error.message = action.payload.error.message;
         }

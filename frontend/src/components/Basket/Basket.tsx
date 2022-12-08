@@ -38,6 +38,7 @@ function Basket() {
   const dispatch = useAppDispatch();
   // wasd123
   useEffect(() => {
+    // dispatch(addAsyncOrders())
     if (user) {
       dispatch(actualOrder(user.id!));
     };
@@ -66,7 +67,7 @@ function Basket() {
 
     const numberOfOrder: number = Number(basket[0]?.idOrder);
     dispatch(makeOrder(numberOfOrder));
-    dispatch(addAsyncOrders());
+    setTimeout(() => dispatch(addAsyncOrders()), 0);
     setOpen(true);
   }
 

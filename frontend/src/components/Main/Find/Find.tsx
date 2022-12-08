@@ -55,6 +55,7 @@ function Find({ products }: { products: Product[] }): JSX.Element {
         disabled={open}
         placeholder="Поиск"
         style={{ borderRadius: '10px' }}
+        color='warning'
       />
       <Modal
         open={open}

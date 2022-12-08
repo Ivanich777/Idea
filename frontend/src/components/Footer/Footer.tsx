@@ -24,7 +24,8 @@ export default function Footer(): JSX.Element {
         backgroundColor: 'black'
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="lg"
+      style={{maxHeight:'235px'}}>
         <Grid container spacing={5}>
           <Grid item xs={12} sm={4}>
             <Box py={{ xs: 2, sm: 2, lg: 2 }}>КОНТАКТЫ</Box>

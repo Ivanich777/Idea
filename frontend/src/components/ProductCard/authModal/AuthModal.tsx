@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { NavLink } from 'react-router-dom';
 import ProductAddForm from '../../ProductAddForm/ProductAddForm';
+import './basket.css'
 
 import RegistrationDesktop from '../../Auth/Registration/RegistrationDesktop';
 
@@ -61,7 +62,7 @@ const handleCloseLog = ():void => SetLog(false);
   }
 
   return (
-    <div>
+    <div className='cardBasket'>
       <Button
         onClick={handleOpen}
         size="small"

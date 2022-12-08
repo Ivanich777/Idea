@@ -63,6 +63,7 @@ export default function Header({ count }: { count: number }): JSX.Element {
           <Toolbar disableGutters 
           style={{height: '96.5px'}}
           >
+            <NavLink to="/" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
             <Typography
               variant="h6"
               noWrap
@@ -82,6 +83,7 @@ export default function Header({ count }: { count: number }): JSX.Element {
             >
               IDEA
             </Typography>
+            </NavLink>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -152,7 +154,8 @@ export default function Header({ count }: { count: number }): JSX.Element {
                 </>
               </Menu>
             </Box>
-
+            
+            <NavLink to="/" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
             <Typography
               variant="h5"
               noWrap
@@ -171,6 +174,7 @@ export default function Header({ count }: { count: number }): JSX.Element {
             >
               IDEA
             </Typography>
+            </NavLink>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
               {user && (
                 <>

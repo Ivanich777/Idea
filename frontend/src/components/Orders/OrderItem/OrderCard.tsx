@@ -7,6 +7,34 @@ import { RootState, useAppDispatch } from '../../../store';
 import { addAsyncOrderItems } from './orderItemSlice';
 import { editAsyncOrder } from '../orderSlice';
 
+const styles = {
+  orderItem: {
+    fontSize: '1rem',
+  },
+  orderSelect: {
+    fontSize: '1rem',
+    width: '150px',
+    height: '40px'
+  },
+  order: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    pl: '15px',
+    pr: '15px',
+    border: 'solid',
+    borderRadius: '10px',
+    ml: '25px',
+    mr: '25px',
+    mt: '10px',
+    backgroundColor: 'rgb(233, 207, 180)',
+  },
+  btnInfo: {
+    fontSize: '1rem',
+    fontWeight: '500',
+  },
+};
+
 function OrderCard({ order }: { order: Order }): JSX.Element {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [orderStatus, setOrderStatus] = useState<string>(order.status);
@@ -28,24 +56,24 @@ function OrderCard({ order }: { order: Order }): JSX.Element {
     setOrderStatus(event.target.value);
   };
 
-  const getDate = (string: string): string => new Date(string).toLocaleString("en-GB", { timeZone: 'Europe/Moscow' }); 
+  const getDate = (string: string): string => new Date(string).toLocaleString("en-GB", { timeZone: 'Europe/Moscow' });
 
   const { orderItems } = useSelector((state: RootState) => state.orderItems);
   const { user } = useSelector((state: RootState) => state.users);
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', pl: '15px', pr: '15px', border: 'solid', borderRadius: '10px', ml: '25px', mr: '25px', mt: '10px' }}>
-      <p>Номер заказа: {order.id}</p>
-      <p>Дата: {getDate(order.createdAt)}</p>
+    <Box sx={styles.order}>
+      <p style={styles.orderItem}>Номер заказа: {order.id}</p>
+      <p style={styles.orderItem}>Дата: {getDate(order.createdAt)}</p>
 
       {user?.admin &&
-      (
-        <>
-          <p>Пользователь: {order.email}</p>
-          <p>Телефон: {order.phone}</p>
-        </>
-      )}
-      <Button onClick={handleManualOpen}>Подробнее</Button>
+        (
+          <>
+            <p style={styles.orderItem}>Пользователь: {order.email}</p>
+            <p style={styles.orderItem}>Телефон: {order.phone}</p>
+          </>
+        )}
+      <Button onClick={handleManualOpen} sx={styles.btnInfo}>Подробнее</Button>
       <ModalInfo
         order={order}
         orderItems={orderItems}
@@ -57,9 +85,8 @@ function OrderCard({ order }: { order: Order }): JSX.Element {
           <Select
             id="demo-simple-select"
             value={orderStatus}
-            label="Статус"
             onChange={handleChange}
-            sx={{ width: '150px', height: '40px' }}
+            sx={styles.orderSelect}
           >
             <MenuItem value="Завершен">Завершен</MenuItem>
             <MenuItem value="В обработке">В обработке</MenuItem>

@@ -1,10 +1,24 @@
-import { Box, Typography, TextField, FormControl, Select, MenuItem, Button } from '@mui/material';
+import { Box, Typography, TextField, FormControl, Select, MenuItem, Button, InputLabel } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
 import OrderCard from './OrderItem/OrderCard';
 import { addAsyncOrders } from './orderSlice';
 import { Order } from './types/state';
+
+const styles = {
+  labelSearch: {
+    mt: 2,
+    textAlign: 'left',
+    paddingTop: '10px',
+    ml: 2,
+    fontSize: '1rem',
+    textDecoration: 'underline',
+  },
+  btnFilter: {
+    fontSize: '1rem',
+  }
+} 
 
 function Orders(): JSX.Element {
   const [orderList, setOrderList] = useState<Order[]>([]);
@@ -85,7 +99,7 @@ function Orders(): JSX.Element {
     <div>
       {user?.admin && (
         <>
-          <Box sx={{ mt: 2 }} style={{textAlign:'center',paddingTop:'10px'}}>Поиск заказов: </Box>
+          <Box sx={styles.labelSearch}>Поиск заказов: </Box>
           <Box sx={{ mb: 2, mt: 1, display: 'flex', justifyContent: 'space-around' }}>
             <TextField
               id="outlined-required"
@@ -102,6 +116,7 @@ function Orders(): JSX.Element {
               onChange={handleSearchUser}
             />
             <FormControl>
+              <InputLabel id="demo-simple-select">Статус</InputLabel>
               <Select
                 id="demo-simple-select"
                 value={searchStatus}
@@ -116,19 +131,24 @@ function Orders(): JSX.Element {
                 <MenuItem value="Принят">Принят</MenuItem>
               </Select>
             </FormControl>
-            <Button onClick={handleDefault}>Сбросить фильтры</Button>
+            <Button 
+              onClick={handleDefault}
+              sx={styles.btnFilter}
+            >
+              Сбросить фильтры
+            </Button>
           </Box>
         </>
       )}
       {user?.admin
         ?
         (
-          <Box sx={{ mb: 1 }}>
+          <Box sx={styles.labelSearch}>
             Все заказы:
           </Box>
         )
         : (
-          <Box sx={{ mb: 1 }}>
+          <Box sx={styles.labelSearch}>
             Ваши заказы:
           </Box>
         )}

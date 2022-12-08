@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { NavLink } from 'react-router-dom';
 import ProductAddForm from '../../ProductAddForm/ProductAddForm';
+import './basket.css'
 
 import RegistrationDesktop from '../../Auth/Registration/RegistrationDesktop';
 
@@ -32,7 +33,7 @@ export default function AuthModal(): JSX.Element {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
+    <div className='cardBasket'>
       <Button
         onClick={handleOpen}
         size="small"

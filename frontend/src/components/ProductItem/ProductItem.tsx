@@ -40,7 +40,7 @@ function ProductItem(): JSX.Element {
             {
               product?.images.map((img) =>
                 <SwiperSlide >
-                  <img style={{ width: '300px', height: '350px' }} src={img.path} />
+                  <img style={{ width: '300px', height: '350px', borderRadius:'15px' }} src={img.path} />
                 </SwiperSlide>
               )
             }
@@ -53,7 +53,7 @@ function ProductItem(): JSX.Element {
             <Button
               size="small"
               color="primary"
-              style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+              style={{ color: 'black', textAlign: 'center', margin: 'auto', backgroundColor:'#D2B48C', borderRadius:'10px',padding:'12px', fontFamily: 'Georgia, serif', fontSize:'18px' }}
               onClick={handleClick}
             >
               В корзину

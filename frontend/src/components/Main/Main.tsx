@@ -21,7 +21,7 @@ function Main():JSX.Element {
         >
             <Box style={{
                 width: '1250px',
-                height: '320px',
+                height: '180px',
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -36,14 +36,16 @@ function Main():JSX.Element {
             <Box style={{
                 width: '1340px',
                 height: '420px',
-                margin: '75px' }}
+                margin: '75px',
+                marginTop:'20px' }}
             >
                 <Scroll products={products} />
             </Box>
             <Box style={{
                 width: '1340px',
                 height: '320px',
-                marginBottom: '45px' }}
+                marginBottom: '50px'
+             }}
             >
                 <Auto />
             </Box>

@@ -90,12 +90,13 @@ function LoginDesktop({
                   id="outlined-name"
                   name="email"
                   label="Email"
+                  color='warning'
                   value={formik.values.email}
                   onChange={formik.handleChange}
                   error={formik.touched.email}
                 />
                 {formik.touched.email && formik.errors.email ? (
-                  <div style={{ color: 'red' }}>{formik.errors.email}</div>
+                  <div style={{ color: 'red', fontSize:'15px', margin:'-10px 0px -10px' }}>{formik.errors.email}</div>
                 ) : null}
 
                 <TextField
@@ -103,20 +104,29 @@ function LoginDesktop({
                   name="password"
                   label="Password"
                   type="password"
+                  color='warning'
                   value={formik.values.password}
                   onChange={formik.handleChange}
+                  error={formik.touched.password}
                 />
                 {formik.touched.password && formik.errors.password ? (
-                  <div style={{ color: 'red' }}>{formik.errors.password}</div>
+                  <div style={{ color: 'red', fontSize:'15px', margin:'-10px 0px -10px' }}>{formik.errors.password}</div>
                 ) : null}
 
-                <Button type="submit">Login</Button>
-                <Button onClick={handleLogClose}>Закрыть</Button>
+                <Button 
+                style={{marginTop:'-10px',color:'black'}}
+                type="submit">Войти</Button>
+                <Button 
+                style={{marginTop:'-10px',color:'black'}}
+                onClick={handleLogClose}>Закрыть</Button>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between' }}
                 >
                   {/* <Link href="/auth/reg">У вас еще нет аккаунта?</Link> */}
-                  <Button onClick={logToReg}>У вас еще нет аккаунта?</Button>
+                  <Button 
+                  color='warning'
+                  style={{marginBottom:'-35px', marginTop:'-5px', marginLeft:'110px'}}
+                  onClick={logToReg}>У вас еще нет аккаунта?</Button>
                 </div>
                 <p
                   style={{

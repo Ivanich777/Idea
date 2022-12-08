@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
-import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem, Modal, Typography } from '@mui/material';
+import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem, Modal, Typography, IconButton } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
 import { editAsyncProduct, addAsyncProduct, addAsyncImages } from '../ProductList/productSlice';
+import { Feature } from '../ProductList/types/state';
 
 
 const styleModal = {
@@ -26,6 +28,7 @@ interface INewProduct {
   images: string | any,
   count: string | any,
   price: string | any,
+  features: Feature[],
 }
 
 export default function ProductAddForm({ id }: { id: number }): JSX.Element {
@@ -37,6 +40,7 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
   const [description, setDescription] = React.useState('');
   const [count, setCount] = React.useState('');
   const [price, setPrice] = React.useState('');
+  const [rows, setRows] = React.useState<Feature[]>([{ id: 1, title: 'Вес', description: '20кг' }]);
 
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
@@ -71,6 +75,7 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
       images: '',
       count: '',
       price: '',
+      features: [],
     };
     if (!id) {
       newProduct = {
@@ -81,6 +86,7 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
         images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
         count: data.get('count'),
         price: data.get('price'),
+        features: rows,
       };
     } else {
       newProduct = {
@@ -92,6 +98,7 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
         images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
         count: data.get('count'),
         price: data.get('price'),
+        features: rows,
       };
     }
 
@@ -117,10 +124,14 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
     }
   };
 
+  const handleAddFeature = () => {
+    setRows([...rows, { id: rows.length, title: '', description: '' }]);
+  }
+
   return (
     <>
       {/* <Typography sx={{ fontSize: '1rem', ml: 8, mt: 2 }}>Добавление товара: </Typography> */}
-      <Container maxWidth='xl' sx={{ mt: 3}}>
+      <Container maxWidth='xl' sx={{ mt: 3 }}>
         <Modal
           open={open}
           onClose={handleClose}
@@ -138,7 +149,7 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
         </Modal>
         <Box component="form" onSubmit={handleSubmit} sx={{ m: 1 }}>
           <Grid container spacing={5} sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 required
                 value={article}
@@ -205,7 +216,7 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
                 sx={{ mb: 1 }}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -243,6 +254,20 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
               >
                 {id ? ('Изменить') : ('Добавить товар')}
               </Button>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Button onClick={handleAddFeature}>+</Button>
+              <Box>
+                {rows.map((row, i) => (
+                  <Box key={i} sx={{ display: 'flex' }}>
+                    <TextField required type="text" value={row.title} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, title: e.target.value } : rowItem))} />
+                    <TextField required type="text" value={row.description} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, description: e.target.value } : rowItem))} />
+                    <IconButton color="inherit" onClick={() => setRows(rows.filter((item, idx ) => i !== idx))}>
+                      <ShoppingCartIcon />
+                    </IconButton>
+                  </Box>
+                ))}
+              </Box>
             </Grid>
           </Grid>
         </Box>

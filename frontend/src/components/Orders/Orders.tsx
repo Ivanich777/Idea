@@ -11,6 +11,7 @@ const styles = {
     mt: 2,
     textAlign: 'left',
     paddingTop: '10px',
+    paddingLeft:'12px',
     ml: 2,
     fontSize: '1rem',
     textDecoration: 'underline',
@@ -148,7 +149,7 @@ function Orders(): JSX.Element {
           </Box>
         )
         : (orderList.length === 0 ? (
-          <div>
+          <div className='flex'>
             <Box>
               <Typography>{user?.name}</Typography>
               <Typography>{user?.surname}</Typography>
@@ -160,9 +161,9 @@ function Orders(): JSX.Element {
             </Box>
           </div>
         ) : (
-          <div>
-            <Box>
-              <Typography>{user?.name}</Typography>
+          <div >
+            <Box style={{display:'flex', flexDirection:'column', marginLeft:'27px'}}>
+              <Typography>{` ${user?.name}`}</Typography>
               <Typography>{user?.surname}</Typography>
               <Typography>{user?.email}</Typography>
               <Typography>{user?.phone}</Typography>

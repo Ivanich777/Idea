@@ -48,14 +48,21 @@ router.put('/order/:idOrder', async (req, res) => {
 });
 
 router.get('/products', async (req, res) => {
-  res.setHeader('Acess-Control-Allow-Origin', '*');
+  // res.setHeader('Acess-Control-Allow-Origin', '*');
   try {
     const products = await db.Product.findAll({
       include: [{
         model: db.Image,
         attributes: ['path'],
+      }, {
+        model: db.Feature,
+        attributes: ['title', 'description'],
+      }, {
+        model: db.Category,
+        attributes: ['title'],
       }],
     });
+    console.log(products);
     res.json(products);
   } catch (e) {
     console.log(e.message);
@@ -147,20 +154,23 @@ router.put('/product/:id', async (req, res) => {
     price,
   } = req.body;
   await db.Product.update({
+    article: Number(article),
+    title,
+    description,
     idCategory: Number(category),
     count: Number(count),
     price: Number(price),
   }, { where: { id } });
   const newProduct = await db.Product.findOne({ where: { id } });
-  await db.Image.destroy({ where: { idProduct: id } });
+  // await db.Image.destroy({ where: { idProduct: id } });
 
-  images.forEach(async (img) => {
-    await db.Image.create({
-      idProduct: newProduct.dataValues.id,
-      path: img.path,
-    });
-  });
-  newProduct.dataValues.images = images;
+  // images.forEach(async (img) => {
+  //   await db.Image.create({
+  //     idProduct: newProduct.dataValues.id,
+  //     path: img.path,
+  //   });
+  // });
+  // newProduct.dataValues.images = images;
   res.json(newProduct);
 });
 

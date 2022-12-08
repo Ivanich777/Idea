@@ -3,14 +3,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import ProductAddForm from '../../ProductAddForm/ProductAddForm';
+import ProductEditForm from '../../ProductEditForm/ProductEditForm';
 
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: '50%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -20,7 +20,7 @@ const style = {
 export default function EditModal({ id }:{ id:number }):JSX.Element {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = React.useCallback(() => setOpen(false), []);
 
   return (
     <div>
@@ -32,7 +32,7 @@ export default function EditModal({ id }:{ id:number }):JSX.Element {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <ProductAddForm id={id} />
+            <ProductEditForm id={id} closeFunc={handleClose}/>
         </Box>
       </Modal>
     </div>

@@ -7,7 +7,7 @@ import orderSlice from './components/Orders/orderSlice';
 import categorySlice from './components/ProductAddForm/categorySlice';
 import orderItemSlice from './components/Orders/OrderItem/orderItemSlice';
 import basketSlice from './components/ProductCard/basketSlice';
-
+import feedbackSlice from './components/Feedback/feedbackSlice';
 
 const store = configureStore({
   reducer: {
@@ -17,6 +17,7 @@ const store = configureStore({
     categories: categorySlice,
     orderItems: orderItemSlice,
     basket: basketSlice,
+    feedbacks: feedbackSlice,
   },
 });
 export default store;

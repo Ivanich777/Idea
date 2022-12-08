@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const apiRoute = require('./Routes/apiRoute');
 const authRoute = require('./Routes/authRoute');
+const telegramRoute = require('./Routes/telegramRoute');
 const sessionConfig = require('./config/session');
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(session(sessionConfig));
 app.use(upload());
 app.use('/api', apiRoute);
 app.use('/auth', authRoute);
+app.use('/feedback', telegramRoute);
 
 app.listen(PORT, () => {
   console.log('Опять работа?');

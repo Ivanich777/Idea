@@ -1,8 +1,19 @@
-import React from 'react';
-import { Container, Grid, Box, Link } from '@mui/material';
+import React, { useState } from 'react';
+import { Container, Grid, Box, Link, Button } from '@mui/material';
+import Feedback from '../Feedback/Feedback';
 
 export default function Footer(): JSX.Element {
+  const [feedopen, setFeedOpen] = useState(false);
+
+  function handleFeedOpen() {
+    setFeedOpen(true);
+   }
+
+   function handleFeedClose() {
+     setFeedOpen(false);
+     }
   return (
+    <>
     <Box
       px={{ xs: 2, sm: 2, lg: 2 }}
       py={{ xs: 2, sm: 2, lg: 4 }}
@@ -79,6 +90,13 @@ export default function Footer(): JSX.Element {
             <Box>
               <span>phone: +7920-660-8423</span>
             </Box>
+
+            <Button
+              onClick={handleFeedOpen}
+            >
+               <p style={{ textDecoration: 'none', color: 'white' }}>Feedback</p>
+            </Button>
+
             <Box
               sx={{ display: 'flex', justifyContent: 'space-around' }}
               pt={{ xs: 2, sm: 3, lg: 3 }}
@@ -93,7 +111,8 @@ export default function Footer(): JSX.Element {
           IdeaProject &reg; {new Date().getFullYear()}
         </Box>
       </Container>
-
     </Box>
+    <Feedback handleFeedClose={handleFeedClose} feedopen={feedopen} />
+    </>
   );
 }

@@ -14,6 +14,8 @@ import LoginDesktop from '../Auth/Login/LoginDesktop';
 export default function Header(): JSX.Element {
   const [open, setOpen] = useState(false);
   const [logopen, setLogopen] = useState(false);
+
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -216,30 +218,28 @@ function logToReg() {
                     Войти
                   </NavLink> */}
                 </Button>
-                <Button
+                {/* <Button
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                   <NavLink to="/basket" style={{ textDecoration: 'none', color: 'white' }}>
                     Корзина
                   </NavLink>
-                </Button>
+                </Button> */}
               </>
             )}
 
-
-            </Box>
+          </Box>
             <IconButton color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
               <ShoppingCartIcon />
             </IconButton>
 
           </Toolbar>
         </Container>
-    </AppBar>
+      </AppBar>
     <Outlet />
     <RegistrationDesktop handleRegClose={handleRegClose} open={open} regToLog={regToLog} />
     <LoginDesktop handleLogClose={handleLogClose} logopen={logopen} logToReg={logToReg} />
-
     </>
   );
 }

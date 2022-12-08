@@ -26,7 +26,7 @@ function RegistrationDesktop({ handleRegClose, regToLog, open, logopen } : { han
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(errorOff());
-  }, [logopen, open]);
+  }, [logopen]);
   useEffect(() => {
     dispatch(errorOff());
     if (user) {
@@ -76,8 +76,9 @@ function RegistrationDesktop({ handleRegClose, regToLog, open, logopen } : { han
       // style={{ marginBottom: '200px' }}
     >
     <div className="modal-modal-title">
-    <form 
-    onSubmit={formik.handleSubmit}>
+    <form
+      onSubmit={formik.handleSubmit}
+    >
       <div
         style={{
           paddingTop: '2%',
@@ -101,20 +102,21 @@ function RegistrationDesktop({ handleRegClose, regToLog, open, logopen } : { han
           }}
         >
           <div
-          style={{marginTop:'-20px'}}>
+            style={{ marginTop: '-20px' }}
+          >
             <h3 style={{ color: 'black', textAlign: 'center' }}>Регистрация</h3>
           </div>
           <TextField
             id="outlined-name"
             name="email"
             label="Email"
-            color='warning'
+            color="warning"
             value={formik.values.email}
             onChange={formik.handleChange}
             error={formik.touched.email}
-            />
+          />
             {formik.touched.email && formik.errors.email ? (
-              <span style={{ color: 'red',fontSize:'15px', margin:'-10px 0px -10px' }}>{formik.errors.email}</span>
+              <span style={{ color: 'red', fontSize: '15px', margin: '-10px 0px -10px' }}>{formik.errors.email}</span>
             ) : null}
 
       <TextField
@@ -122,44 +124,44 @@ function RegistrationDesktop({ handleRegClose, regToLog, open, logopen } : { han
         name="password"
         label="Password"
         type="password"
-        color='warning'
+        color="warning"
         value={formik.values.password}
         onChange={formik.handleChange}
         error={formik.touched.password}
       />
       {formik.touched.password && formik.errors.password ? (
-        <div style={{ color: 'red',fontSize:'15px', margin:'-10px 0px -10px' }}>{formik.errors.password}</div>
+        <div style={{ color: 'red', fontSize: '15px', margin: '-10px 0px -10px' }}>{formik.errors.password}</div>
       ) : null}
       <TextField
         id="outlined-name"
         name="checkPassword"
         label="Check Password"
         type="password"
-        color='warning'
+        color="warning"
         value={formik.values.checkPassword}
         onChange={formik.handleChange}
         error={formik.touched.checkPassword}
       />
       {formik.touched.checkPassword && formik.errors.checkPassword ? (
-        <div style={{ color: 'red', fontSize:'15px',margin:'-10px 0px -10px' }}>{formik.errors.checkPassword}</div>
+        <div style={{ color: 'red', fontSize: '15px', margin: '-10px 0px -10px' }}>{formik.errors.checkPassword}</div>
       ) : null}
       <TextField
         id="outlined-name"
         name="name"
         label="Name"
-        color='warning'
+        color="warning"
         value={formik.values.name}
         onChange={formik.handleChange}
         error={formik.touched.name}
       />
       {formik.touched.name && formik.errors.name ? (
-        <div style={{ color: 'red',fontSize:'15px',margin:'-10px 0px -10px' }}>{formik.errors.name}</div>
+        <div style={{ color: 'red', fontSize: '15px', margin: '-10px 0px -10px' }}>{formik.errors.name}</div>
       ) : null}
       <TextField
         id="outlined-name"
         name="surname"
         label="Surname"
-        color='warning'
+        color="warning"
         value={formik.values.surname}
         onChange={formik.handleChange}
       />
@@ -170,39 +172,50 @@ function RegistrationDesktop({ handleRegClose, regToLog, open, logopen } : { han
         id="outlined-name"
         name="phone"
         label="Phone"
-        color='warning'
+        color="warning"
         value={formik.values.phone}
         onChange={formik.handleChange}
       />
       {formik.touched.phone && formik.errors.phone ? (
         <div style={{ color: 'red' }}>{formik.errors.phone}</div>
       ) : null}
-            <p style={{ fontFamily: 'Times New Roman, Times, serif',
-fontSize: '14px',
-letterSpacing: '1.6px',
-wordSpacing: '-1.4px',
-color: '#000000',
-fontWeight: '400',
-textDecoration: 'none',
-fontStyle: 'normal',
-fontVariant: 'normal',
-textTransform: 'none' }}
-            >{error.message}
-            </p>
-          <Button 
-          color='warning'
-          style={{marginTop:'-50px',color:'black'}}
-          type="submit">Регистрация</Button>
-          <Button 
-          color='warning'
-          style={{marginTop:'-10px',color:'black'}}
-          onClick={handleRegClose}>Закрыть</Button>
+                 <p
+                   style={{
+                    fontFamily: 'Times New Roman, Times, serif',
+                    fontSize: '14px',
+                    letterSpacing: '1.6px',
+                    wordSpacing: '-1.4px',
+                    color: '#000000',
+                    fontWeight: '400',
+                    paddingBottom: '6px',
+                    textDecoration: 'none',
+                    fontStyle: 'normal',
+                    fontVariant: 'normal',
+                    textTransform: 'none',
+                  }}
+                 >
+                  {error?.message}
+                 </p>
+          <Button
+            color="warning"
+            style={{ marginTop: '-50px', color: 'black' }}
+            type="submit"
+          >Регистрация
+          </Button>
+          <Button
+            color="warning"
+            style={{ marginTop: '-10px', color: 'black' }}
+            onClick={handleRegClose}
+          >Закрыть
+          </Button>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* <Link href="/auth/login">У вас уже есть аккаунт?</Link> */}
-            <Button 
-            color='warning'
-            style={{marginBottom:'-15px', marginTop:'-10px', marginLeft:'110px'}}
-            onClick={regToLog}>У вас уже есть аккаунт?</Button>
+            <Button
+              color="warning"
+              style={{ marginBottom: '-15px', marginTop: '-10px', marginLeft: '110px' }}
+              onClick={regToLog}
+            >У вас уже есть аккаунт?
+            </Button>
 
           </div>
 

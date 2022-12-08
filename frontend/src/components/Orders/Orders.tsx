@@ -1,8 +1,9 @@
 import { Box, Typography, TextField, FormControl, Select, MenuItem, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState, useAppDispatch } from '../../store';
 import OrderCard from './OrderItem/OrderCard';
+import { addAsyncOrders } from './orderSlice';
 import { Order } from './types/state';
 
 function Orders(): JSX.Element {
@@ -10,9 +11,20 @@ function Orders(): JSX.Element {
   const [searchNumber, setSearchNumber] = useState('');
   const [searchUser, setSearchUser] = useState('');
   const [searchStatus, setSearchStatus] = useState('Все');
+  const dispatch = useAppDispatch();
 
+  
   const { user } = useSelector((state: RootState) => state.users);
   const { orders } = useSelector((state: RootState) => state.orders);
+  
+  useEffect(() => {
+    if (user?.admin) {
+      setOrderList(orders);
+    } else {
+      setOrderList(orders.filter((order: Order) => order.idUser === user?.id));
+      dispatch(addAsyncOrders())
+    }
+  }, [orders]);
 
   const handleSearchNumber = (event: any): void => {
     setSearchNumber((event.target.value));
@@ -44,6 +56,7 @@ function Orders(): JSX.Element {
     setOrderList(fOrders);
   };
 
+
   const handleSearchStatus = (event: any): void => {
     setSearchStatus((event.target.value));
     let fOrders = orders;
@@ -66,16 +79,8 @@ function Orders(): JSX.Element {
     setOrderList(orders);
   };
 
-  useEffect(() => {
-    if (user?.admin) {
-      setOrderList(orders);
-    } else {
-      setOrderList(orders.filter((order: Order) => order.idUser === user?.id));
-    }
-  }, []);
 
   const answerFromBack = useSelector((state: RootState) => state.orders);
-  console.log('sdfsdfsafasdf');
   return (
     <div>
       {user?.admin && (

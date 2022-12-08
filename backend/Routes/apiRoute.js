@@ -62,7 +62,6 @@ router.get('/products', async (req, res) => {
         attributes: ['title'],
       }],
     });
-    console.log(products);
     res.json(products);
   } catch (e) {
     console.log(e.message);
@@ -97,7 +96,6 @@ router.post('/product', async (req, res) => {
       });
     });
     newProduct.dataValues.images = images;
-    console.log(newProduct);
     res.json(newProduct);
   } catch (e) {
     console.log(e.message);
@@ -127,7 +125,6 @@ router.post('/images', async (req, res) => {
     });
     return URL;
   });
-  console.log(newArr);
   res.json(newArr);
 });
 

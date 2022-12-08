@@ -81,7 +81,6 @@ function Orders(): JSX.Element {
 
 
   const answerFromBack = useSelector((state: RootState) => state.orders);
-  console.log('sdfsdfsafasdf');
   return (
     <div>
       {user?.admin && (

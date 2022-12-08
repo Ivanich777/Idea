@@ -13,6 +13,7 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
   const dispatch = useAppDispatch();
   const [countItem, setCountItem] = useState(item.orderCount)
 
+
   const handleDeleteBasketItem = () => {
     if (user) {
       dispatch(deleteBasketItem(item.id));
@@ -26,6 +27,17 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
       }
     }
   }
+
+  const btn = {
+    width: 3,
+    height: 5,
+    // background: '#FFE4B5',
+    marginRight: 3,
+    marginLeft: 3,
+    paddingTop:'15px',
+    border: 'solid 0px black',
+    color: 'black'
+};
 
   const handleDecreaseCount = () => {
     if (item.orderCount > 1) {      
@@ -44,12 +56,13 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
           <IconButton edge="end" aria-label="delete"
           >
             <DeleteIcon onClick={handleDeleteBasketItem}
-              style={{ paddingRight: '30px' }} />
+              style={{ paddingRight: '9px', width: 40,
+              height: 25, }} />
           </IconButton>
         }
-        style={{ borderBottom: '2px solid #FFE4C4', borderRadius: '10px' }}
+        style={{ borderBottom: '2px solid #FFE4C4', borderRadius: '10px' ,display:'flex', flexDirection:'row'}}
       >
-        <img src={`${item.Images[0].path}`} style={{ width: '100px', height: '100px', borderRadius: '10px' }}></img>
+        <img src={`${item.Images[0].path}`} style={{ maxWidth: '100px',minWidth:'100px', height: '100px', borderRadius: '10px' }}></img>
         <div className='component' style={{ display: 'flex', flexDirection: 'column', paddingLeft: '60px' }}>
           <ListItemText
             primary={`${item?.title}`}
@@ -58,29 +71,35 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
             style={{ fontFamily: 'Georgia, serif', letterSpacing: '2.0px' }}
           />
         </div>
-        <div className='component_two' style={{ display: 'flex', flexDirection: 'column', paddingLeft: '300px' }}>
+        <div className='component_two' style={{ display: 'flex', flexDirection: 'column', paddingLeft: '100px' }}>
           <ListItemText
-            primary={`${item?.price} ₽`}
+            primary={`${item?.price}₽`}
           />
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
+        
+            </div>
+          <div className='comp_3'style={{ display: 'flex', flexDirection: 'column', paddingLeft:'100px' }}>
+            <div className='count' style={{display:'flex', flexDirection:'row'}}>
               <Button
                 aria-label="reduce"
                 onClick={handleDecreaseCount}
+                style={btn}
               >
                 <RemoveIcon fontSize="small" />
               </Button>
               <ListItemText>
-                {`кол-во: ${item.orderCount}`}
+                {` ${item.orderCount}`}
               </ListItemText>
               <Button
                 aria-label="increase"
                 onClick={handleIncreaseCount}
+                style={btn}
               >
                 <AddIcon fontSize="small" />
               </Button>
+                </div>
+          <ListItemText style={{textAlign:'center'}}
+          primary={`Итого: ${item?.orderCount * item?.price}₽`} />
           </div>
-          <ListItemText primary={`Итого: ${item?.orderCount * item?.price}₽`} />
-        </div>
       </ListItem>
     </Box >
   )

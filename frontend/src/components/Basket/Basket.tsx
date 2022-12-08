@@ -67,10 +67,10 @@ function Basket() {
         </Demo>
         <Box>
           <Typography
-          style={{fontFamily:'Georgia, serif', letterSpacing:'2.0px', marginTop:'10px',marginBottom:'30px'}}>
+          style={{fontFamily:'Georgia, serif', letterSpacing:'2.0px', marginTop:'10px',marginBottom:'30px', fontSize:'19px'}}>
           {`Итоговая сумма заказа: ${sum()}₽`}
           <Button onClick={handleClickMakeOrder}
-          style={{color:'black', marginLeft:'350px',fontFamily:'Georgia, serif',letterSpacing:'1.0px'}}>Оформить заказ</Button>
+          style={{color:'black', marginLeft:'350px',fontFamily:'Georgia, serif',letterSpacing:'1.0px', backgroundColor:'#D2B48C', borderRadius:'15px'}}>Оформить заказ</Button>
           </Typography>
         </Box>
       </Grid>

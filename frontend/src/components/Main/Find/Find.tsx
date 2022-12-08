@@ -1,6 +1,7 @@
 import { Box, TextField, Modal, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import Fuse from 'fuse.js';
+import './style.css';
 import { flexbox } from '@mui/system';
 import ProductCard from '../../ProductCard/productCard';
 import { Product } from '../../ProductList/types/state';
@@ -23,6 +24,7 @@ function Find({ products }: { products: Product[] }): JSX.Element {
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'column',
+    overflow: 'auto',
   };
   const bx = {
     display: 'flex',
@@ -44,7 +46,7 @@ function Find({ products }: { products: Product[] }): JSX.Element {
     fuse.search(str);
     const match = fuse.search(str);
     const res = match.map((el) => el.item);
-    const prod = res.filter((el, i)=> i <= 4)
+    const prod = res.filter((el, i) => i <= 4);
     setMatch(prod);
   };
   return (
@@ -55,7 +57,7 @@ function Find({ products }: { products: Product[] }): JSX.Element {
         disabled={open}
         placeholder="Поиск"
         style={{ borderRadius: '10px' }}
-        color='warning'
+        color="warning"
       />
       <Modal
         open={open}
@@ -63,23 +65,27 @@ function Find({ products }: { products: Product[] }): JSX.Element {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}
-        style={{position: 'fixed',left: '50%',top: '50%', width:'1200px', height:'600px', backgroundColor:'#FFFAF0', borderRadius:'30px'}}>
+        <Box
+          className="container"
+          sx={style}
+          style={{ position: 'fixed', left: '50%', top: '50%', width: '1200px', height: '600px', backgroundColor: '#FFFAF0', borderRadius: '30px' }}
+        >
           <TextField
             sx={inp}
-            id='find'
+            id="find"
             onChange={(e) => searh(e.target.value)}
             placeholder="Поиск"
-            color='warning'
-            style={{display:'flex', flexDirection:'column',paddingLeft:'400px', backgroundColor:'#FFFAF0'}}
+            color="warning"
+            style={{ display: 'flex', flexDirection: 'column', paddingLeft: '400px', backgroundColor: '#FFFAF0' }}
           />
-          <Box sx={bx}
-          style={{position:'absolute', marginTop:'80px', backgroundColor:'#FFFAF0'}}
+          <Box
+            sx={bx}
+            style={{ position: 'absolute', marginTop: '80px', backgroundColor: '#FFFAF0' }}
           >
             {
               matches.map((match, i) => <ProductCard key={i} product={match} />)
             }
-          
+
           </Box>
         </Box>
       </Modal>

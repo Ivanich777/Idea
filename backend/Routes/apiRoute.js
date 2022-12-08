@@ -77,6 +77,7 @@ router.post('/product', async (req, res) => {
     images,
     count,
     price,
+    features,
   } = req.body;
   console.log(images);
   try {
@@ -95,7 +96,17 @@ router.post('/product', async (req, res) => {
         path: img.path,
       });
     });
+
+    features.forEach(async (feature) => {
+      await db.Feature.create({
+        idProduct: newProduct.dataValues.id,
+        title: feature.title,
+        description: feature.description,
+      });
+    });
+
     newProduct.dataValues.images = images;
+    newProduct.dataValues.features = features;
     res.json(newProduct);
   } catch (e) {
     console.log(e.message);

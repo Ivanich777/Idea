@@ -14,6 +14,8 @@ import LoginDesktop from '../Auth/Login/LoginDesktop';
 export default function Header({ count }: { count: number }): JSX.Element {
   const [open, setOpen] = useState(false);
   const [logopen, setLogopen] = useState(false);
+
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -228,20 +230,11 @@ export default function Header({ count }: { count: number }): JSX.Element {
                     {/* <NavLink to="/auth/login" style={{ textDecoration: 'none', color: 'white' }}>
                     Войти
                   </NavLink> */}
-                  </Button>
-                  <Button
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                    <NavLink to="/basket" style={{ textDecoration: 'none', color: 'white' }}>
-                      Корзина
-                    </NavLink>
-                  </Button>
+                  </Button>                  
                 </>
               )}
 
-
-            </Box>
+          </Box>
             <IconButton color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
               <ShoppingCartIcon />
             </IconButton>
@@ -252,7 +245,6 @@ export default function Header({ count }: { count: number }): JSX.Element {
       <Outlet />
       <RegistrationDesktop handleRegClose={handleRegClose} open={open} regToLog={regToLog} />
       <LoginDesktop handleLogClose={handleLogClose} logopen={logopen} logToReg={logToReg} />
-
     </>
   );
 }

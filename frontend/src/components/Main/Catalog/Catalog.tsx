@@ -28,7 +28,9 @@ function Catalog({ categories } : { categories: Category[] }):JSX.Element {
         marginRight: 30,
         marginLeft: 30,
         border: 'solid 1px black',
-        color: 'black'
+        color: 'black',
+        fontSize:'17px',
+        fontFamily: 'Georgia, serif',
     };
     return (
         <div>

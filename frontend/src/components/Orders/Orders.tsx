@@ -1,18 +1,44 @@
-import { Box, Typography, TextField, FormControl, Select, MenuItem, Button } from '@mui/material';
+import { Box, Typography, TextField, FormControl, Select, MenuItem, Button, InputLabel } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState, useAppDispatch } from '../../store';
 import OrderCard from './OrderItem/OrderCard';
+import { addAsyncOrders } from './orderSlice';
 import { Order } from './types/state';
+
+const styles = {
+  labelSearch: {
+    mt: 2,
+    textAlign: 'left',
+    paddingTop: '10px',
+    ml: 2,
+    fontSize: '1rem',
+    textDecoration: 'underline',
+  },
+  btnFilter: {
+    fontSize: '1rem',
+  }
+} 
 
 function Orders(): JSX.Element {
   const [orderList, setOrderList] = useState<Order[]>([]);
   const [searchNumber, setSearchNumber] = useState('');
   const [searchUser, setSearchUser] = useState('');
   const [searchStatus, setSearchStatus] = useState('Все');
+  const dispatch = useAppDispatch();
 
+  
   const { user } = useSelector((state: RootState) => state.users);
   const { orders } = useSelector((state: RootState) => state.orders);
+  
+  useEffect(() => {
+    if (user?.admin) {
+      setOrderList(orders);
+    } else {
+      setOrderList(orders.filter((order: Order) => order.idUser === user?.id));
+      dispatch(addAsyncOrders())
+    }
+  }, [orders]);
 
   const handleSearchNumber = (event: any): void => {
     setSearchNumber((event.target.value));
@@ -44,6 +70,7 @@ function Orders(): JSX.Element {
     setOrderList(fOrders);
   };
 
+
   const handleSearchStatus = (event: any): void => {
     setSearchStatus((event.target.value));
     let fOrders = orders;
@@ -66,21 +93,13 @@ function Orders(): JSX.Element {
     setOrderList(orders);
   };
 
-  useEffect(() => {
-    if (user?.admin) {
-      setOrderList(orders);
-    } else {
-      setOrderList(orders.filter((order: Order) => order.idUser === user?.id));
-    }
-  }, []);
 
   const answerFromBack = useSelector((state: RootState) => state.orders);
-  console.log('sdfsdfsafasdf');
   return (
     <div>
       {user?.admin && (
         <>
-          <Box sx={{ mt: 2 }} style={{textAlign:'center',paddingTop:'10px'}}>Поиск заказов: </Box>
+          <Box sx={styles.labelSearch}>Поиск заказов: </Box>
           <Box sx={{ mb: 2, mt: 1, display: 'flex', justifyContent: 'space-around' }}>
             <TextField
               id="outlined-required"
@@ -97,6 +116,7 @@ function Orders(): JSX.Element {
               onChange={handleSearchUser}
             />
             <FormControl>
+              <InputLabel id="demo-simple-select">Статус</InputLabel>
               <Select
                 id="demo-simple-select"
                 value={searchStatus}
@@ -111,19 +131,24 @@ function Orders(): JSX.Element {
                 <MenuItem value="Принят">Принят</MenuItem>
               </Select>
             </FormControl>
-            <Button onClick={handleDefault}>Сбросить фильтры</Button>
+            <Button 
+              onClick={handleDefault}
+              sx={styles.btnFilter}
+            >
+              Сбросить фильтры
+            </Button>
           </Box>
         </>
       )}
       {user?.admin
         ?
         (
-          <Box sx={{ mb: 1 }}>
+          <Box sx={styles.labelSearch}>
             Все заказы:
           </Box>
         )
         : (
-          <Box sx={{ mb: 1 }}>
+          <Box sx={styles.labelSearch}>
             Ваши заказы:
           </Box>
         )}

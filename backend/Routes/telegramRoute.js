@@ -9,7 +9,6 @@ router.post('/', async (req, res) => {
     email,
     description,
   } = req.body;
-  console.log(req.body);
   const feedback = await Feedback.create({
     name,
     phone,

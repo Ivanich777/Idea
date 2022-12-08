@@ -64,7 +64,6 @@ const userSlice = createSlice({
       .addCase(addAsyncUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.error.message = action.payload.message;
-        // console.log(state.error.message);
       })
       .addCase(addAsyncUser.rejected, (state, action) => {
         state.error.message = action.error.message;

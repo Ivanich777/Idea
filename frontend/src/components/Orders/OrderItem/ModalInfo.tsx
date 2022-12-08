@@ -31,7 +31,9 @@ function ModalInfo({ order, orderItems, showModal, handleManualClose }: IModel):
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    fontSize: '12px'
+    fontSize: '12px',
+    backgroundColor: '#FAEBD7',
+    borderRadius: '15px',
   };
 
   function sum(): number {

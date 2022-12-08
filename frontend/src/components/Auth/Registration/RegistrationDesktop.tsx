@@ -10,7 +10,7 @@ import { Button, TextField, Modal, Link } from '@mui/material';
 import { Formik } from 'formik';
 import { borderRadius } from '@mui/system';
 import { RootState, useAppDispatch } from '../../../store';
-import { addAsyncUser } from '../authSlice';
+import { addAsyncUser, errorOff } from '../authSlice';
 import { FormInputs } from './types/state';
 // import AuthLayout from '../AuthLayout/AuthLayout';
 // import { Button, Link } from '@mui/material';
@@ -20,11 +20,15 @@ import '../AuthLayout/reg.css';
 // import { Outlet, NavLink } from 'react-router-dom';
 
 // eslint-disable-next-line max-len
-function RegistrationDesktop({ handleRegClose, regToLog, open } : { handleRegClose: () => void, regToLog:()=>void, open: boolean }): JSX.Element {
+function RegistrationDesktop({ handleRegClose, regToLog, open, logopen } : { handleRegClose: () => void, regToLog:()=>void, open: boolean, logopen: boolean }): JSX.Element {
   const { user, error } = useSelector((srt:RootState) => srt.users);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   useEffect(() => {
+    dispatch(errorOff());
+  }, [logopen, open]);
+  useEffect(() => {
+    dispatch(errorOff());
     if (user) {
       navigate('/');
     }

@@ -5,12 +5,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Outlet, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { pink } from '@mui/material/colors';
 import { RootState, useAppDispatch } from '../../store';
 import './header.css';
 import RegistrationDesktop from '../Auth/Registration/RegistrationDesktop';
 import Login from '../Auth/Login/Login';
 import LoginDesktop from '../Auth/Login/LoginDesktop';
-import { pink } from '@mui/material/colors';
 
 export default function Header({ count }: { count: number }): JSX.Element {
   const [open, setOpen] = useState(false);
@@ -195,7 +195,7 @@ const dispatch = useAppDispatch();
                       badgeContent={count}
                     >
                       <NavLink to="/basket" style={{ textDecoration: 'none', color: 'white' }}>
-                        <ShoppingCartIcon sx={{ fontSize: 30 }}/>
+                        <ShoppingCartIcon sx={{ fontSize: 30 }} />
                       </NavLink>
                     </Badge>
                   </Button>
@@ -247,8 +247,8 @@ const dispatch = useAppDispatch();
             <IconButton color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
               <ShoppingCartIcon />
             </IconButton>
-      <RegistrationDesktop handleRegClose={handleRegClose} open={open} regToLog={regToLog} />
-      <LoginDesktop handleLogClose={handleLogClose} logopen={logopen} logToReg={logToReg} />
+      <RegistrationDesktop handleRegClose={handleRegClose} open={open} regToLog={regToLog} logopen={logopen} />
+      <LoginDesktop handleLogClose={handleLogClose} logopen={logopen} open={open} logToReg={logToReg} />
 
           </Toolbar>
         </Container>

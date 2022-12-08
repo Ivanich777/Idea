@@ -10,7 +10,7 @@ import { Button, TextField, Modal, Link } from '@mui/material';
 import { Formik } from 'formik';
 import { borderRadius } from '@mui/system';
 import { RootState, useAppDispatch } from '../../../store';
-import { checkAsyncUser } from '../authSlice';
+import { checkAsyncUser, errorOff } from '../authSlice';
 
 // import AuthLayout from '../AuthLayout/AuthLayout';
 // import { Button, Link } from '@mui/material';
@@ -24,14 +24,19 @@ function LoginDesktop({
   handleLogClose,
   logToReg,
   logopen,
+  open
 }: {
   handleLogClose: () => void;
   logToReg: () => void;
   logopen: boolean;
+  open:boolean
 }): JSX.Element {
   const { user, error } = useSelector((srt: RootState) => srt.users);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(errorOff());
+  }, [logopen, open]);
   useEffect(() => {
     if (user) {
       navigate('/');

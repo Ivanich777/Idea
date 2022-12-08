@@ -29,12 +29,12 @@ function ProductCard({ product }: {
     dispatch(delAsyncProduct(product.id!));
   };
   const handleClick = ():void => {
-    const obj = {idProduct: product.id, userId: user?.id}
-    dispatch(addNewOrder(obj))
-  }
-  
+    const obj = { idProduct: product.id, userId: user?.id };
+    dispatch(addNewOrder(obj));
+  };
+
   return (
-    <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite',boxShadow: '5px 2px 5px 5px rgba(109, 80, 23, 0.43) ' }}> 
+    <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite', boxShadow: '5px 2px 5px 5px rgba(109, 80, 23, 0.43) ' }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -42,9 +42,9 @@ function ProductCard({ product }: {
           width="100"
           image={product?.images[0].path}
           alt="product"
-          style={{ 
-          backgroundColor: 'AntiqueWhite', 
-          minHeight: '220px', 
+          style={{
+          backgroundColor: 'AntiqueWhite',
+          minHeight: '220px',
           maxHeight: '220px' }}
         />
         <CardContent onClick={handleNav}>
@@ -67,13 +67,14 @@ function ProductCard({ product }: {
           >
             {product?.title}
           </Typography>
-          <Typography 
-          variant="body2" 
-          color="text.secondary"
-          style={{
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            style={{
             fontSize: '12px',
             letterSpacing: '1.7px'
-          }}>
+          }}
+          >
             {`art.${product?.article}`}
 
           </Typography>
@@ -102,7 +103,7 @@ function ProductCard({ product }: {
               >
                 Удалить
               </Button>
-              <EditModal id={product.id!}/>
+              <EditModal id={product.id!} />
             </>
           ) : (
             <>

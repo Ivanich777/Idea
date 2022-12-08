@@ -58,6 +58,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+   errorOff: (state) => {
+      state.error.message = '';
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -84,4 +87,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { errorOff } = userSlice.actions;
 export default userSlice.reducer;

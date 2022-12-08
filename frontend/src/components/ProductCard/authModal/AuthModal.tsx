@@ -22,15 +22,44 @@ const style = {
   boxShadow: 24,
   backgroundColor: '#FAEBD7',
   borderRadius: '15px',
-  fontFamile:'Comfortaa, cursive', 
+  fontFamile: 'Comfortaa, cursive',
   fontSize: '50px',
   p: 4,
 };
 
 export default function AuthModal(): JSX.Element {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [reg, Set] = React.useState(false);
+  const [log, SetLog] = React.useState(false);
+
+  const handleOpen = ():void => setOpen(true);
+  const handleClose = ():void => setOpen(false);
+
+  const handleOpenReg = ():void => Set(true);
+  const handleCloseReg = ():void => Set(false);
+
+const handleOpenLog = ():void => SetLog(true);
+const handleCloseLog = ():void => SetLog(false);
+
+  const regToLog = ():void => {
+    Set(false);
+    SetLog(true);
+  };
+
+  const logToReg = ():void => {
+    SetLog(false);
+    Set(true);
+  };
+
+  function closerReg():void {
+   setOpen(false);
+   Set(true);
+  }
+
+  function closerLog():void {
+    setOpen(false);
+    SetLog(true);
+  }
 
   return (
     <div className='cardBasket'>
@@ -50,20 +79,24 @@ export default function AuthModal(): JSX.Element {
       >
         <Box sx={style}>
           <Typography
-          style={{fontFamily:'Comfortaa, cursive', 
-          fontSize: '20px',}}>
+            style={{ fontFamily: 'Comfortaa, cursive',
+          fontSize: '20px', }}
+          >
             Чтобы добавить товар в корзину, пройдите{' '}
-            <NavLink to='/auth/reg' style={{ color: 'var(--color-active)' }}>
-              регистрацию 
-            </NavLink>
+            <span onClick={closerReg} style={{ color: 'var(--color-active)', textDecoration: 'underline', cursor: 'pointer' }}>
+              регистрацию
+            </span>
             {' '} или {' '}
-            <NavLink to="/auth/login" style={{ color: 'var(--color-active)' }}>
+            {/* <NavLink to="/auth/login" style={{ color: 'var(--color-active)' }}>
               авторизируйтесь.
-            </NavLink>
+            </NavLink> */}
+            <span onClick={closerLog} style={{ color: 'var(--color-active)', textDecoration: 'underline', cursor: 'pointer' }}>войдите.</span>
 
           </Typography>
         </Box>
       </Modal>
+      <RegistrationDesktop handleRegClose={handleCloseReg} open={reg} logopen={log} regToLog={regToLog} />
+      <LoginDesktop handleLogClose={handleCloseLog} logopen={log} open={reg} logToReg={logToReg} />
     </div>
   );
 }

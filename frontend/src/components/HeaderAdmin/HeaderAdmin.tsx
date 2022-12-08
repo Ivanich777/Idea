@@ -19,15 +19,15 @@ export default function Header(): JSX.Element {
     <>
       <AppBar position="sticky" style={{ backgroundColor: 'black' }}>
         <Container maxWidth="xl"
-          style={{height: '96.5px'}}>
+          style={{ height: '96.5px' }}>
           <Toolbar disableGutters
-            style={{height: '96.5px'}}>
+            style={{ height: '96.5px' }}>
             <NavLink to="/orders" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
               <Typography
                 variant="h6"
                 noWrap
                 component="a"
-                href=""
+                // ref=""h
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },
@@ -72,29 +72,29 @@ export default function Header(): JSX.Element {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                <>
-                  <MenuItem>
-                    <Typography textAlign="center">
-                      <NavLink to="/orders" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                        Заказы
-                      </NavLink>
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem>
-                    <Typography textAlign="center">
-                      <NavLink to="/product" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                        Товары
-                      </NavLink>
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem>
-                    <Typography textAlign="center">
-                      <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                        Выход
-                      </NavLink>
-                    </Typography>
-                  </MenuItem>
-                </>
+
+                <MenuItem>
+                  <Typography textAlign="center">
+                    <NavLink to="/orders" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                      Заказы
+                    </NavLink>
+                  </Typography>
+                </MenuItem>
+                <MenuItem>
+                  <Typography textAlign="center">
+                    <NavLink to="/product" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                      Товары
+                    </NavLink>
+                  </Typography>
+                </MenuItem>
+                <MenuItem>
+                  <Typography textAlign="center">
+                    <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                      Выход
+                    </NavLink>
+                  </Typography>
+                </MenuItem>
+
               </Menu>
             </Box>
 
@@ -121,7 +121,7 @@ export default function Header(): JSX.Element {
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', borderStyle: 'none' }}
-                style={{marginRight:'25px', marginTop:'0px', marginBottom:'0px'}}
+                style={{ marginRight: '25px', marginTop: '0px', marginBottom: '0px' }}
               >
                 <NavLink to="/orders" style={{ textDecoration: 'none', color: 'white' }}>
                   Заказы
@@ -130,7 +130,7 @@ export default function Header(): JSX.Element {
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', borderStyle: 'none' }}
-                style={{marginRight:'25px', marginTop:'0px', marginBottom:'0px'}}
+                style={{ marginRight: '25px', marginTop: '0px', marginBottom: '0px' }}
               >
                 <NavLink to="/product" style={{ textDecoration: 'none', color: 'white' }}>
                   Товары
@@ -139,7 +139,7 @@ export default function Header(): JSX.Element {
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', borderStyle: 'none' }}
-                // style={{marginRight:'10px',marginTop:'0px', marginBottom:'0px'}}
+              // style={{marginRight:'10px',marginTop:'0px', marginBottom:'0px'}}
               >
                 <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'white' }}>
                   Выход

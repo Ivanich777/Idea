@@ -104,14 +104,14 @@ function Orders(): JSX.Element {
             <TextField
               id="outlined-required"
               label="Номер заказа"
-              defaultValue=""
+              // defaultValue=""
               value={searchNumber}
               onChange={handleSearchNumber}
             />
             <TextField
               id="outlined-required"
               label="Пользователь"
-              defaultValue=""
+              // defaultValue=""
               value={searchUser}
               onChange={handleSearchUser}
             />

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem, Modal, Typography, IconButton } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ClearIcon from '@mui/icons-material/Clear';
+import AddIcon from '@mui/icons-material/Add';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
 import { editAsyncProduct, addAsyncProduct, addAsyncImages } from '../ProductList/productSlice';
@@ -40,7 +41,7 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
   const [description, setDescription] = React.useState('');
   const [count, setCount] = React.useState('');
   const [price, setPrice] = React.useState('');
-  const [rows, setRows] = React.useState<Feature[]>([{ id: 1, title: 'Вес', description: '20кг' }]);
+  const [rows, setRows] = React.useState<Feature[]>([{ id: 1, title: 'Характеристика', description: 'Описание' }]);
 
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
@@ -217,6 +218,25 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
               />
             </Grid>
             <Grid item xs={12} sm={4}>
+              <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <Typography>Характеристики:</Typography>
+                <IconButton onClick={handleAddFeature}>
+                  <AddIcon />
+                </IconButton>
+              </Box>
+              <Box>
+                {rows.map((row, i) => (
+                  <Box key={i} sx={{ display: 'flex' }}>
+                    <TextField required type="text" value={row.title} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, title: e.target.value } : rowItem))} />
+                    <TextField required type="text" value={row.description} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, description: e.target.value } : rowItem))} />
+                    <IconButton color="inherit" onClick={() => setRows(rows.filter((item, idx) => i !== idx))}>
+                      <ClearIcon />
+                    </IconButton>
+                  </Box>
+                ))}
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={4}>
               <TextField
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -236,15 +256,20 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
               required
               style={{paddingTop:'15px', paddingBottom:'15px'}}
             /> */}
+
               <TextField
                 value={image}
                 name="images"
                 type="file"
+                id="file"
                 onChange={handleChangleFiles}
                 inputProps={{ multiple: true }}
                 required
                 style={{ paddingTop: '15px', paddingBottom: '15px' }}
+                className="file"
               />
+
+
               <Button
                 type="submit"
                 fullWidth
@@ -254,20 +279,6 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
               >
                 {id ? ('Изменить') : ('Добавить товар')}
               </Button>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Button onClick={handleAddFeature}>+</Button>
-              <Box>
-                {rows.map((row, i) => (
-                  <Box key={i} sx={{ display: 'flex' }}>
-                    <TextField required type="text" value={row.title} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, title: e.target.value } : rowItem))} />
-                    <TextField required type="text" value={row.description} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, description: e.target.value } : rowItem))} />
-                    <IconButton color="inherit" onClick={() => setRows(rows.filter((item, idx ) => i !== idx))}>
-                      <ShoppingCartIcon />
-                    </IconButton>
-                  </Box>
-                ))}
-              </Box>
             </Grid>
           </Grid>
         </Box>

@@ -18,6 +18,7 @@ export interface Product {
   }],
   image?: string,
   features: Feature[],
+  updatedAt: string,
 }
 
 export interface State {

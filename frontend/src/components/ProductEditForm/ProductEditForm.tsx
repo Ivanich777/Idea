@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
-import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem, Modal, Typography } from '@mui/material';
+import { Container, Grid, TextField, Box, Button, IconButton, FormControl, InputLabel, Select, MenuItem, Modal, Typography } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
+import AddIcon from '@mui/icons-material/Add';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
 import { editAsyncProduct, addAsyncProduct, addAsyncImages } from '../ProductList/productSlice';
-import { Product } from '../ProductList/types/state';
+import { Feature, Product } from '../ProductList/types/state';
 
 const styleModal = {
   position: 'absolute' as 'absolute',
@@ -26,6 +28,7 @@ interface INewProduct {
   // images: string | any,
   count: string | any,
   price: string | any,
+  features: Feature[],
 }
 
 export default function ProductEditForm({ id, closeFunc }: { id: number, closeFunc: Function }): JSX.Element {
@@ -40,6 +43,7 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
   const [description, setDescription] = React.useState(product?.description);
   const [count, setCount] = React.useState(String(product?.count));
   const [price, setPrice] = React.useState(String(product?.price));
+  const [rows, setRows] = React.useState<Feature[]>(product?.features!);
 
   const handleChange = (event: any): void => {
     setCategory(event.target.value as string);
@@ -70,6 +74,7 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
       // images: '',
       count: '',
       price: '',
+      features: [],
     };
     if (!id) {
       newProduct = {
@@ -80,6 +85,7 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
         // images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
         count: data.get('count'),
         price: data.get('price'),
+        features: rows,
       };
     } else {
       newProduct = {
@@ -91,6 +97,7 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
         // images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
         count: data.get('count'),
         price: data.get('price'),
+        features: rows,
       };
     }
 
@@ -115,11 +122,15 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
     }
   };
 
+  const handleAddFeature = () => {
+    setRows([...rows, { id: rows.length, title: '', description: '' }]);
+  }
+
   return (
     <Container maxWidth="lg">
       <Box component="form" onSubmit={handleSubmit} sx={{ m: 1 }}>
         <Grid container spacing={5}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
               required
               value={article}
@@ -187,7 +198,26 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
             />
 
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+              <Typography>Характеристики:</Typography>
+              <IconButton onClick={handleAddFeature}>
+                <AddIcon />
+              </IconButton>
+            </Box>
+            <Box>
+              {rows.map((row, i) => (
+                <Box key={i} sx={{ display: 'flex' }}>
+                  <TextField required type="text" value={row.title} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, title: e.target.value } : rowItem))} />
+                  <TextField required type="text" value={row.description} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, description: e.target.value } : rowItem))} />
+                  <IconButton color="inherit" onClick={() => setRows(rows.filter((item, idx) => i !== idx))}>
+                    <ClearIcon />
+                  </IconButton>
+                </Box>
+              ))}
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={4}>
             <TextField
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -212,7 +242,7 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
               fullWidth
               variant="contained"
               sx={{ mt: 2 }}
-              style={{backgroundColor:'black'}}
+              style={{ backgroundColor: 'black' }}
             >
               {id ? ('Изменить') : ('Добавить товар')}
             </Button>

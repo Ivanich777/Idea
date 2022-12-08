@@ -143,9 +143,11 @@ router.get('/category', async (req, res) => {
   const categories = await db.Category.findAll({ raw: true });
   res.json(categories);
 });
+
 router.delete('/product/:id', async (req, res) => {
   const { id } = req.params;
   await db.Image.destroy({ where: { idProduct: id } });
+  await db.Feature.destroy({ where: { id } });
   await db.Product.destroy({ where: { id } });
   res.json(Number(id));
 });
@@ -157,7 +159,7 @@ router.put('/product/:id', async (req, res) => {
     title,
     description,
     category,
-    images,
+    features,
     count,
     price,
   } = req.body;
@@ -170,15 +172,16 @@ router.put('/product/:id', async (req, res) => {
     price: Number(price),
   }, { where: { id } });
   const newProduct = await db.Product.findOne({ where: { id } });
-  // await db.Image.destroy({ where: { idProduct: id } });
+  await db.Feature.destroy({ where: { idProduct: id } });
 
-  // images.forEach(async (img) => {
-  //   await db.Image.create({
-  //     idProduct: newProduct.dataValues.id,
-  //     path: img.path,
-  //   });
-  // });
-  // newProduct.dataValues.images = images;
+  features.forEach(async (feature) => {
+    await db.Feature.create({
+      idProduct: newProduct.dataValues.id,
+      title: feature.title,
+      description: feature.description,
+    });
+  });
+  newProduct.dataValues.features = features;
   res.json(newProduct);
 });
 

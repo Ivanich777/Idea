@@ -11,6 +11,21 @@ module.exports = {
       {
         title: 'Инструменты',
       },
+      {
+        title: 'Декор',
+      },
+      {
+        title: 'Краски',
+      },
+      {
+        title: 'Сантехника',
+      },
+      {
+        title: 'Стройматериалы',
+      },
+      {
+        title: 'Электротовары',
+      },
     ];
     const categories = categoriesData.map((category) => ({
       ...category,

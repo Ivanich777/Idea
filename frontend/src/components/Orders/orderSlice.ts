@@ -40,8 +40,6 @@ const orderSlice = createSlice({
             state.orders[i].createdAt = action.payload[i].createdAt;
           });
           
-          console.log(action.payload);
-
           const pre = state.orders.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
           state.orders = pre;
           const res = state.orders.filter((order) => order.status !== 'Не оформлен');

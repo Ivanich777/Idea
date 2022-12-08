@@ -148,11 +148,25 @@ function Orders(): JSX.Element {
           </Box>
         )
         : (orderList.length === 0 ? (
-          <Box sx={styles.labelSearch}>
-            У вас еще нет заказов
-          </Box>
+          <div>
+            <Box>
+              <Typography>{user?.name}</Typography>
+              <Typography>{user?.surname}</Typography>
+              <Typography>{user?.email}</Typography>
+              <Typography>{user?.phone}</Typography>
+            </Box>
+            <Box sx={styles.labelSearch}>
+              У вас еще нет заказов
+            </Box>
+          </div>
         ) : (
           <div>
+            <Box>
+              <Typography>{user?.name}</Typography>
+              <Typography>{user?.surname}</Typography>
+              <Typography>{user?.email}</Typography>
+              <Typography>{user?.phone}</Typography>
+            </Box>
             <Box sx={styles.labelSearch}>
               Ваши заказы:
             </Box>

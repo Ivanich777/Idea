@@ -37,18 +37,20 @@ function App(): JSX.Element {
     dispatch(addAsyncProducts());
     dispatch(addAsyncOrders());
     dispatch(addAsyncCategories());
+    if (user) {
+      dispatch(actualOrder(user.id!));
+    }
   }, []);
 
-  // useEffect(() => {
-  //   dispatch(addAsyncProducts());
-  //   dispatch(addAsyncCategories());
-  // }, []);
+
+  const { basket } = useSelector((state: RootState) => state.basket);
+  const count = basket.length
 
   return (
     <div className="App">
       {!user && (
         <Routes>
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/" element={<MainLayout count={count} />}>
             <Route path="/" element={<Main />} />
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
@@ -60,7 +62,7 @@ function App(): JSX.Element {
       )}
       {user && !user.admin && (
         <Routes>
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/" element={<MainLayout count={count}/>}>
             <Route path="/" element={<Main />} />
             <Route path="/profile" element={<Orders />} />
             <Route path="/product" element={<ProductList />} />

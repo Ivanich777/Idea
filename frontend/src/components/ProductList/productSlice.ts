@@ -52,6 +52,7 @@ const productSlice = createSlice({
                  item.images = action.payload[i].Images;
                  item.features = action.payload[i].Features;
                  item.category = action.payload[i].Category.title;
+                 item.isDeletable = action.payload[i].OrderItems.length ? false : true;
             });
         })
         .addCase(addAsyncProduct.fulfilled, (state, action) => {

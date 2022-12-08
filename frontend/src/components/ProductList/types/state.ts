@@ -19,6 +19,7 @@ export interface Product {
   image?: string,
   features: Feature[],
   updatedAt: string,
+  isDeletable: boolean,
 }
 
 export interface State {

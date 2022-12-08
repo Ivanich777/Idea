@@ -60,6 +60,9 @@ router.get('/products', async (req, res) => {
       }, {
         model: db.Category,
         attributes: ['title'],
+      }, {
+        model: db.OrderItem,
+        attributes: ['idOrder'],
       }],
     });
     res.json(products);
@@ -74,6 +77,7 @@ router.post('/product', async (req, res) => {
     title,
     description,
     category,
+    categoryId,
     images,
     count,
     price,
@@ -85,7 +89,7 @@ router.post('/product', async (req, res) => {
       article: Number(article),
       title,
       description,
-      idCategory: Number(category),
+      idCategory: Number(categoryId),
       count: Number(count),
       price: Number(price),
     });
@@ -107,6 +111,8 @@ router.post('/product', async (req, res) => {
 
     newProduct.dataValues.images = images;
     newProduct.dataValues.features = features;
+    newProduct.dataValues.category = category;
+    newProduct.dataValues.isDeletable = true;
     res.json(newProduct);
   } catch (e) {
     console.log(e.message);
@@ -147,7 +153,7 @@ router.get('/category', async (req, res) => {
 router.delete('/product/:id', async (req, res) => {
   const { id } = req.params;
   await db.Image.destroy({ where: { idProduct: id } });
-  await db.Feature.destroy({ where: { id } });
+  await db.Feature.destroy({ where: { idProduct: id } });
   await db.Product.destroy({ where: { id } });
   res.json(Number(id));
 });
@@ -159,6 +165,7 @@ router.put('/product/:id', async (req, res) => {
     title,
     description,
     category,
+    categoryId,
     features,
     count,
     price,
@@ -167,7 +174,7 @@ router.put('/product/:id', async (req, res) => {
     article: Number(article),
     title,
     description,
-    idCategory: Number(category),
+    idCategory: Number(categoryId),
     count: Number(count),
     price: Number(price),
   }, { where: { id } });
@@ -182,6 +189,7 @@ router.put('/product/:id', async (req, res) => {
     });
   });
   newProduct.dataValues.features = features;
+  newProduct.dataValues.category = category;
   res.json(newProduct);
 });
 

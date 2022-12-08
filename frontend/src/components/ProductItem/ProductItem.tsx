@@ -47,7 +47,9 @@ function ProductItem(): JSX.Element {
           </Swiper>
         </Box>
         <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
-          {user ? (
+          {!user && <AuthModal />}
+          {!user?.admin && 
+          (
             <Button
               size="small"
               color="primary"
@@ -56,9 +58,8 @@ function ProductItem(): JSX.Element {
             >
               В корзину
             </Button>
-          ) : (
-            <AuthModal />
-          )}
+          )
+          }
         </CardActions>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', margin: '20px', padding: '20px' }}>
@@ -109,7 +110,7 @@ function ProductItem(): JSX.Element {
         {product?.features.length! > 0 && product?.features.map((item: any) => (
           <Box sx={{ display: 'flex' }}>
             <Box sx={{ marginRight: '5px', fontSize: '20px', fontFamily: 'Georgia, serif', letterSpacing: '1.2px', marginLeft: '10px' }}>{item.title}:</Box>
-            <Box sx={{ fontSize: '20px', fontFamily: 'Georgia, serif', letterSpacing: '1.2px', marginLeft: '10px' }}>{item.description}</Box>
+            <Box sx={{ fontSize: '20px', fontFamily: 'Georgia, serif', letterSpacing: '1.2px', marginLeft: '10px', mb: '1' }}>{item.description}</Box>
           </Box>
         ))}
       </Box>

@@ -28,7 +28,7 @@ interface INewProduct {
   price: string | any,
 }
 
-export default function ProductEditForm({ id }: { id: number }): JSX.Element {
+export default function ProductEditForm({ id, closeFunc }: { id: number, closeFunc: Function }): JSX.Element {
   const { products } = useSelector((state: RootState) => state.products);
   const { categories } = useSelector((state: RootState) => state.categories);
   const product = products.find((productItem) => productItem.id === id);
@@ -102,6 +102,7 @@ export default function ProductEditForm({ id }: { id: number }): JSX.Element {
       // setImage('');
       setCount('');
       setPrice('');
+      closeFunc();
     } else {
       dispatch(editAsyncProduct(newProduct));
       setArticle('');
@@ -110,6 +111,7 @@ export default function ProductEditForm({ id }: { id: number }): JSX.Element {
       // setImage('');
       setCount('');
       setPrice('');
+      closeFunc();
     }
   };
 

@@ -20,7 +20,7 @@ const style = {
 export default function EditModal({ id }:{ id:number }):JSX.Element {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = React.useCallback(() => setOpen(false), []);
 
   return (
     <div>
@@ -32,7 +32,7 @@ export default function EditModal({ id }:{ id:number }):JSX.Element {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <ProductEditForm id={id} />
+            <ProductEditForm id={id} closeFunc={handleClose}/>
         </Box>
       </Modal>
     </div>

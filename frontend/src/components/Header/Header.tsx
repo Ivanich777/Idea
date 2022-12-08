@@ -79,7 +79,6 @@ export default function Header({ count }: { count: number }): JSX.Element {
                   color: 'inherit',
                   textDecoration: 'none',
                   fontSize: '20px'
-
                 }}
               >
                 IDEA

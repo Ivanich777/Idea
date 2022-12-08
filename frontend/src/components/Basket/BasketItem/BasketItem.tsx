@@ -44,12 +44,12 @@ function BasketElement({ item }: BasketItem | any): JSX.Element {
           <IconButton edge="end" aria-label="delete"
           >
             <DeleteIcon onClick={handleDeleteBasketItem}
-              style={{ paddingRight: '30px' }} />
+              style={{ marginRight: '30px' }} />
           </IconButton>
         }
         style={{ borderBottom: '2px solid #FFE4C4', borderRadius: '10px' }}
       >
-        <img src={`${item.Images[0].path}`} style={{ width: '100px', height: '100px', borderRadius: '10px' }}></img>
+        <img src={`${item.Images[0].path}`} style={{ width: '100px', minHeight: '100px', borderRadius: '10px' }}></img>
         <div className='component' style={{ display: 'flex', flexDirection: 'column', paddingLeft: '60px' }}>
           <ListItemText
             primary={`${item?.title}`}

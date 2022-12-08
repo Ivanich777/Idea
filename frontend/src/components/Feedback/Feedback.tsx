@@ -77,6 +77,7 @@ function Feedback({ handleFeedClose, feedopen } : { handleFeedClose: () => void,
             id="outlined-name"
             name="email"
             label="Email"
+            color="warning"
             value={formik.values.email}
             onChange={formik.handleChange}
             error={formik.touched.email}
@@ -89,34 +90,47 @@ function Feedback({ handleFeedClose, feedopen } : { handleFeedClose: () => void,
         id="outlined-name"
         name="phone"
         label="Phone"
+        color="warning"
         value={formik.values.phone}
         onChange={formik.handleChange}
       />
       {formik.touched.phone && formik.errors.phone ? (
-        <div style={{ color: 'red' }}>{formik.errors.phone}</div>
+        <div style={{ color: 'red', fontSize: '15px', margin: '-10px 0px -10px' }}>{formik.errors.phone}</div>
       ) : null}
       <TextField
         id="outlined-name"
         name="name"
         label="Name"
+        color="warning"
         value={formik.values.name}
         onChange={formik.handleChange}
       />
       {formik.touched.name && formik.errors.name ? (
-        <div style={{ color: 'red' }}>{formik.errors.name}</div>
+        <div style={{ color: 'red', fontSize: '15px', margin: '-10px 0px -10px' }}>{formik.errors.name}</div>
       ) : null}
       <TextField
         id="outlined-name"
         name="description"
         label="Description"
+        color="warning"
         value={formik.values.description}
         onChange={formik.handleChange}
       />
       {formik.touched.description && formik.errors.description ? (
-        <div style={{ color: 'red' }}>{formik.errors.description}</div>
+        <div style={{ color: 'red', fontSize: '15px', margin: '-10px 0px -10px' }}>{formik.errors.description}</div>
       ) : null}
-          <Button type="submit">Отправить форму</Button>
-          <Button onClick={handleFeedClose}>Закрыть</Button>
+          <Button
+            color="warning"
+            style={{ color: 'black' }}
+            type="submit"
+          >Отправить форму
+          </Button>
+          <Button
+            color="warning"
+            style={{ color: 'black' }}
+            onClick={handleFeedClose}
+          >Закрыть
+          </Button>
           <div style={{ display: 'flex', justifyContent: 'space-between' }} />
         </div>
       </div>

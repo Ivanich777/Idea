@@ -1,7 +1,6 @@
 export interface FeedbackProduct {
   name:string,
   phone:string,
-  img:string,
   email:string,
   description:string,
 }

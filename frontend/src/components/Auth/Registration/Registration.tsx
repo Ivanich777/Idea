@@ -13,9 +13,7 @@ import { RootState, useAppDispatch } from '../../../store';
 import { addAsyncUser } from '../authSlice';
 import { FormInputs } from './types/state';
 import AuthLayout from '../AuthLayout/AuthLayout';
-import './registr.css'
-
-
+import './registr.css';
 
 function Registration(): JSX.Element {
   // const { name } = useParams();
@@ -72,7 +70,7 @@ function Registration(): JSX.Element {
         value={formik.values.email}
         onChange={formik.handleChange}
         error={formik.touched.email}
-        color='warning'
+        // color='warning'
         // error={formik.touched.email && formik.errors.email}
       />
       {formik.touched.email && formik.errors.email ? (
@@ -86,7 +84,7 @@ function Registration(): JSX.Element {
         type="password"
         value={formik.values.password}
         onChange={formik.handleChange}
-        color='warning'
+        // color='warning'
       />
       {formik.touched.password && formik.errors.password ? (
         <div style={{ color: 'red' }}>{formik.errors.password}</div>
@@ -98,7 +96,7 @@ function Registration(): JSX.Element {
         type="password"
         value={formik.values.checkPassword}
         onChange={formik.handleChange}
-        color='warning'
+        // color='warning'
       />
       {formik.touched.checkPassword && formik.errors.checkPassword ? (
         <div style={{ color: 'red' }}>{formik.errors.checkPassword}</div>
@@ -109,7 +107,7 @@ function Registration(): JSX.Element {
         label="Name"
         value={formik.values.name}
         onChange={formik.handleChange}
-        color='warning'
+        // color='warning'
       />
       {formik.touched.name && formik.errors.name ? (
         <div style={{ color: 'red' }}>{formik.errors.name}</div>
@@ -120,7 +118,7 @@ function Registration(): JSX.Element {
         label="Surname"
         value={formik.values.surname}
         onChange={formik.handleChange}
-        color='warning'
+        // color='warning'
       />
       {formik.touched.surname && formik.errors.surname ? (
         <div style={{ color: 'red' }}>{formik.errors.surname}</div>
@@ -131,7 +129,7 @@ function Registration(): JSX.Element {
         label="Phone"
         value={formik.values.phone}
         onChange={formik.handleChange}
-        color='warning'
+        // color='warning'
       />
       {formik.touched.phone && formik.errors.phone ? (
         <div style={{ color: 'red' }}>{formik.errors.phone}</div>

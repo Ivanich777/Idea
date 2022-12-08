@@ -5,11 +5,11 @@ import Feedback from '../Feedback/Feedback';
 export default function Footer(): JSX.Element {
   const [feedopen, setFeedOpen] = useState(false);
 
-  function handleFeedOpen() {
+  function handleFeedOpen():void {
     setFeedOpen(true);
    }
 
-   function handleFeedClose() {
+   function handleFeedClose():void {
      setFeedOpen(false);
      }
   return (
@@ -66,10 +66,8 @@ export default function Footer(): JSX.Element {
                 Как оплатить
               </Link>
             </Box>
-            <Box>
-              <Link href="/" color="inherit">
-                Правила продажи
-              </Link>
+            <Box onClick={handleFeedOpen}>
+              <span style={{ color: 'inherit', textDecoration: 'underline', cursor: 'pointer' }}>По вопросам сотрудничества</span>
             </Box>
             <Box>
               <Link href="/" color="inherit">
@@ -90,12 +88,6 @@ export default function Footer(): JSX.Element {
             <Box>
               <span>phone: +7920-660-8423</span>
             </Box>
-
-            <Button
-              onClick={handleFeedOpen}
-            >
-               <p style={{ textDecoration: 'none', color: 'white' }}>Feedback</p>
-            </Button>
 
             <Box
               sx={{ display: 'flex', justifyContent: 'space-around' }}

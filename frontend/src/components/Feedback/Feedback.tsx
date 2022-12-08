@@ -15,17 +15,16 @@ function Feedback({ handleFeedClose, feedopen } : { handleFeedClose: () => void,
   // const { feedback, error } = useSelector((srt:RootState) => srt.feedbacks);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       name: '',
       phone: '',
       description: '',
-      img: '',
       email: '',
     },
     validationSchema: Yup.object({
       name: Yup.string()
-        .max(15, 'Не должно превышать 15 символов')
         .required('Обязательное поле'),
       phone: Yup.string()
         .min(11, 'Не менее 11 символов')
@@ -35,8 +34,8 @@ function Feedback({ handleFeedClose, feedopen } : { handleFeedClose: () => void,
         .required('Обязательное поле'),
     }),
     onSubmit: (values:FeedbackProduct) => {
-      console.log(values);
       dispatch(addAsyncFeedback(values));
+      handleFeedClose();
     },
   });
   return (
@@ -44,8 +43,8 @@ function Feedback({ handleFeedClose, feedopen } : { handleFeedClose: () => void,
     <Modal
       open={feedopen}
       onClose={handleFeedClose}
-      // style={{ marginBottom: '200px' }}
     >
+
     <div className="modal-modal-title">
     <form onSubmit={formik.handleSubmit}>
       <div
@@ -53,15 +52,17 @@ function Feedback({ handleFeedClose, feedopen } : { handleFeedClose: () => void,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          paddingTop: '15%',
+          paddingBottom: '1%',
+          paddingTop: '8%',
         }}
       >
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
+            fontSize: '18px',
             gap: '1rem',
-            width: '30%',
+            width: '24%',
             height: 'fitContent',
             background: 'white',
             boxShadow: '0 0 10px rgba(0,0,0,0.5)',
@@ -96,16 +97,6 @@ function Feedback({ handleFeedClose, feedopen } : { handleFeedClose: () => void,
       ) : null}
       <TextField
         id="outlined-name"
-        name="img"
-        label="Img"
-        value={formik.values.img}
-        onChange={formik.handleChange}
-      />
-      {formik.touched.img && formik.errors.img ? (
-        <div style={{ color: 'red' }}>{formik.errors.img}</div>
-      ) : null}
-      <TextField
-        id="outlined-name"
         name="name"
         label="Name"
         value={formik.values.name}
@@ -126,9 +117,7 @@ function Feedback({ handleFeedClose, feedopen } : { handleFeedClose: () => void,
       ) : null}
           <Button type="submit">Отправить форму</Button>
           <Button onClick={handleFeedClose}>Закрыть</Button>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Link href="/">На главную</Link>
-          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }} />
         </div>
       </div>
     </form>

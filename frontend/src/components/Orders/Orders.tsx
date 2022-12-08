@@ -18,7 +18,7 @@ const styles = {
   btnFilter: {
     fontSize: '1rem',
   }
-} 
+}
 
 function Orders(): JSX.Element {
   const [orderList, setOrderList] = useState<Order[]>([]);
@@ -27,10 +27,10 @@ function Orders(): JSX.Element {
   const [searchStatus, setSearchStatus] = useState('Все');
   const dispatch = useAppDispatch();
 
-  
+
   const { user } = useSelector((state: RootState) => state.users);
   const { orders } = useSelector((state: RootState) => state.orders);
-  
+
   useEffect(() => {
     if (user?.admin) {
       setOrderList(orders);
@@ -131,7 +131,7 @@ function Orders(): JSX.Element {
                 <MenuItem value="Принят">Принят</MenuItem>
               </Select>
             </FormControl>
-            <Button 
+            <Button
               onClick={handleDefault}
               sx={styles.btnFilter}
             >
@@ -147,21 +147,23 @@ function Orders(): JSX.Element {
             Все заказы:
           </Box>
         )
-        : (
+        : (orderList.length === 0 ? (
           <Box sx={styles.labelSearch}>
-            Ваши заказы:
+            У вас еще нет заказов
           </Box>
+        ) : (
+          <div>
+            <Box sx={styles.labelSearch}>
+              Ваши заказы:
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
+              {orderList.map((order: any) => (
+                <OrderCard key={order.id} order={order} />
+              ))}
+            </Box>
+          </div>
+        )
         )}
-      {(!user?.admin && answerFromBack.error.message === 'У вас нет заказов') && (
-        <Typography>{answerFromBack.error.message}</Typography>
-      )}
-      {(!user?.admin && answerFromBack.error.message !== 'У вас нет заказов') && (
-        <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-          {orderList.map((order: any) => (
-            <OrderCard key={order.id} order={order} />
-          ))}
-        </Box>
-      )}
       {user?.admin && (
         <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
           {orderList.map((order: any) => (

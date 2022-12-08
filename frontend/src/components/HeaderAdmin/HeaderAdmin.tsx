@@ -20,23 +20,25 @@ export default function Header(): JSX.Element {
       <AppBar position="sticky" style={{ backgroundColor: 'black' }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'Playfair Display SC',
-                fontWeight: 700,
-                letterSpacing: '.5rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              IDEA
-            </Typography>
+            <NavLink to="/orders" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href=""
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'Playfair Display SC',
+                  fontWeight: 700,
+                  letterSpacing: '.5rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                IDEA
+              </Typography>
+            </NavLink>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -97,7 +99,7 @@ export default function Header(): JSX.Element {
               variant="h5"
               noWrap
               component="a"
-              href=""
+              href="/orders"
               sx={{
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
@@ -116,7 +118,7 @@ export default function Header(): JSX.Element {
               <Button
                 variant="outlined"
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', borderStyle:'none' }}
+                sx={{ my: 2, color: 'white', display: 'block', borderStyle: 'none' }}
               >
                 <NavLink to="/orders" style={{ textDecoration: 'none', color: 'white' }}>
                   Заказы
@@ -125,7 +127,7 @@ export default function Header(): JSX.Element {
               <Button
                 variant="outlined"
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', borderStyle:'none' }}
+                sx={{ my: 2, color: 'white', display: 'block', borderStyle: 'none' }}
               >
                 <NavLink to="/product" style={{ textDecoration: 'none', color: 'white' }}>
                   Товары
@@ -134,7 +136,7 @@ export default function Header(): JSX.Element {
               <Button
                 variant="outlined"
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', borderStyle:'none' }}
+                sx={{ my: 2, color: 'white', display: 'block', borderStyle: 'none' }}
               >
                 <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'white' }}>
                   Выход

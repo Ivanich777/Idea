@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Modal, AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem } from '@mui/material';
+import { Modal, AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem, Badge } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Outlet, NavLink } from 'react-router-dom';
@@ -11,7 +11,7 @@ import RegistrationDesktop from '../Auth/Registration/RegistrationDesktop';
 import Login from '../Auth/Login/Login';
 import LoginDesktop from '../Auth/Login/LoginDesktop';
 
-export default function Header(): JSX.Element {
+export default function Header({ count }: { count: number }): JSX.Element {
   const [open, setOpen] = useState(false);
   const [logopen, setLogopen] = useState(false);
 
@@ -20,36 +20,37 @@ export default function Header(): JSX.Element {
     null
   );
 
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
-      setAnchorElNav(event.currentTarget);
-    };
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
+    setAnchorElNav(event.currentTarget);
+  };
 
-    const handleCloseNavMenu = (): void => {
-      setAnchorElNav(null);
-    };
-function handleRegOpen() {
- setOpen(true);
-}
+  const handleCloseNavMenu = (): void => {
+    setAnchorElNav(null);
+  };
+  function handleRegOpen() {
+    setOpen(true);
+  }
 
-function handleRegClose() {
-  setOpen(false);
+  function handleRegClose() {
+    setOpen(false);
   }
   function handleLogOpen() {
     setLogopen(true);
-   }
+  }
 
-   function handleLogClose() {
+  function handleLogClose() {
     setLogopen(false);
-     }
+  }
 
-     function regToLog() {
-      setOpen(false);
-      setLogopen(true);
-     }
-function logToReg() {
-  setLogopen(false);
-  setOpen(true);
-}
+  function regToLog() {
+    setOpen(false);
+    setLogopen(true);
+  }
+  function logToReg() {
+    setLogopen(false);
+    setOpen(true);
+  }
+
   const { user } = useSelector((state: RootState) => state.users);
 
   return (
@@ -57,8 +58,11 @@ function logToReg() {
       <AppBar position="sticky" style={{ backgroundColor: 'black' }}>
         <Container
           maxWidth="xl"
+          style={{height: '96.5px'}}
         >
-          <Toolbar disableGutters>
+          <Toolbar disableGutters 
+          style={{height: '96.5px'}}
+          >
             <Typography
               variant="h6"
               noWrap
@@ -69,9 +73,11 @@ function logToReg() {
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'Playfair Display SC',
                 fontWeight: 700,
-                letterSpacing: '.5rem',
+                letterSpacing: '0.9rem',
                 color: 'inherit',
                 textDecoration: 'none',
+                fontSize: '20px'
+
               }}
             >
               IDEA
@@ -165,69 +171,68 @@ function logToReg() {
             >
               IDEA
             </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-            {user && (
-              <>
-                <Button
-                  variant="outlined"
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  <NavLink to="/basket" style={{ textDecoration: 'none', color: 'white' }}>
-                    Корзина
-                  </NavLink>
-                </Button>
-                <Button
-                  variant="outlined"
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  <NavLink to="/profile" style={{ textDecoration: 'none', color: 'white' }}>
-                    Профиль
-                  </NavLink>
-                </Button>
-                <Button
-                  variant="outlined"
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'white' }}>
-                    Выход
-                  </NavLink>
-                </Button>
-              </>
-            )}
-            {!user && (
-              <>
-                <Button
-                  onClick={handleRegOpen}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  <p style={{ textDecoration: 'none', color: 'white' }}>Регистрация</p>
-                  {/* <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'white' }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
+              {user && (
+                <>
+                  <Button
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    <Badge
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                      }}
+                      badgeContent={count}>
+                      <NavLink to="/basket" style={{ textDecoration: 'none', color: 'white' }}>
+                        Корзина
+                      </NavLink>
+                    </Badge>
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    <NavLink to="/profile" style={{ textDecoration: 'none', color: 'white' }}>
+                      Профиль
+                    </NavLink>
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'white' }}>
+                      Выход
+                    </NavLink>
+                  </Button>
+                </>
+              )}
+              {!user && (
+                <>
+                  <Button
+                    onClick={handleRegOpen}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    <p style={{ textDecoration: 'none', color: 'white' }}>Регистрация</p>
+                    {/* <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'white' }}>
                     Регистрация
                   </NavLink> */}
-                </Button>
-                {/* <Button onClick={handleOpen}></Button> */}
-                <Button
-                  onClick={handleLogOpen}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  <p style={{ textDecoration: 'none', color: 'white' }}>Логин</p>
-                  {/* <NavLink to="/auth/login" style={{ textDecoration: 'none', color: 'white' }}>
+                  </Button>
+                  {/* <Button onClick={handleOpen}></Button> */}
+                  <Button
+                    onClick={handleLogOpen}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    <p style={{ textDecoration: 'none', color: 'white' }}>Логин</p>
+                    {/* <NavLink to="/auth/login" style={{ textDecoration: 'none', color: 'white' }}>
                     Войти
                   </NavLink> */}
-                </Button>
-                {/* <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  <NavLink to="/basket" style={{ textDecoration: 'none', color: 'white' }}>
-                    Корзина
-                  </NavLink>
-                </Button> */}
-              </>
-            )}
+                  </Button>                  
+                </>
+              )}
 
           </Box>
             <IconButton color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -237,9 +242,9 @@ function logToReg() {
           </Toolbar>
         </Container>
       </AppBar>
-    <Outlet />
-    <RegistrationDesktop handleRegClose={handleRegClose} open={open} regToLog={regToLog} />
-    <LoginDesktop handleLogClose={handleLogClose} logopen={logopen} logToReg={logToReg} />
+      <Outlet />
+      <RegistrationDesktop handleRegClose={handleRegClose} open={open} regToLog={regToLog} />
+      <LoginDesktop handleLogClose={handleLogClose} logopen={logopen} logToReg={logToReg} />
     </>
   );
 }

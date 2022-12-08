@@ -80,7 +80,7 @@ function Orders(): JSX.Element {
     <div>
       {user?.admin && (
         <>
-          <Box sx={{ mt: 2 }}>Поиск заказов: </Box>
+          <Box sx={{ mt: 2 }} style={{textAlign:'center',paddingTop:'10px'}}>Поиск заказов: </Box>
           <Box sx={{ mb: 2, mt: 1, display: 'flex', justifyContent: 'space-around' }}>
             <TextField
               id="outlined-required"

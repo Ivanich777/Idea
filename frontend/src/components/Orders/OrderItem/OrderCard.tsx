@@ -28,7 +28,7 @@ function OrderCard({ order }: { order: Order }): JSX.Element {
     setOrderStatus(event.target.value);
   };
 
-  const getDate = (string: string): string => `${string.slice(0, 10)} ${string.slice(11, 19)}`;
+  const getDate = (string: string): string => new Date(string).toLocaleString("en-GB", { timeZone: 'Europe/Moscow' }); 
 
   const { orderItems } = useSelector((state: RootState) => state.orderItems);
   const { user } = useSelector((state: RootState) => state.users);
@@ -68,14 +68,14 @@ function OrderCard({ order }: { order: Order }): JSX.Element {
           </Select>
         </FormControl>
       )}
-      {user?.admin && orderStatus === 'Завершен' && <p>🟢</p>}
+      {user?.admin && orderStatus === 'Завершен' && <p>🔵</p>}
       {user?.admin && orderStatus === 'Отменен' && <p>🔴</p>}
       {user?.admin && orderStatus === 'В обработке' && <p>🟡</p>}
-      {user?.admin && orderStatus === 'Принят' && <p>🟡</p>}
-      {!user?.admin && orderStatus === 'Завершен' && <p>{order.status}     🟢</p>}
+      {user?.admin && orderStatus === 'Принят' && <p>🟢</p>}
+      {!user?.admin && orderStatus === 'Завершен' && <p>{order.status}     🔵</p>}
       {!user?.admin && orderStatus === 'Отменен' && <p>{order.status}     🔴</p>}
       {!user?.admin && orderStatus === 'В обработке' && <p>{order.status}     🟡</p>}
-      {!user?.admin && orderStatus === 'Принят' && <p>{order.status}     🟡</p>}
+      {!user?.admin && orderStatus === 'Принят' && <p>{order.status}     🟢</p>}
     </Box>
   );
 }

@@ -34,14 +34,18 @@ function ProductCard({ product }: {
   }
   
   return (
-    <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite' }}> 
+    <Card sx={{ width: 250, height: 400, margin: '15px', borderRadius: '20px', backgroundColor: 'AntiqueWhite',boxShadow: '5px 2px 5px 5px rgba(109, 80, 23, 0.43) ' }}> 
       <CardActionArea>
         <CardMedia
           component="img"
+          onClick={handleNav}
           width="100"
           image={product?.images[0].path}
           alt="product"
-          style={{ backgroundColor: 'AntiqueWhite', minHeight: '220px', maxHeight: '220px' }}
+          style={{ 
+          backgroundColor: 'AntiqueWhite', 
+          minHeight: '220px', 
+          maxHeight: '220px' }}
         />
         <CardContent onClick={handleNav}>
           <Typography
@@ -63,10 +67,16 @@ function ProductCard({ product }: {
           >
             {product?.title}
           </Typography>
-          {/* <Typography variant="body2" color="text.secondary">
-            {product?.article}
+          <Typography 
+          variant="body2" 
+          color="text.secondary"
+          style={{
+            fontSize: '12px',
+            letterSpacing: '1.7px'
+          }}>
+            {`art.${product?.article}`}
 
-          </Typography> */}
+          </Typography>
           <Typography
             gutterBottom
             variant="h6"
@@ -76,7 +86,7 @@ function ProductCard({ product }: {
               letterSpacing: '1.7px',
             }}
           >
-            {product?.article}
+            {`${product?.price}₽`}
           </Typography>
         </CardContent>
       </CardActionArea>

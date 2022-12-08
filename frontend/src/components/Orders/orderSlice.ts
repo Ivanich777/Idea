@@ -39,6 +39,7 @@ const orderSlice = createSlice({
             order.createdAt = action.payload[i].createdAt;
           });
           state.orders.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
+          state.orders = state.orders.filter((order) => order.status !== 'Не оформлен');
         } else {
           state.error.message = action.payload.error.message;
         }

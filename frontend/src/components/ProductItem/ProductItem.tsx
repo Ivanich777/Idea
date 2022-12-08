@@ -48,7 +48,7 @@ function ProductItem(): JSX.Element {
         </Box>
         <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
           {!user && <AuthModal />}
-          {!user?.admin && 
+          {user && !user.admin &&
           (
             <Button
               size="small"

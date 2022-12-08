@@ -29,6 +29,11 @@ function RegistrationDesktop({ handleRegClose, regToLog, open } : { handleRegClo
       navigate('/');
     }
       }, [user]);
+      // useEffect(() => {
+      //   if (user) {
+      //     navigate('/');
+      //   }
+      // }, [user]);
 
       const formik = useFormik({
         initialValues: {
@@ -70,18 +75,19 @@ function RegistrationDesktop({ handleRegClose, regToLog, open } : { handleRegClo
     <form onSubmit={formik.handleSubmit}>
       <div
         style={{
+          paddingTop: '6%',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          paddingTop: '15%',
         }}
       >
         <div
           style={{
             display: 'flex',
+            fontSize: '18px',
             flexDirection: 'column',
             gap: '1rem',
-            width: '30%',
+            width: '20%',
             height: 'fitContent',
             background: 'white',
             boxShadow: '0 0 10px rgba(0,0,0,0.5)',
@@ -157,7 +163,7 @@ function RegistrationDesktop({ handleRegClose, regToLog, open } : { handleRegClo
         <div style={{ color: 'red' }}>{formik.errors.phone}</div>
       ) : null}
             <p style={{ fontFamily: 'Times New Roman, Times, serif',
-fontSize: '21px',
+fontSize: '14px',
 letterSpacing: '1.6px',
 wordSpacing: '-1.4px',
 color: '#000000',
@@ -173,8 +179,9 @@ textTransform: 'none' }}
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* <Link href="/auth/login">У вас уже есть аккаунт?</Link> */}
             <Button onClick={regToLog}>У вас уже есть аккаунт?</Button>
-            <Link href="/">На главную</Link>
+
           </div>
+
         </div>
       </div>
     </form>

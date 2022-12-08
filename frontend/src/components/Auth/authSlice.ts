@@ -57,13 +57,13 @@ export const getUser = createAsyncThunk('auth/user', () => checkUser());
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addAsyncUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.error.message = action.payload.message;
-        // console.log(state.error.message);
       })
       .addCase(addAsyncUser.rejected, (state, action) => {
         state.error.message = action.error.message;

@@ -14,9 +14,6 @@ module.exports = {
       phone: {
         type: Sequelize.TEXT,
       },
-      img: {
-        type: Sequelize.TEXT,
-      },
       email: {
         type: Sequelize.TEXT,
       },

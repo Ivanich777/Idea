@@ -25,8 +25,8 @@ function ProductList(): JSX.Element {
       {
         user?.admin &&
         (
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <p>Поиск товара по артикулу: </p>
+          <Box sx={{ display: 'flex', justifyContent: 'left', mt: 3}}>
+            <p style={{ fontSize: '1rem', marginLeft: '100px', textDecoration: 'underline' }}>Поиск товара по артикулу: </p>
             <TextField
               label="Введите артикул"
               value={search}

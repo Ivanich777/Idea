@@ -62,7 +62,6 @@ router.get('/products', async (req, res) => {
         attributes: ['title'],
       }],
     });
-    console.log(products);
     res.json(products);
   } catch (e) {
     console.log(e.message);
@@ -78,6 +77,7 @@ router.post('/product', async (req, res) => {
     images,
     count,
     price,
+    features,
   } = req.body;
   console.log(images);
   try {
@@ -96,8 +96,17 @@ router.post('/product', async (req, res) => {
         path: img.path,
       });
     });
+
+    features.forEach(async (feature) => {
+      await db.Feature.create({
+        idProduct: newProduct.dataValues.id,
+        title: feature.title,
+        description: feature.description,
+      });
+    });
+
     newProduct.dataValues.images = images;
-    console.log(newProduct);
+    newProduct.dataValues.features = features;
     res.json(newProduct);
   } catch (e) {
     console.log(e.message);
@@ -127,7 +136,6 @@ router.post('/images', async (req, res) => {
     });
     return URL;
   });
-  console.log(newArr);
   res.json(newArr);
 });
 

@@ -175,7 +175,7 @@ export default function Header({ count }: { count: number }): JSX.Element {
               {user && (
                 <>
                   <Button
-                    variant="outlined"
+                    // variant="outlined"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
@@ -191,7 +191,7 @@ export default function Header({ count }: { count: number }): JSX.Element {
                     </Badge>
                   </Button>
                   <Button
-                    variant="outlined"
+                    // variant="outlined"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
@@ -200,7 +200,7 @@ export default function Header({ count }: { count: number }): JSX.Element {
                     </NavLink>
                   </Button>
                   <Button
-                    variant="outlined"
+                    // variant="outlined"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >

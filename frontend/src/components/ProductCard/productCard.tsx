@@ -40,7 +40,7 @@ function ProductCard({ product }: {
           component="img"
           onClick={handleNav}
           width="100"
-          image={product?.images[0].path}
+          image={product?.images[0] ? product?.images[0].path : '123'}
           alt="product"
           style={{
           backgroundColor: 'AntiqueWhite',
@@ -95,7 +95,7 @@ function ProductCard({ product }: {
         {
           user?.admin ? (
             <>
-           
+              {product.isDeletable && (
               <Button
                 onClick={handleDel}
                 size="small"
@@ -104,7 +104,8 @@ function ProductCard({ product }: {
               >
                 Удалить
               </Button>
-
+            )}
+                
               <EditModal id={product.id!}/>
              
 

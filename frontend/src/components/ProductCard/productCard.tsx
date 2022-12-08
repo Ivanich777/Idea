@@ -110,7 +110,7 @@ function ProductCard({ product }: {
                 <Button
                   size="small"
                   color="primary"
-                  style={{ color: 'black', textAlign: 'center', margin: 'auto' }}
+                  style={{ color: 'black', textAlign: 'center', margin: 'auto' , backgroundColor:'#FAEBD7', borderRadius:'10px'}}
                   onClick={handleClick}
                 >
                   В корзину

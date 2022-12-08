@@ -18,8 +18,10 @@ export default function Header(): JSX.Element {
   return (
     <>
       <AppBar position="sticky" style={{ backgroundColor: 'black' }}>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
+        <Container maxWidth="xl"
+          style={{height: '96.5px'}}>
+          <Toolbar disableGutters
+            style={{height: '96.5px'}}>
             <NavLink to="/orders" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
               <Typography
                 variant="h6"
@@ -31,9 +33,10 @@ export default function Header(): JSX.Element {
                   display: { xs: 'none', md: 'flex' },
                   fontFamily: 'Playfair Display SC',
                   fontWeight: 700,
-                  letterSpacing: '.5rem',
+                  letterSpacing: '0.9rem',
                   color: 'inherit',
                   textDecoration: 'none',
+                  fontSize: '20px'
                 }}
               >
                 IDEA
@@ -116,27 +119,27 @@ export default function Header(): JSX.Element {
 
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
               <Button
-                variant="outlined"
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', borderStyle: 'none' }}
+                style={{marginRight:'25px', marginTop:'0px', marginBottom:'0px'}}
               >
                 <NavLink to="/orders" style={{ textDecoration: 'none', color: 'white' }}>
                   Заказы
                 </NavLink>
               </Button>
               <Button
-                variant="outlined"
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', borderStyle: 'none' }}
+                style={{marginRight:'25px', marginTop:'0px', marginBottom:'0px'}}
               >
                 <NavLink to="/product" style={{ textDecoration: 'none', color: 'white' }}>
                   Товары
                 </NavLink>
               </Button>
               <Button
-                variant="outlined"
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', borderStyle: 'none' }}
+                // style={{marginRight:'10px',marginTop:'0px', marginBottom:'0px'}}
               >
                 <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'white' }}>
                   Выход

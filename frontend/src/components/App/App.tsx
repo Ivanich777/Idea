@@ -44,6 +44,7 @@ function App(): JSX.Element {
 
 
   const { basket } = useSelector((state: RootState) => state.basket);
+  
   const count = basket.length
 
   return (

@@ -18,11 +18,11 @@ function Basket() {
   const { user } = useSelector((state: RootState) => state.users);
   const dispatch = useAppDispatch();
   // wasd123
-  // useEffect(() => {
-  //   if (user) {
-  //     dispatch(actualOrder(user.id!));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user) {
+      dispatch(actualOrder(user.id!));
+    }
+  }, []);
   const { basket } = useSelector((state: RootState) => state.basket);
   
   const { products } = useSelector((state: RootState) => state.products);

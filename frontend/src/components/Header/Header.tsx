@@ -10,6 +10,7 @@ import './header.css';
 import RegistrationDesktop from '../Auth/Registration/RegistrationDesktop';
 import Login from '../Auth/Login/Login';
 import LoginDesktop from '../Auth/Login/LoginDesktop';
+import { pink } from '@mui/material/colors';
 
 export default function Header({ count }: { count: number }): JSX.Element {
   const [open, setOpen] = useState(false);
@@ -58,31 +59,30 @@ export default function Header({ count }: { count: number }): JSX.Element {
       <AppBar position="sticky" style={{ backgroundColor: 'black' }}>
         <Container
           maxWidth="xl"
-          style={{height: '96.5px'}}
+          style={{ height: '96.5px' }}
         >
-          <Toolbar disableGutters 
-          style={{height: '96.5px'}}
+          <Toolbar disableGutters
+            style={{ height: '96.5px' }}
           >
             <NavLink to="/" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'Playfair Display SC',
-                fontWeight: 700,
-                letterSpacing: '0.9rem',
-                color: 'inherit',
-                textDecoration: 'none',
-                fontSize: '20px'
-
-              }}
-            >
-              IDEA
-            </Typography>
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="/"
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'Playfair Display SC',
+                  fontWeight: 700,
+                  letterSpacing: '0.9rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  fontSize: '20px'
+                }}
+              >
+                IDEA
+              </Typography>
             </NavLink>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -154,26 +154,26 @@ export default function Header({ count }: { count: number }): JSX.Element {
                 </>
               </Menu>
             </Box>
-            
+
             <NavLink to="/" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              IDEA
-            </Typography>
+              <Typography
+                variant="h5"
+                noWrap
+                component="a"
+                href="/"
+                sx={{
+                  mr: 2,
+                  display: { xs: 'flex', md: 'none' },
+                  flexGrow: 1,
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                IDEA
+              </Typography>
             </NavLink>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
               {user && (
@@ -184,13 +184,14 @@ export default function Header({ count }: { count: number }): JSX.Element {
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     <Badge
+                      color="success"
                       anchorOrigin={{
                         vertical: 'top',
-                        horizontal: 'left',
+                        horizontal: 'right',
                       }}
                       badgeContent={count}>
                       <NavLink to="/basket" style={{ textDecoration: 'none', color: 'white' }}>
-                        Корзина
+                        <ShoppingCartIcon sx={{ fontSize: 30 }}/>
                       </NavLink>
                     </Badge>
                   </Button>
@@ -234,11 +235,12 @@ export default function Header({ count }: { count: number }): JSX.Element {
                     {/* <NavLink to="/auth/login" style={{ textDecoration: 'none', color: 'white' }}>
                     Войти
                   </NavLink> */}
-                  </Button>                  
+                  </Button>
                 </>
               )}
 
-          </Box>
+            </Box>
+            
             <IconButton color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
               <ShoppingCartIcon />
             </IconButton>

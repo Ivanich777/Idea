@@ -35,7 +35,6 @@ function Feedback({ handleFeedClose, feedopen } : { handleFeedClose: () => void,
         .required('Обязательное поле'),
     }),
     onSubmit: (values:FeedbackProduct) => {
-      console.log(values);
       dispatch(addAsyncFeedback(values));
     },
   });

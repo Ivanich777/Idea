@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Root } from 'react-dom/client';
@@ -28,9 +28,11 @@ import { actualOrder } from '../ProductCard/basketSlice';
 import Basket from '../Basket/Basket';
 import './app.css'
 import { addAsyncOrders } from '../Orders/orderSlice';
+import { ProductOrder } from '../ProductCard/types/State';
 
 function App(): JSX.Element {
   const { user } = useSelector((state: RootState) => state.users);
+  const [countProduct, setCountProduct] = useState(0);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getUser());
@@ -44,8 +46,15 @@ function App(): JSX.Element {
 
 
   const { basket } = useSelector((state: RootState) => state.basket);
-  
-  const count = basket.length
+
+  useEffect(() => {
+    let result: ProductOrder[] = [];
+    const wasd = basket.filter((item, index, arr) =>
+      index === arr.findIndex((el) => el.id === item.id))
+      setCountProduct(wasd.length)
+  }, [basket])
+
+  const count = countProduct;
 
   return (
     <div className="App">
@@ -56,14 +65,14 @@ function App(): JSX.Element {
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductItem />} />
             <Route path="/categories/:categoryId" element={<Category />} />
-          <Route path="/auth/reg" element={<Registration />} />
-          <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/reg" element={<Registration />} />
+            <Route path="/auth/login" element={<Login />} />
           </Route>
         </Routes>
       )}
       {user && !user.admin && (
         <Routes>
-          <Route path="/" element={<MainLayout count={count}/>}>
+          <Route path="/" element={<MainLayout count={count} />}>
             <Route path="/" element={<Main />} />
             <Route path="/profile" element={<Orders />} />
             <Route path="/product" element={<ProductList />} />

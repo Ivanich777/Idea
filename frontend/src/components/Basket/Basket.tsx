@@ -1,5 +1,7 @@
+
 import { Avatar, Box, Button, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import FolderIcon from '@mui/icons-material/Folder';
 import { styled } from '@mui/material/styles';
@@ -8,6 +10,7 @@ import { RootState, useAppDispatch } from '../../store';
 import { actualOrder, makeOrder } from '../ProductCard/basketSlice';
 import BasketItem from './BasketItem/BasketItem';
 import { addAsyncOrders } from '../Orders/orderSlice';
+
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -20,6 +23,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
 
 function Basket() {
   const [open, setOpen] = React.useState(false);
@@ -45,14 +49,12 @@ function Basket() {
 
   const { products } = useSelector((state: RootState) => state.products);
 
+
   const bs = basket.map((item: any, index: number) => {
     const product = products.find((el) => el.id === item.idProduct);
     const id: number = basket[index]?.id!;
     return { ...product, orderCount: item.count, idOrderItem: id };
-  })
-
-  console.log(basket);
-
+  });
 
 
   function sum() {
@@ -61,11 +63,13 @@ function Basket() {
   }
 
   const handleClickMakeOrder = () => {
+
     const numberOfOrder: number = Number(basket[0]?.idOrder);
     dispatch(makeOrder(numberOfOrder));
     dispatch(addAsyncOrders());
     setOpen(true);
   }
+
 
   const handleClose = () => setOpen(false);
 
@@ -123,7 +127,7 @@ function Basket() {
         </Modal>
       </Grid>
     </div>
-  )
+  );
 }
 
-export default Basket
+export default Basket;

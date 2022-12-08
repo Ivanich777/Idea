@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   Feedback.init({
     name: DataTypes.TEXT,
     phone: DataTypes.TEXT,
-    img: DataTypes.TEXT,
     email: DataTypes.TEXT,
     description: DataTypes.TEXT,
   }, {

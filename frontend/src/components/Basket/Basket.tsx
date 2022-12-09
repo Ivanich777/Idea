@@ -20,7 +20,9 @@ const style = {
   width: 400,
   bgcolor: 'background.paper',
   border: '2px solid #000',
+  borderRadius: '15px',
   boxShadow: 24,
+  backgroundColor: '#FAEBD7',
   p: 4,
 };
 
@@ -103,10 +105,10 @@ function Basket() {
           <>
             <Box>
               <Typography
-                style={{ fontFamily: 'Georgia, serif', letterSpacing: '2.0px', marginTop: '10px', marginBottom: '30px' }}>
+                style={{ fontFamily: 'Georgia, serif', letterSpacing: '2.0px',fontSize:'18px', marginTop: '10px', marginBottom: '30px' }}>
                 {`Итоговая сумма заказа: ${sum()}₽`}
                 <Button onClick={handleClickMakeOrder}
-                  style={{ color: 'black', marginLeft: '350px', fontFamily: 'Georgia, serif', letterSpacing: '1.0px' }}>Оформить заказ</Button>
+                  style={{ color: 'black', marginLeft: '350px', fontFamily: 'Georgia, serif', fontSize:'15px',letterSpacing: '1.0px', backgroundColor:'#D2B48C', borderRadius:'10px' }}>Оформить заказ</Button>
               </Typography>
             </Box>
           </>
@@ -122,7 +124,7 @@ function Basket() {
               Ваш заказ оформлен!
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {`Вашему заказу присвоен №${numberOrder}`}
+              {`Заказ №${numberOrder}`}
             </Typography>
           </Box>
         </Modal>

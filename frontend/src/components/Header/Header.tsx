@@ -5,17 +5,17 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Outlet, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { pink } from '@mui/material/colors';
 import { RootState, useAppDispatch } from '../../store';
 import './header.css';
 import RegistrationDesktop from '../Auth/Registration/RegistrationDesktop';
 import Login from '../Auth/Login/Login';
 import LoginDesktop from '../Auth/Login/LoginDesktop';
-import { pink } from '@mui/material/colors';
 
 export default function Header({ count }: { count: number }): JSX.Element {
   const [open, setOpen] = useState(false);
   const [logopen, setLogopen] = useState(false);
-const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -28,26 +28,26 @@ const dispatch = useAppDispatch();
   const handleCloseNavMenu = (): void => {
     setAnchorElNav(null);
   };
-  function handleRegOpen():void {
+  function handleRegOpen(): void {
     setOpen(true);
   }
 
-  function handleRegClose():void {
+  function handleRegClose(): void {
     setOpen(false);
   }
-  function handleLogOpen():void {
+  function handleLogOpen(): void {
     setLogopen(true);
   }
 
-  function handleLogClose():void {
+  function handleLogClose(): void {
     setLogopen(false);
   }
 
-  function regToLog():void {
+  function regToLog(): void {
     setOpen(false);
     setLogopen(true);
   }
-  function logToReg():void {
+  function logToReg(): void {
     setLogopen(false);
     setOpen(true);
   }
@@ -61,7 +61,6 @@ const dispatch = useAppDispatch();
           maxWidth="xl"
           style={{ height: '96.5px' }}
         >
-
           <Toolbar
             disableGutters
 
@@ -72,7 +71,7 @@ const dispatch = useAppDispatch();
                 variant="h6"
                 noWrap
                 component="a"
-                href="/"
+                // href="/"
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },
@@ -99,63 +98,78 @@ const dispatch = useAppDispatch();
               >
                 <MenuIcon />
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                <>
-                  {user && (
-                    <>
-                      <MenuItem>
-                        <Typography textAlign="center">
-                          <NavLink to="/profile" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                            Профиль
-                          </NavLink>
-                        </Typography>
-                      </MenuItem>
-                      <MenuItem>
-                        <Typography textAlign="center">
-                          <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                            Выход
-                          </NavLink>
-                        </Typography>
-                      </MenuItem>
-                    </>
-                  )}
-                  {!user && (
-                    <>
-                      <MenuItem>
-                        <Typography textAlign="center">
-                          <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                            Регистрация
-                          </NavLink>
-                        </Typography>
-                      </MenuItem>
-                      <MenuItem>
-                        <Typography textAlign="center" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
-                          <NavLink to="/auth/login">
-                            Войти
-                          </NavLink>
-                        </Typography>
-                      </MenuItem>
-                    </>
-                  )}
-                </>
-              </Menu>
+              <>
+                {user && (
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorElNav}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    open={Boolean(anchorElNav)}
+                    onClose={handleCloseNavMenu}
+                    sx={{
+                      display: { xs: 'block', md: 'none' },
+                    }}
+                  >
+                    <MenuItem>
+                      <Typography textAlign="center">
+                        <NavLink to="/profile" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                          Профиль
+                        </NavLink>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem>
+                      <Typography textAlign="center">
+                        <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                          Выход
+                        </NavLink>
+                      </Typography>
+                    </MenuItem>
+                  </Menu>
+                )}
+                {!user && (
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorElNav}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    open={Boolean(anchorElNav)}
+                    onClose={handleCloseNavMenu}
+                    sx={{
+                      display: { xs: 'block', md: 'none' },
+                    }}
+                  >
+                    <MenuItem>
+                      <Typography textAlign="center">
+                        <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                          Регистрация
+                        </NavLink>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem>
+                      <Typography textAlign="center" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
+                        <NavLink to="/auth/login">
+                          Войти
+                        </NavLink>
+                      </Typography>
+                    </MenuItem>
+                  </Menu>
+                )}
+              </>
             </Box>
 
             <NavLink to="/" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
@@ -163,7 +177,7 @@ const dispatch = useAppDispatch();
                 variant="h5"
                 noWrap
                 component="a"
-                href="/"
+                // href="/"
                 sx={{
                   mr: 2,
                   display: { xs: 'flex', md: 'none' },
@@ -184,7 +198,7 @@ const dispatch = useAppDispatch();
                   <Button
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
-                    style={{marginRight:'25px', marginTop:'0px', marginBottom:'0px'}}
+                    style={{ marginRight: '25px', marginTop: '0px', marginBottom: '0px' }}
                   >
                     <Badge
                       color="success"
@@ -195,14 +209,14 @@ const dispatch = useAppDispatch();
                       badgeContent={count}
                     >
                       <NavLink to="/basket" style={{ textDecoration: 'none', color: 'white' }}>
-                        <ShoppingCartIcon sx={{ fontSize: 30 }}/>
+                        <ShoppingCartIcon sx={{ fontSize: 30 }} />
                       </NavLink>
                     </Badge>
                   </Button>
                   <Button
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
-                    style={{marginRight:'25px', marginTop:'0px', marginBottom:'0px'}}
+                    style={{ marginRight: '25px', marginTop: '0px', marginBottom: '0px' }}
                   >
                     <NavLink to="/profile" style={{ textDecoration: 'none', color: 'white' }}>
                       Профиль
@@ -224,7 +238,7 @@ const dispatch = useAppDispatch();
                     onClick={handleRegOpen}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
-                    <p style={{ textDecoration: 'none', color: 'white' ,marginRight:'25px', marginTop:'0px', marginBottom:'0px'}}>Регистрация</p>
+                    <p style={{ textDecoration: 'none', color: 'white', marginRight: '25px', marginTop: '0px', marginBottom: '0px' }}>Регистрация</p>
                     {/* <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'white' }}>
                     Регистрация
                   </NavLink> */}
@@ -246,9 +260,8 @@ const dispatch = useAppDispatch();
             <IconButton color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
               <ShoppingCartIcon />
             </IconButton>
-      <RegistrationDesktop handleRegClose={handleRegClose} open={open} regToLog={regToLog} />
-      <LoginDesktop handleLogClose={handleLogClose} logopen={logopen} logToReg={logToReg} />
-
+      <RegistrationDesktop handleRegClose={handleRegClose} open={open} regToLog={regToLog} logopen={logopen} />
+      <LoginDesktop handleLogClose={handleLogClose} logopen={logopen} open={open} logToReg={logToReg} />
           </Toolbar>
         </Container>
       </AppBar>

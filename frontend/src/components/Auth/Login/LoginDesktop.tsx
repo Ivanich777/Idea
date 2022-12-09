@@ -10,7 +10,7 @@ import { Button, TextField, Modal, Link } from '@mui/material';
 import { Formik } from 'formik';
 import { borderRadius } from '@mui/system';
 import { RootState, useAppDispatch } from '../../../store';
-import { checkAsyncUser } from '../authSlice';
+import { checkAsyncUser, errorOff } from '../authSlice';
 
 // import AuthLayout from '../AuthLayout/AuthLayout';
 // import { Button, Link } from '@mui/material';
@@ -24,14 +24,19 @@ function LoginDesktop({
   handleLogClose,
   logToReg,
   logopen,
+  open
 }: {
   handleLogClose: () => void;
   logToReg: () => void;
   logopen: boolean;
+  open:boolean
 }): JSX.Element {
   const { user, error } = useSelector((srt: RootState) => srt.users);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(errorOff());
+  }, [open]);
   useEffect(() => {
     if (user) {
       navigate('/');
@@ -90,13 +95,13 @@ function LoginDesktop({
                   id="outlined-name"
                   name="email"
                   label="Email"
-                  color='warning'
+                  color="warning"
                   value={formik.values.email}
                   onChange={formik.handleChange}
                   error={formik.touched.email}
                 />
                 {formik.touched.email && formik.errors.email ? (
-                  <div style={{ color: 'red', fontSize:'15px', margin:'-10px 0px -10px' }}>{formik.errors.email}</div>
+                  <div style={{ color: 'red', fontSize: '15px', margin: '-10px 0px -10px' }}>{formik.errors.email}</div>
                 ) : null}
 
                 <TextField
@@ -104,38 +109,45 @@ function LoginDesktop({
                   name="password"
                   label="Password"
                   type="password"
-                  color='warning'
+                  color="warning"
                   value={formik.values.password}
                   onChange={formik.handleChange}
                   error={formik.touched.password}
                 />
                 {formik.touched.password && formik.errors.password ? (
-                  <div style={{ color: 'red', fontSize:'15px', margin:'-10px 0px -10px' }}>{formik.errors.password}</div>
+                  <div style={{ color: 'red', fontSize: '15px', margin: '-10px 0px -10px' }}>{formik.errors.password}</div>
                 ) : null}
 
-                <Button 
-                style={{marginTop:'-10px',color:'black'}}
-                type="submit">Войти</Button>
-                <Button 
-                style={{marginTop:'-10px',color:'black'}}
-                onClick={handleLogClose}>Закрыть</Button>
+                <Button
+                  style={{ marginTop: '-10px', color: 'black' }}
+                  type="submit"
+                >Войти
+                </Button>
+                <Button
+                  style={{ marginTop: '-10px', color: 'black' }}
+                  onClick={handleLogClose}
+                >Закрыть
+                </Button>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between' }}
                 >
                   {/* <Link href="/auth/reg">У вас еще нет аккаунта?</Link> */}
-                  <Button 
-                  color='warning'
-                  style={{marginBottom:'-35px', marginTop:'-5px', marginLeft:'110px'}}
-                  onClick={logToReg}>У вас еще нет аккаунта?</Button>
+                  <Button
+                    color="warning"
+                    style={{ marginBottom: '-35px', marginTop: '-5px', marginLeft: '110px' }}
+                    onClick={logToReg}
+                  >У вас еще нет аккаунта?
+                  </Button>
                 </div>
                 <p
                   style={{
                     fontFamily: 'Times New Roman, Times, serif',
-                    fontSize: '14pxs',
+                    fontSize: '14px',
                     letterSpacing: '1.6px',
                     wordSpacing: '-1.4px',
                     color: '#000000',
                     fontWeight: '400',
+                    paddingBottom: '6px',
                     textDecoration: 'none',
                     fontStyle: 'normal',
                     fontVariant: 'normal',

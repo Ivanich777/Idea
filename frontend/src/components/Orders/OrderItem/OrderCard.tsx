@@ -32,6 +32,8 @@ const styles = {
   btnInfo: {
     fontSize: '1rem',
     fontWeight: '500',
+    color:'black',
+    // backgroundColor: 'rgb(233, 207, 180)'
   },
 };
 

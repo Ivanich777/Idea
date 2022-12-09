@@ -29,6 +29,7 @@ interface INewProduct {
   count: string | any,
   price: string | any,
   features: Feature[],
+  categoryId: number | any,
 }
 
 export default function ProductEditForm({ id, closeFunc }: { id: number, closeFunc: Function }): JSX.Element {
@@ -71,6 +72,7 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
       title: '',
       description: '',
       category: '',
+      categoryId: '0',
       // images: '',
       count: '',
       price: '',
@@ -81,7 +83,8 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
         article: data.get('article'),
         title: data.get('title'),
         description: data.get('description'),
-        category: categories?.find((item) => item?.title === category)?.id,
+        category: category,
+        categoryId: categories?.find((item) => item?.title === category)?.id,
         // images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
         count: data.get('count'),
         price: data.get('price'),
@@ -93,7 +96,8 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
         article: data.get('article'),
         title: data.get('title'),
         description: data.get('description'),
-        category: categories?.find((item) => item?.title === category)?.id,
+        category: category,
+        categoryId: categories?.find((item) => item?.title === category)?.id,
         // images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
         count: data.get('count'),
         price: data.get('price'),

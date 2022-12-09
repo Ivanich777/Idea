@@ -30,6 +30,7 @@ interface INewProduct {
   count: string | any,
   price: string | any,
   features: Feature[],
+  categoryId: number | any,
 }
 
 export default function ProductAddForm({ id }: { id: number }): JSX.Element {
@@ -41,6 +42,7 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
   const [description, setDescription] = React.useState('');
   const [count, setCount] = React.useState('');
   const [price, setPrice] = React.useState('');
+  const [modalMsg, setModalMsg] = React.useState('');
   const [rows, setRows] = React.useState<Feature[]>([{ id: 1, title: 'Характеристика', description: 'Описание' }]);
 
   const handleOpen = (): void => setOpen(true);
@@ -73,6 +75,7 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
       title: '',
       description: '',
       category: '',
+      categoryId: 0,
       images: '',
       count: '',
       price: '',
@@ -83,11 +86,12 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
         article: data.get('article'),
         title: data.get('title'),
         description: data.get('description'),
-        category: categories?.find((item) => item?.title === category)?.id,
+        categoryId: categories?.find((item) => item?.title === category)?.id,
         images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
         count: data.get('count'),
         price: data.get('price'),
         features: rows,
+        category: category,
       };
     } else {
       newProduct = {
@@ -95,15 +99,19 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
         article: data.get('article'),
         title: data.get('title'),
         description: data.get('description'),
-        category: categories?.find((item) => item?.title === category)?.id,
+        categoryId: categories?.find((item) => item?.title === category)?.id,
         images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
         count: data.get('count'),
         price: data.get('price'),
         features: rows,
+        category: category,
       };
     }
 
+    console.log(newProduct);
+
     if (products.find((item) => Number(item.article) === Number(newProduct.article))) {
+      setModalMsg('Артикул не уникален');
       handleOpen();
       setImage('');
     } else if (!id) {
@@ -114,6 +122,8 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
       setImage('');
       setCount('');
       setPrice('');
+      setModalMsg('Товар успешно добавлен');
+      handleOpen();
     } else {
       dispatch(editAsyncProduct(newProduct));
       setArticle('');
@@ -141,10 +151,10 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
         >
           <Box sx={styleModal}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Артикул не уникален
+              {modalMsg}
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Товар с таким артикулом уже существует
+              {/* Товар с таким артикулом уже существует */}
             </Typography>
           </Box>
         </Modal>

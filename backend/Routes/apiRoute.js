@@ -3,14 +3,6 @@ const path = require('path');
 const db = require('../db/models');
 
 router.get('/profile', async (req, res) => {
-  // const id = req.session.userId;
-  // // const id = 1;
-  // if (id) {
-  //   const orders = await db.Order.findAll({ where: { idUser: id } });
-  //   res.json(orders);
-  // } else {
-  //   res.json({ error: { message: 'У вас нет заказов' } });
-  // }
   const orders = await db.Order.findAll({
     include: {
       model: db.User,
@@ -109,7 +101,7 @@ router.post('/product', async (req, res) => {
     newProduct.dataValues.features = features;
     res.json(newProduct);
   } catch (e) {
-    console.log(e.message);
+    console.error(e.message);
   }
   res.end();
 });
@@ -163,26 +155,30 @@ router.put('/product/:id', async (req, res) => {
     count,
     price,
   } = req.body;
-  await db.Product.update({
-    article: Number(article),
-    title,
-    description,
-    idCategory: Number(category),
-    count: Number(count),
-    price: Number(price),
-  }, { where: { id } });
-  const newProduct = await db.Product.findOne({ where: { id } });
-  await db.Feature.destroy({ where: { idProduct: id } });
+  try {
+    await db.Product.update({
+      article: Number(article),
+      title,
+      description,
+      idCategory: Number(category),
+      count: Number(count),
+      price: Number(price),
+    }, { where: { id } });
+    const newProduct = await db.Product.findOne({ where: { id } });
+    await db.Feature.destroy({ where: { idProduct: id } });
 
-  features.forEach(async (feature) => {
-    await db.Feature.create({
-      idProduct: newProduct.dataValues.id,
-      title: feature.title,
-      description: feature.description,
+    features.forEach(async (feature) => {
+      await db.Feature.create({
+        idProduct: newProduct.dataValues.id,
+        title: feature.title,
+        description: feature.description,
+      });
     });
-  });
-  newProduct.dataValues.features = features;
-  res.json(newProduct);
+    newProduct.dataValues.features = features;
+    res.json(newProduct);
+  } catch (error) {
+    console.error(error.meassage);
+  }
 });
 
 router.delete('/basket/:id', async (req, res) => {

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Product.init({
-    article: DataTypes.INTEGER,
+    article: DataTypes.BIGINT,
     title: DataTypes.TEXT,
     description: DataTypes.TEXT,
     count: DataTypes.INTEGER,

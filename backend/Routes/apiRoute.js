@@ -167,7 +167,7 @@ router.put('/product/:id', async (req, res) => {
       article: Number(article),
       title,
       description,
-      idCategory: Number(category),
+      idCategory: Number(categoryId),
       count: Number(count),
       price: Number(price),
     }, { where: { id } });

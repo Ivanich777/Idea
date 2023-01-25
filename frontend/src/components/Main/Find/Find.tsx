@@ -1,15 +1,15 @@
-import { Box, TextField, Modal, Typography } from '@mui/material';
+import { Box, TextField, Modal } from '@mui/material';
 import React, { useState } from 'react';
 import Fuse from 'fuse.js';
 import './style.css';
-import { flexbox } from '@mui/system';
 import ProductCard from '../../ProductCard/productCard';
 import { Product } from '../../ProductList/types/state';
 
 function Find({ products }: { products: Product[] }): JSX.Element {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [matches, setMatch] = useState<Product[]>([]);
+  const [str, setStr] = useState('');
+
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -39,8 +39,7 @@ function Find({ products }: { products: Product[] }): JSX.Element {
   const fuse = new Fuse(products, {
     keys: ['title'],
   });
-  const [str, setStr] = useState('');
-  const [matches, setMatch] = useState<Product[]>([]);
+
   const searh = (a: string): void => {
     setStr(a);
     fuse.search(str);
@@ -49,11 +48,12 @@ function Find({ products }: { products: Product[] }): JSX.Element {
     const prod = res.filter((el, i) => i <= 4);
     setMatch(prod);
   };
+
   return (
     <div>
       <TextField
         sx={inp}
-        onClick={handleOpen}
+        onClick={() => setOpen(true)}
         disabled={open}
         placeholder="Поиск"
         style={{ borderRadius: '10px' }}
@@ -61,7 +61,7 @@ function Find({ products }: { products: Product[] }): JSX.Element {
       />
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -83,7 +83,7 @@ function Find({ products }: { products: Product[] }): JSX.Element {
             style={{ position: 'absolute', marginTop: '80px', backgroundColor: '#FFFAF0' }}
           >
             {
-              matches.map((match, i) => <ProductCard key={i} product={match} />)
+              matches.map((match) => <ProductCard key={match.article} product={match} />)
             }
 
           </Box>

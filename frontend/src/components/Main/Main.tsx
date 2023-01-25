@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
@@ -7,17 +7,17 @@ import Catalog from './Catalog/Catalog';
 import Find from './Find/Find';
 import Scroll from './Scroll/Scroll';
 
-function Main():JSX.Element {
-  const { products } = useSelector((state:RootState) => state.products);
-  const { categories } = useSelector((state:RootState) => state.categories);
-  
+function Main(): JSX.Element {
+    const { products } = useSelector((state: RootState) => state.products);
+    const { categories } = useSelector((state: RootState) => state.categories);
+
     return (
         <Box style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center'
-            }}
+        }}
         >
             <Box style={{
                 width: '1250px',
@@ -28,7 +28,8 @@ function Main():JSX.Element {
                 justifyContent: 'flex-start',
                 marginTop: '30px',
                 background: 'url("./kar.jpeg") no-repeat',
-                borderRadius:'10px' }}
+                borderRadius: '10px'
+            }}
             >
                 <Catalog categories={categories} />
                 <Find products={products} />
@@ -37,7 +38,8 @@ function Main():JSX.Element {
                 width: '1340px',
                 height: '420px',
                 margin: '75px',
-                marginTop:'20px' }}
+                marginTop: '20px'
+            }}
             >
                 <Scroll products={products} />
             </Box>
@@ -45,7 +47,7 @@ function Main():JSX.Element {
                 width: '1340px',
                 height: '320px',
                 marginBottom: '50px'
-             }}
+            }}
             >
                 <Auto />
             </Box>

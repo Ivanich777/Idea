@@ -15,9 +15,9 @@ const productSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-        .addCase(addAsyncCategories.fulfilled, (state, action) => {
-            state.categories = action.payload;
-        });
+            .addCase(addAsyncCategories.fulfilled, (state, action) => {
+                state.categories = action.payload;
+            });
     }
 });
 

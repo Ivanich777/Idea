@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Container, Grid, TextField, Box, Button, FormControl, InputLabel, Select, MenuItem, Modal, Typography, IconButton } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
 import { editAsyncProduct, addAsyncProduct, addAsyncImages } from '../ProductList/productSlice';
 import { Feature } from '../ProductList/types/state';
-
 
 const styleModal = {
   position: 'absolute' as 'absolute',
@@ -91,7 +90,7 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
         count: data.get('count'),
         price: data.get('price'),
         features: rows,
-        category: category,
+        category,
       };
     } else {
       newProduct = {
@@ -104,11 +103,9 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
         count: data.get('count'),
         price: data.get('price'),
         features: rows,
-        category: category,
+        category,
       };
     }
-
-    console.log(newProduct);
 
     if (products.find((item) => Number(item.article) === Number(newProduct.article))) {
       setModalMsg('Артикул не уникален');
@@ -135,164 +132,151 @@ export default function ProductAddForm({ id }: { id: number }): JSX.Element {
     }
   };
 
-  const handleAddFeature = () => {
+  const handleAddFeature = (): void => {
     setRows([...rows, { id: rows.length, title: '', description: '' }]);
-  }
+  };
 
   return (
-    <>
-      {/* <Typography sx={{ fontSize: '1rem', ml: 8, mt: 2 }}>Добавление товара: </Typography> */}
-      <Container maxWidth='xl' sx={{ mt: 3 }}>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={styleModal}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              {modalMsg}
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {/* Товар с таким артикулом уже существует */}
-            </Typography>
-          </Box>
-        </Modal>
-        <Box component="form" onSubmit={handleSubmit} sx={{ m: 1 }}>
-          <Grid container spacing={5} sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
-            <Grid item xs={12} sm={4}>
-              <TextField
+    <Container maxWidth="xl" sx={{ mt: 3 }}>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={styleModal}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {modalMsg}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {/* Товар с таким артикулом уже существует */}
+          </Typography>
+        </Box>
+      </Modal>
+      <Box component="form" onSubmit={handleSubmit} sx={{ m: 1 }}>
+        <Grid container spacing={5} sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+          <Grid item xs={12} sm={4}>
+            <TextField
+              required
+              value={article}
+              onChange={(e) => setArticle(e.target.value)}
+              id="article"
+              name="article"
+              label="Артикул"
+              fullWidth
+              variant="outlined"
+              sx={{ mb: 1 }}
+            />
+            <TextField
+              required
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              id="title"
+              name="title"
+              label="Название"
+              fullWidth
+              variant="outlined"
+              sx={{ mb: 1 }}
+            />
+            <FormControl fullWidth sx={{ mb: 1 }}>
+              <InputLabel id="demo-simple-select-label">Категория</InputLabel>
+              <Select
                 required
-                value={article}
-                onChange={(e) => setArticle(e.target.value)}
-                id="article"
-                name="article"
-                label="Артикул"
-                fullWidth
-                variant="outlined"
-                sx={{ mb: 1 }}
-              />
-              <TextField
-                required
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                id="title"
-                name="title"
-                label="Название"
-                fullWidth
-                variant="outlined"
-                sx={{ mb: 1 }}
-              />
-              <FormControl fullWidth sx={{ mb: 1 }}>
-                <InputLabel id="demo-simple-select-label">Категория</InputLabel>
-                <Select
-                  required
-                  name="category"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={category}
-                  label="Категория"
-                  onChange={handleChange}
-                >
-                  {categories.map((item: any) => (
-                    <MenuItem
-                      key={item.id}
-                      value={item.title}
-                    >
-                      {item.title}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <TextField
-                required
-                value={count}
-                onChange={(e) => setCount(e.target.value)}
-                id="count"
-                name="count"
-                label="Количество"
-                fullWidth
-                variant="outlined"
-                sx={{ mb: 1 }}
-              />
-              <TextField
-                required
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                id="price"
-                name="price"
-                label="Цена"
-                fullWidth
-                variant="outlined"
-                sx={{ mb: 1 }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <Typography>Характеристики:</Typography>
-                <IconButton onClick={handleAddFeature}>
-                  <AddIcon />
-                </IconButton>
-              </Box>
-              <Box>
-                {rows.map((row, i) => (
-                  <Box key={i} sx={{ display: 'flex' }}>
-                    <TextField required type="text" value={row.title} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, title: e.target.value } : rowItem))} />
-                    <TextField required type="text" value={row.description} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, description: e.target.value } : rowItem))} />
-                    <IconButton color="inherit" onClick={() => setRows(rows.filter((item, idx) => i !== idx))}>
-                      <ClearIcon />
-                    </IconButton>
-                  </Box>
+                name="category"
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={category}
+                label="Категория"
+                onChange={handleChange}
+              >
+                {categories.map((item: any) => (
+                  <MenuItem
+                    key={item.id}
+                    value={item.title}
+                  >
+                    {item.title}
+                  </MenuItem>
                 ))}
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <TextField
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                id="outlined-multiline-flexible"
-                name="description"
-                label="Описание"
-                multiline
-                rows={6}
-                sx={{ width: '100%', mb: 1 }}
-              />
-              {/* <input
+              </Select>
+            </FormControl>
+            <TextField
+              required
+              value={count}
+              onChange={(e) => setCount(e.target.value)}
+              id="count"
+              name="count"
+              label="Количество"
+              fullWidth
+              variant="outlined"
+              sx={{ mb: 1 }}
+            />
+            <TextField
+              required
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              id="price"
+              name="price"
+              label="Цена"
+              fullWidth
+              variant="outlined"
+              sx={{ mb: 1 }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+              <Typography>Характеристики:</Typography>
+              <IconButton onClick={handleAddFeature}>
+                <AddIcon />
+              </IconButton>
+            </Box>
+            <Box>
+              {rows.map((row, i) => (
+                <Box key={row.id} sx={{ display: 'flex' }}>
+                  <TextField required type="text" value={row.title} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, title: e.target.value } : rowItem))} />
+                  <TextField required type="text" value={row.description} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, description: e.target.value } : rowItem))} />
+                  <IconButton color="inherit" onClick={() => setRows(rows.filter((item, idx) => i !== idx))}>
+                    <ClearIcon />
+                  </IconButton>
+                </Box>
+              ))}
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <TextField
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              id="outlined-multiline-flexible"
+              name="description"
+              label="Описание"
+              multiline
+              rows={6}
+              sx={{ width: '100%', mb: 1 }}
+            />
+
+            <TextField
               value={image}
               name="images"
               type="file"
+              id="file"
               onChange={handleChangleFiles}
-              multiple
+              inputProps={{ multiple: true }}
               required
-              style={{paddingTop:'15px', paddingBottom:'15px'}}
-            /> */}
+              style={{ paddingTop: '15px', paddingBottom: '15px' }}
+              className="file"
+            />
 
-              <TextField
-                value={image}
-                name="images"
-                type="file"
-                id="file"
-                onChange={handleChangleFiles}
-                inputProps={{ multiple: true }}
-                required
-                style={{ paddingTop: '15px', paddingBottom: '15px' }}
-                className="file"
-              />
-
-
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 2 }}
-                style={{ backgroundColor: 'black' }}
-              >
-                {id ? ('Изменить') : ('Добавить товар')}
-              </Button>
-            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 2 }}
+              style={{ backgroundColor: 'black' }}
+            >
+              {id ? ('Изменить') : ('Добавить товар')}
+            </Button>
           </Grid>
-        </Box>
-      </Container>
-    </>
+        </Grid>
+      </Box>
+    </Container>
   );
 }

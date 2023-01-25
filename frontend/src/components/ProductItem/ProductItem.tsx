@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import { useParams } from 'react-router-dom';
 import { Button, CardActions, Typography } from '@mui/material';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
 import { RootState, useAppDispatch } from '../../store';
 import AuthModal from '../ProductCard/authModal/AuthModal';
 import { addNewOrder } from '../ProductCard/basketSlice';
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-
-
-
-import { Pagination } from "swiper";
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 function ProductItem(): JSX.Element {
   const { productId } = useParams();
@@ -30,7 +27,7 @@ function ProductItem(): JSX.Element {
 
         <Box sx={{ width: '300px', height: '350px' }}>
           <Swiper
-            direction={"vertical"}
+            direction="vertical"
             pagination={{
               clickable: true,
             }}
@@ -38,10 +35,11 @@ function ProductItem(): JSX.Element {
             className="mySwiper"
           >
             {
-              product?.images.map((img) =>
-                <SwiperSlide >
-                  <img style={{ width: '300px', height: '350px', borderRadius:'15px' }} src={img.path} />
+              product?.images.map((img) => (
+                <SwiperSlide>
+                  <img style={{ width: '300px', height: '350px', borderRadius: '15px' }} src={img.path} alt={img.path} />
                 </SwiperSlide>
+              )
               )
             }
           </Swiper>
@@ -49,17 +47,16 @@ function ProductItem(): JSX.Element {
         <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
           {!user && <AuthModal />}
           {user && !user.admin &&
-          (
-            <Button
-              size="small"
-              color="primary"
-              style={{ color: 'black', textAlign: 'center', margin: 'auto', backgroundColor:'#D2B48C', borderRadius:'10px',padding:'12px', fontFamily: 'Georgia, serif', fontSize:'18px' }}
-              onClick={handleClick}
-            >
-              В корзину
-            </Button>
-          )
-          }
+            (
+              <Button
+                size="small"
+                color="primary"
+                style={{ color: 'black', textAlign: 'center', margin: 'auto', backgroundColor: '#D2B48C', borderRadius: '10px', padding: '12px', fontFamily: 'Georgia, serif', fontSize: '18px' }}
+                onClick={handleClick}
+              >
+                В корзину
+              </Button>
+            )}
         </CardActions>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', margin: '20px', padding: '20px' }}>

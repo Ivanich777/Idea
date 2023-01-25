@@ -1,25 +1,13 @@
 import React, { useEffect } from 'react';
-// import { useForm, SubmitHandler } from 'react-hook-form';
-// import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useNavigate, Outlet, NavLink } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
-import FormControl from '@mui/material/FormControl';
 import { Button, TextField, Modal, Link } from '@mui/material';
-import { Formik } from 'formik';
-import { borderRadius } from '@mui/system';
 import { RootState, useAppDispatch } from '../../../store';
 import { checkAsyncUser, errorOff } from '../authSlice';
-
-// import AuthLayout from '../AuthLayout/AuthLayout';
-// import { Button, Link } from '@mui/material';
-// import img from './cool-background.png';
-// import { useNavigate } from 'react-router-dom';
 import '../AuthLayout/reg.css';
-// import { Outlet, NavLink } from 'react-router-dom';
 
-// eslint-disable-next-line max-len
 function LoginDesktop({
   handleLogClose,
   logToReg,
@@ -29,7 +17,7 @@ function LoginDesktop({
   handleLogClose: () => void;
   logToReg: () => void;
   logopen: boolean;
-  open:boolean
+  open: boolean
 }): JSX.Element {
   const { user, error } = useSelector((srt: RootState) => srt.users);
   const dispatch = useAppDispatch();
@@ -58,7 +46,6 @@ function LoginDesktop({
     }),
     onSubmit: (values) => {
       dispatch(checkAsyncUser(values));
-      // navigate('/');
     },
   });
   return (
@@ -131,7 +118,6 @@ function LoginDesktop({
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between' }}
                 >
-                  {/* <Link href="/auth/reg">У вас еще нет аккаунта?</Link> */}
                   <Button
                     color="warning"
                     style={{ marginBottom: '-35px', marginTop: '-5px', marginLeft: '110px' }}

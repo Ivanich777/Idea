@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 
-import { Modal, AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem, Badge } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, Button, IconButton, Menu, Container, MenuItem, Badge } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Outlet, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { pink } from '@mui/material/colors';
-import { RootState, useAppDispatch } from '../../store';
+import { RootState } from '../../store';
 import './header.css';
 import RegistrationDesktop from '../Auth/Registration/RegistrationDesktop';
-import Login from '../Auth/Login/Login';
 import LoginDesktop from '../Auth/Login/LoginDesktop';
 
 export default function Header({ count }: { count: number }): JSX.Element {
   const [open, setOpen] = useState(false);
   const [logopen, setLogopen] = useState(false);
-  const dispatch = useAppDispatch();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -28,29 +25,23 @@ export default function Header({ count }: { count: number }): JSX.Element {
   const handleCloseNavMenu = (): void => {
     setAnchorElNav(null);
   };
-  function handleRegOpen(): void {
-    setOpen(true);
-  }
 
-  function handleRegClose(): void {
-    setOpen(false);
-  }
-  function handleLogOpen(): void {
+  const handleLogOpen = (): void => {
     setLogopen(true);
-  }
+  };
 
-  function handleLogClose(): void {
+  const handleLogClose = (): void => {
     setLogopen(false);
-  }
+  };
 
-  function regToLog(): void {
+  const regToLog = (): void => {
     setOpen(false);
     setLogopen(true);
-  }
-  function logToReg(): void {
+  };
+  const logToReg = (): void => {
     setLogopen(false);
     setOpen(true);
-  }
+  };
 
   const { user } = useSelector((state: RootState) => state.users);
 
@@ -63,7 +54,6 @@ export default function Header({ count }: { count: number }): JSX.Element {
         >
           <Toolbar
             disableGutters
-
             style={{ height: '96.5px' }}
           >
             <NavLink to="/" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
@@ -71,7 +61,6 @@ export default function Header({ count }: { count: number }): JSX.Element {
                 variant="h6"
                 noWrap
                 component="a"
-                // href="/"
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },
@@ -177,7 +166,6 @@ export default function Header({ count }: { count: number }): JSX.Element {
                 variant="h5"
                 noWrap
                 component="a"
-                // href="/"
                 sx={{
                   mr: 2,
                   display: { xs: 'flex', md: 'none' },
@@ -235,23 +223,16 @@ export default function Header({ count }: { count: number }): JSX.Element {
               {!user && (
                 <>
                   <Button
-                    onClick={handleRegOpen}
+                    onClick={() => setOpen(true)}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     <p style={{ textDecoration: 'none', color: 'white', marginRight: '25px', marginTop: '0px', marginBottom: '0px' }}>Регистрация</p>
-                    {/* <NavLink to="/auth/reg" style={{ textDecoration: 'none', color: 'white' }}>
-                    Регистрация
-                  </NavLink> */}
                   </Button>
-                  {/* <Button onClick={handleOpen}></Button> */}
                   <Button
                     onClick={handleLogOpen}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     <p style={{ textDecoration: 'none', color: 'white' }}>Логин</p>
-                    {/* <NavLink to="/auth/login" style={{ textDecoration: 'none', color: 'white' }}>
-                    Войти
-                  </NavLink> */}
                   </Button>
                 </>
               )}
@@ -260,8 +241,18 @@ export default function Header({ count }: { count: number }): JSX.Element {
             <IconButton color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
               <ShoppingCartIcon />
             </IconButton>
-      <RegistrationDesktop handleRegClose={handleRegClose} open={open} regToLog={regToLog} logopen={logopen} />
-      <LoginDesktop handleLogClose={handleLogClose} logopen={logopen} open={open} logToReg={logToReg} />
+            <RegistrationDesktop
+              handleRegClose={() => setOpen(false)}
+              open={open}
+              regToLog={regToLog}
+              logopen={logopen}
+            />
+            <LoginDesktop
+              handleLogClose={handleLogClose}
+              logopen={logopen}
+              open={open}
+              logToReg={logToReg}
+            />
           </Toolbar>
         </Container>
       </AppBar>

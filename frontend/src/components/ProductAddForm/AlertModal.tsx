@@ -16,7 +16,7 @@ const style = {
   p: 4,
 };
 
-export default function AlertModal():JSX.Element {
+export default function AlertModal(): JSX.Element {
   const [open, setOpen] = React.useState(false);
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);

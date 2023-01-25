@@ -1,5 +1,4 @@
 import { Button, Link } from '@mui/material';
-// import img from './cool-background.png';
 import { useNavigate } from 'react-router-dom';
 import './reg.css';
 import { Outlet, NavLink } from 'react-router-dom';
@@ -38,14 +37,14 @@ function AuthLayout(props: AuthlayputProps): JSX.Element {
               boxShadow: '0 0 10px black',
               padding: '1.5rem',
               borderRadius: '20px',
-              borderColor:'black'
+              borderColor: 'black'
             }}
           >
             <div>
               <h3 style={{ color: 'black', textAlign: 'center' }}>{title}</h3>
             </div>
             {children}
-            <Button className="button" type="submit" style={{color:'black'}}>{buttonTitle}</Button>
+            <Button className="button" type="submit" style={{ color: 'black' }}>{buttonTitle}</Button>
             <div>
               <Link href={href}>{linkTitle}</Link>
               <Link href="/">На главную</Link>

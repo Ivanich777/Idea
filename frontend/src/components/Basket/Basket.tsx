@@ -1,16 +1,12 @@
+import { Avatar, Box, Button, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
 
-import { Avatar, Box, Button, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Typography } from '@mui/material'
-import React, { useEffect } from 'react'
-
-import DeleteIcon from '@mui/icons-material/Delete';
-import FolderIcon from '@mui/icons-material/Folder';
 import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
 import { actualOrder, makeOrder } from '../ProductCard/basketSlice';
 import BasketItem from './BasketItem/BasketItem';
 import { addAsyncOrders } from '../Orders/orderSlice';
-
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -26,11 +22,9 @@ const style = {
   p: 4,
 };
 
-
 function Basket() {
   const [open, setOpen] = React.useState(false);
   const [numberOrder, setNumberOrder] = React.useState(0);
-  // basket[0].idOrder
 
   const Demo = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
@@ -38,12 +32,10 @@ function Basket() {
 
   const { user } = useSelector((state: RootState) => state.users);
   const dispatch = useAppDispatch();
-  // wasd123
   useEffect(() => {
-    // dispatch(addAsyncOrders())
     if (user) {
       dispatch(actualOrder(user.id!));
-    };
+    }
     if (basket.length > 0) {
       setNumberOrder(basket[0].idOrder);
     }
@@ -52,13 +44,11 @@ function Basket() {
 
   const { products } = useSelector((state: RootState) => state.products);
 
-
   const bs = basket.map((item: any, index: number) => {
     const product = products.find((el) => el.id === item.idProduct);
     const id: number = basket[index]?.id!;
     return { ...product, orderCount: item.count, idOrderItem: id };
   });
-
 
   function sum() {
     const orderPrice = bs.map((el: any) => el.orderCount * el.price);
@@ -66,13 +56,11 @@ function Basket() {
   }
 
   const handleClickMakeOrder = () => {
-
     const numberOfOrder: number = Number(basket[0]?.idOrder);
     dispatch(makeOrder(numberOfOrder));
     setTimeout(() => dispatch(addAsyncOrders()), 0);
     setOpen(true);
-  }
-
+  };
 
   const handleClose = () => setOpen(false);
 
@@ -81,11 +69,23 @@ function Basket() {
       style={{ display: 'flex', justifyContent: 'center' }}
     >
       <Grid item xs={12} md={6} sx={{ width: '800px' }}>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div"
+        <Typography
+          sx={{ mt: 4, mb: 2 }}
+          variant="h6"
+          component="div"
           style={{
-            fontFamily: 'Georgia, serif', fontSize: '40px', letterSpacing: '4.6px',
-            color: '#000000', fontWeight: 'normal', textDecoration: 'none', fontStyle: 'normal', paddingTop: '10px', fontVariant: 'small-caps', textAlign: 'center'
-          }}>
+            fontFamily: 'Georgia, serif',
+            fontSize: '40px',
+            letterSpacing: '4.6px',
+            color: '#000000',
+            fontWeight: 'normal',
+            textDecoration: 'none',
+            fontStyle: 'normal',
+            paddingTop: '10px',
+            fontVariant: 'small-caps',
+            textAlign: 'center'
+          }}
+        >
           Корзина
         </Typography>
         <Demo style={{ borderRadius: '20px', backgroundColor: 'AntiqueWhite', width: '800px' }}>
@@ -97,21 +97,30 @@ function Basket() {
                 )}
             </List>
           ) : (
-            <Typography sx={{fontFamily: 'Georgia, serif', fontSize: '20px', letterSpacing: '2.6px',
-            color: '#000000', textAlign: 'center'}}>Ваша корзина пуста</Typography>
+            <Typography sx={{
+              fontFamily: 'Georgia, serif',
+              fontSize: '20px',
+              letterSpacing: '2.6px',
+              color: '#000000',
+              textAlign: 'center'
+            }}
+            >Ваша корзина пуста
+            </Typography>
           )}
         </Demo>
         {basket.length > 0 && (
-          <>
-            <Box>
-              <Typography
-                style={{ fontFamily: 'Georgia, serif', letterSpacing: '2.0px',fontSize:'18px', marginTop: '10px', marginBottom: '30px' }}>
-                {`Итоговая сумма заказа: ${sum()}₽`}
-                <Button onClick={handleClickMakeOrder}
-                  style={{ color: 'black', marginLeft: '350px', fontFamily: 'Georgia, serif', fontSize:'15px',letterSpacing: '1.0px', backgroundColor:'#D2B48C', borderRadius:'10px' }}>Оформить заказ</Button>
-              </Typography>
-            </Box>
-          </>
+          <Box>
+            <Typography
+              style={{ fontFamily: 'Georgia, serif', letterSpacing: '2.0px', fontSize: '18px', marginTop: '10px', marginBottom: '30px' }}
+            >
+              {`Итоговая сумма заказа: ${sum()}₽`}
+              <Button
+                onClick={handleClickMakeOrder}
+                style={{ color: 'black', marginLeft: '350px', fontFamily: 'Georgia, serif', fontSize: '15px', letterSpacing: '1.0px', backgroundColor: '#D2B48C', borderRadius: '10px' }}
+              >Оформить заказ
+              </Button>
+            </Typography>
+          </Box>
         )}
         <Modal
           open={open}

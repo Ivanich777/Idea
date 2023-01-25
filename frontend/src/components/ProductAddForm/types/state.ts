@@ -3,8 +3,8 @@ export interface Category {
   title: string,
 }
 export interface State {
-  categories: Category []
+  categories: Category[]
 }
 
 export type Action =
-| { type: 'init'; payload: Category[] };
+  | { type: 'init'; payload: Category[] };

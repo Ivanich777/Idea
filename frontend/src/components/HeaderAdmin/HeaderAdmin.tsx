@@ -18,16 +18,19 @@ export default function Header(): JSX.Element {
   return (
     <>
       <AppBar position="sticky" style={{ backgroundColor: 'black' }}>
-        <Container maxWidth="xl"
-          style={{ height: '96.5px' }}>
-          <Toolbar disableGutters
-            style={{ height: '96.5px' }}>
+        <Container
+          maxWidth="xl"
+          style={{ height: '96.5px' }}
+        >
+          <Toolbar
+            disableGutters
+            style={{ height: '96.5px' }}
+          >
             <NavLink to="/orders" style={{ textDecoration: 'none', color: 'var(--color-active)' }}>
               <Typography
                 variant="h6"
                 noWrap
                 component="a"
-                // ref=""h
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },
@@ -139,7 +142,6 @@ export default function Header(): JSX.Element {
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', borderStyle: 'none' }}
-              // style={{marginRight:'10px',marginTop:'0px', marginBottom:'0px'}}
               >
                 <NavLink to="/auth/logout" style={{ textDecoration: 'none', color: 'white' }}>
                   Выход

@@ -32,8 +32,7 @@ const styles = {
   btnInfo: {
     fontSize: '1rem',
     fontWeight: '500',
-    color:'black',
-    // backgroundColor: 'rgb(233, 207, 180)'
+    color: 'black',
   },
 };
 
@@ -58,7 +57,7 @@ function OrderCard({ order }: { order: Order }): JSX.Element {
     setOrderStatus(event.target.value);
   };
 
-  const getDate = (string: string): string => new Date(string).toLocaleString("en-GB", { timeZone: 'Europe/Moscow' });
+  const getDate = (string: string): string => new Date(string).toLocaleString('en-GB', { timeZone: 'Europe/Moscow' });
 
   const { orderItems } = useSelector((state: RootState) => state.orderItems);
   const { user } = useSelector((state: RootState) => state.users);

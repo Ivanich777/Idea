@@ -28,7 +28,7 @@ function ProductCard({ product }: {
   const handleDel = (): void => {
     dispatch(delAsyncProduct(product.id!));
   };
-  const handleClick = ():void => {
+  const handleClick = (): void => {
     const obj = { idProduct: product.id, userId: user?.id };
     dispatch(addNewOrder(obj));
   };
@@ -43,9 +43,10 @@ function ProductCard({ product }: {
           image={product?.images[0] ? product?.images[0].path : '123'}
           alt="product"
           style={{
-          backgroundColor: 'AntiqueWhite',
-          minHeight: '220px',
-          maxHeight: '220px' }}
+            backgroundColor: 'AntiqueWhite',
+            minHeight: '220px',
+            maxHeight: '220px'
+          }}
         />
         <CardContent onClick={handleNav}>
           <Typography
@@ -71,9 +72,9 @@ function ProductCard({ product }: {
             variant="body2"
             color="text.secondary"
             style={{
-            fontSize: '12px',
-            letterSpacing: '1.7px'
-          }}
+              fontSize: '12px',
+              letterSpacing: '1.7px'
+            }}
           >
             {`art.${product?.article}`}
 
@@ -96,27 +97,26 @@ function ProductCard({ product }: {
           user?.admin ? (
             <>
               {product.isDeletable && (
-              <Button
-                onClick={handleDel}
-                size="small"
-                color="primary"
-                style={{ color: 'black', textAlign: 'center', margin: 'auto',backgroundColor:'#FAEBD7' }}
-              >
-                Удалить
-              </Button>
-            )}
-                
-              <EditModal id={product.id!}/>
-             
+                <Button
+                  onClick={handleDel}
+                  size="small"
+                  color="primary"
+                  style={{ color: 'black', textAlign: 'center', margin: 'auto', backgroundColor: '#FAEBD7' }}
+                >
+                  Удалить
+                </Button>
+              )}
+
+              <EditModal id={product.id!} />
 
             </>
           ) : (
-            <>
+            <div>
               {user ? (
                 <Button
                   size="small"
                   color="primary"
-                  style={{ color: 'black', textAlign: 'center', margin: 'auto', backgroundColor:'#FAEBD7', borderRadius:'10px'}}
+                  style={{ color: 'black', textAlign: 'center', margin: 'auto', backgroundColor: '#FAEBD7', borderRadius: '10px' }}
                   onClick={handleClick}
                 >
                   В корзину
@@ -125,7 +125,7 @@ function ProductCard({ product }: {
                 <AuthModal />
               )}
 
-            </>
+            </div>
           )
         }
       </CardActions>

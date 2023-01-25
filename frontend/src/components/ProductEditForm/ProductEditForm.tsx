@@ -1,23 +1,11 @@
-import React, { useRef } from 'react';
-import { Container, Grid, TextField, Box, Button, IconButton, FormControl, InputLabel, Select, MenuItem, Modal, Typography } from '@mui/material';
+import React from 'react';
+import { Container, Grid, TextField, Box, Button, IconButton, FormControl, InputLabel, Select, MenuItem, Typography } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store';
-import { editAsyncProduct, addAsyncProduct, addAsyncImages } from '../ProductList/productSlice';
-import { Feature, Product } from '../ProductList/types/state';
-
-const styleModal = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import { editAsyncProduct, addAsyncProduct } from '../ProductList/productSlice';
+import { Feature } from '../ProductList/types/state';
 
 interface INewProduct {
   id?: number,
@@ -25,14 +13,17 @@ interface INewProduct {
   title: string | any,
   description: string | any,
   category: string | any,
-  // images: string | any,
   count: string | any,
   price: string | any,
   features: Feature[],
   categoryId: number | any,
 }
 
-export default function ProductEditForm({ id, closeFunc }: { id: number, closeFunc: Function }): JSX.Element {
+interface IProductEditForm {
+  id: number,
+  closeFunc: Function,
+}
+export default function ProductEditForm({ id, closeFunc }: IProductEditForm): JSX.Element {
   const { products } = useSelector((state: RootState) => state.products);
   const { categories } = useSelector((state: RootState) => state.categories);
   const product = products.find((productItem) => productItem.id === id);
@@ -40,7 +31,6 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
   const [category, setCategory] = React.useState(product?.category);
   const [article, setArticle] = React.useState(String(product?.article));
   const [title, setTitle] = React.useState(product?.title);
-  // const [image, setImage] = React.useState('');
   const [description, setDescription] = React.useState(product?.description);
   const [count, setCount] = React.useState(String(product?.count));
   const [price, setPrice] = React.useState(String(product?.price));
@@ -52,18 +42,6 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
 
   const dispatch = useAppDispatch();
 
-
-
-  // const handleChangleFiles = (event: any): void => {
-  //   // setImage(event.target.value);
-  //   const pictures = [...event.target.files];
-  //   const newFile = new FormData();
-  //   pictures.forEach((img) => {
-  //     newFile.append('homesImg', img);
-  //   });
-  //   dispatch(addAsyncImages(newFile));
-  // };
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -73,7 +51,6 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
       description: '',
       category: '',
       categoryId: '0',
-      // images: '',
       count: '',
       price: '',
       features: [],
@@ -83,9 +60,8 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
         article: data.get('article'),
         title: data.get('title'),
         description: data.get('description'),
-        category: category,
+        category,
         categoryId: categories?.find((item) => item?.title === category)?.id,
-        // images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
         count: data.get('count'),
         price: data.get('price'),
         features: rows,
@@ -96,9 +72,8 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
         article: data.get('article'),
         title: data.get('title'),
         description: data.get('description'),
-        category: category,
+        category,
         categoryId: categories?.find((item) => item?.title === category)?.id,
-        // images: images.map((img) => ({ path: `http://localhost:4000${img}` })),
         count: data.get('count'),
         price: data.get('price'),
         features: rows,
@@ -110,7 +85,6 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
       setArticle('');
       setTitle('');
       setDescription('');
-      // setImage('');
       setCount('');
       setPrice('');
       closeFunc();
@@ -119,16 +93,15 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
       setArticle('');
       setTitle('');
       setDescription('');
-      // setImage('');
       setCount('');
       setPrice('');
       closeFunc();
     }
   };
 
-  const handleAddFeature = () => {
+  const handleAddFeature = (): void => {
     setRows([...rows, { id: rows.length, title: '', description: '' }]);
-  }
+  };
 
   return (
     <Container maxWidth="lg">
@@ -203,7 +176,7 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
 
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
               <Typography>Характеристики:</Typography>
               <IconButton onClick={handleAddFeature}>
                 <AddIcon />
@@ -211,7 +184,7 @@ export default function ProductEditForm({ id, closeFunc }: { id: number, closeFu
             </Box>
             <Box>
               {rows.map((row, i) => (
-                <Box key={i} sx={{ display: 'flex' }}>
+                <Box key={row.id} sx={{ display: 'flex' }}>
                   <TextField required type="text" value={row.title} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, title: e.target.value } : rowItem))} />
                   <TextField required type="text" value={row.description} onChange={(e) => setRows(rows.map((rowItem, idx) => i === idx ? { ...rowItem, description: e.target.value } : rowItem))} />
                   <IconButton color="inherit" onClick={() => setRows(rows.filter((item, idx) => i !== idx))}>

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import ProductEditForm from '../../ProductEditForm/ProductEditForm';
 
@@ -17,14 +16,13 @@ const style = {
   p: 4,
 };
 
-export default function EditModal({ id }:{ id:number }):JSX.Element {
+export default function EditModal({ id }: { id: number }): JSX.Element {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = React.useCallback(() => setOpen(false), []);
 
   return (
     <div>
-      <Button onClick={handleOpen}>Изменить</Button>
+      <Button onClick={() => setOpen(true)}>Изменить</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -32,7 +30,7 @@ export default function EditModal({ id }:{ id:number }):JSX.Element {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <ProductEditForm id={id} closeFunc={handleClose}/>
+          <ProductEditForm id={id} closeFunc={handleClose} />
         </Box>
       </Modal>
     </div>

@@ -3,9 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { NavLink } from 'react-router-dom';
-import ProductAddForm from '../../ProductAddForm/ProductAddForm';
-import './basket.css'
+import './basket.css';
 
 import RegistrationDesktop from '../../Auth/Registration/RegistrationDesktop';
 
@@ -29,40 +27,38 @@ const style = {
 
 export default function AuthModal(): JSX.Element {
   const [open, setOpen] = React.useState(false);
-  const [reg, Set] = React.useState(false);
-  const [log, SetLog] = React.useState(false);
+  const [reg, setReg] = React.useState(false);
+  const [log, setLog] = React.useState(false);
 
-  const handleOpen = ():void => setOpen(true);
-  const handleClose = ():void => setOpen(false);
+  const handleOpen = (): void => setOpen(true);
+  const handleClose = (): void => setOpen(false);
 
-  const handleOpenReg = ():void => Set(true);
-  const handleCloseReg = ():void => Set(false);
+  const handleCloseReg = (): void => setReg(false);
 
-const handleOpenLog = ():void => SetLog(true);
-const handleCloseLog = ():void => SetLog(false);
+  const handleCloseLog = (): void => setLog(false);
 
-  const regToLog = ():void => {
-    Set(false);
-    SetLog(true);
+  const regToLog = (): void => {
+    setReg(false);
+    setLog(true);
   };
 
-  const logToReg = ():void => {
-    SetLog(false);
-    Set(true);
+  const logToReg = (): void => {
+    setLog(false);
+    setReg(true);
   };
 
-  function closerReg():void {
-   setOpen(false);
-   Set(true);
+  function closerReg(): void {
+    setOpen(false);
+    setReg(true);
   }
 
-  function closerLog():void {
+  function closerLog(): void {
     setOpen(false);
-    SetLog(true);
+    setLog(true);
   }
 
   return (
-    <div className='cardBasket'>
+    <div className="cardBasket">
       <Button
         onClick={handleOpen}
         size="small"
@@ -79,23 +75,27 @@ const handleCloseLog = ():void => SetLog(false);
       >
         <Box sx={style}>
           <Typography
-            style={{ fontFamily: 'Comfortaa, cursive',
-          fontSize: '20px', }}
+            style={{
+              fontFamily: 'Comfortaa, cursive',
+              fontSize: '20px',
+            }}
           >
             Чтобы добавить товар в корзину, пройдите{' '}
             <span onClick={closerReg} style={{ color: 'var(--color-active)', textDecoration: 'underline', cursor: 'pointer' }}>
               регистрацию
             </span>
             {' '} или {' '}
-            {/* <NavLink to="/auth/login" style={{ color: 'var(--color-active)' }}>
-              авторизируйтесь.
-            </NavLink> */}
             <span onClick={closerLog} style={{ color: 'var(--color-active)', textDecoration: 'underline', cursor: 'pointer' }}>войдите.</span>
 
           </Typography>
         </Box>
       </Modal>
-      <RegistrationDesktop handleRegClose={handleCloseReg} open={reg} logopen={log} regToLog={regToLog} />
+      <RegistrationDesktop
+        handleRegClose={handleCloseReg}
+        open={reg}
+        logopen={log}
+        regToLog={regToLog}
+      />
       <LoginDesktop handleLogClose={handleCloseLog} logopen={log} open={reg} logToReg={logToReg} />
     </div>
   );

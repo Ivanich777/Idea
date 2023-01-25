@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react';
-import { useFormik, Formik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Button, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import AuthLayout from '../AuthLayout/AuthLayout';
-import { addAsyncUser, checkAsyncUser } from '../authSlice';
+import { checkAsyncUser } from '../authSlice';
 import { useAppDispatch, RootState } from '../../../store';
 import '../AuthLayout/reg.css';
 
 function Login(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { user, error } = useSelector((srt:RootState) => srt.users);
+  const { user, error } = useSelector((srt: RootState) => srt.users);
   const navigate = useNavigate();
 
   useEffect(() => {
-if (user) {
- user.admin ? navigate('/product') : navigate('/')
-}
+    if (user) {
+      user.admin ? navigate('/product') : navigate('/');
+    }
   }, [user]);
   const formik = useFormik({
     initialValues: {
@@ -33,7 +33,6 @@ if (user) {
     }),
     onSubmit: (values) => {
       dispatch(checkAsyncUser(values));
-      // navigate('/');
     },
   });
   return (
@@ -45,7 +44,6 @@ if (user) {
         value={formik.values.email}
         onChange={formik.handleChange}
         error={formik.touched.email}
-        // error={formik.touched.email && formik.errors.email}
       />
       {formik.touched.email && formik.errors.email ? (
         <div style={{ color: 'red' }}>{formik.errors.email}</div>
@@ -62,16 +60,18 @@ if (user) {
         <div style={{ color: 'red' }}>{formik.errors.password}</div>
       ) : null}
 
-      <p style={{ fontFamily: 'Times New Roman, Times, serif',
-fontSize: '21px',
-letterSpacing: '1.6px',
-wordSpacing: '-1.4px',
-color: '#000000',
-fontWeight: '400',
-textDecoration: 'none',
-fontStyle: 'normal',
-fontVariant: 'normal',
-textTransform: 'none' }}
+      <p style={{
+        fontFamily: 'Times New Roman, Times, serif',
+        fontSize: '21px',
+        letterSpacing: '1.6px',
+        wordSpacing: '-1.4px',
+        color: '#000000',
+        fontWeight: '400',
+        textDecoration: 'none',
+        fontStyle: 'normal',
+        fontVariant: 'normal',
+        textTransform: 'none'
+      }}
       >{error.message}
       </p>
     </AuthLayout>

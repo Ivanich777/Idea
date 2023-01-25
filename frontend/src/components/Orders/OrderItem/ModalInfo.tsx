@@ -1,5 +1,5 @@
-import { Box, Button, Modal, Typography, TableFooter } from '@mui/material';
-import React, { useEffect } from 'react';
+import { Box, Modal, Typography, TableFooter } from '@mui/material';
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,10 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { NamedTupleMember } from 'typescript';
+import { useSelector } from 'react-redux';
 import { OrderItem } from './types/state';
 import { Order } from '../types/state';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 
 interface IModel {
@@ -37,11 +36,11 @@ function ModalInfo({ order, orderItems, showModal, handleManualClose }: IModel):
   };
 
   function sum(): number {
-    const arrWithOrder: number[] = orderItems.map((order: OrderItem) => {
-      if (order) {
-        return order.count > 1 ?
-          (order['Product.price'] * order.count) :
-          order['Product.price'];
+    const arrWithOrder: number[] = orderItems.map((orderItem: OrderItem) => {
+      if (orderItem) {
+        return orderItem.count > 1 ?
+          (orderItem['Product.price'] * orderItem.count) :
+          orderItem['Product.price'];
       }
       return 0;
     });
@@ -49,7 +48,7 @@ function ModalInfo({ order, orderItems, showModal, handleManualClose }: IModel):
     return wasd;
   }
 
-  const getDate = (string: string): string => new Date(string).toLocaleString("en-GB", { timeZone: 'Europe/Moscow' }); 
+  const getDate = (string: string): string => new Date(string).toLocaleString('en-GB', { timeZone: 'Europe/Moscow' });
 
   const { user } = useSelector((state: RootState) => state.users);
 
@@ -107,7 +106,7 @@ function ModalInfo({ order, orderItems, showModal, handleManualClose }: IModel):
                 <TableCell />
                 <TableCell />
                 <TableCell />
-                <TableCell sx={{ fontSize: '1rem'}} align="right">{`Итого: ${sum()} ₽`}</TableCell>
+                <TableCell sx={{ fontSize: '1rem' }} align="right">{`Итого: ${sum()} ₽`}</TableCell>
               </TableFooter>
             </Table>
           </TableContainer>

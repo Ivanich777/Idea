@@ -1,9 +1,8 @@
 import { Box, Typography, TextField, FormControl, Select, MenuItem, Button, InputLabel } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../store';
+import { RootState } from '../../store';
 import OrderCard from './OrderItem/OrderCard';
-import { addAsyncOrders } from './orderSlice';
 import { Order } from './types/state';
 
 const styles = {
@@ -11,7 +10,7 @@ const styles = {
     mt: 2,
     textAlign: 'left',
     paddingTop: '10px',
-    paddingLeft:'12px',
+    paddingLeft: '12px',
     ml: 2,
     fontSize: '1rem',
     textDecoration: 'underline',
@@ -19,15 +18,13 @@ const styles = {
   btnFilter: {
     fontSize: '1rem',
   }
-}
+};
 
 function Orders(): JSX.Element {
   const [orderList, setOrderList] = useState<Order[]>([]);
   const [searchNumber, setSearchNumber] = useState('');
   const [searchUser, setSearchUser] = useState('');
   const [searchStatus, setSearchStatus] = useState('Все');
-  const dispatch = useAppDispatch();
-
 
   const { user } = useSelector((state: RootState) => state.users);
   const { orders } = useSelector((state: RootState) => state.orders);
@@ -37,8 +34,9 @@ function Orders(): JSX.Element {
       setOrderList(orders);
     } else {
       setOrderList(orders.filter((order: Order) => order.idUser === user?.id));
-      // dispatch(addAsyncOrders())
     }
+    // нужен 1 раз при рендере компонента
+    // eslint-disable-next-line
   }, []);
 
   const handleSearchNumber = (event: any): void => {
@@ -71,7 +69,6 @@ function Orders(): JSX.Element {
     setOrderList(fOrders);
   };
 
-
   const handleSearchStatus = (event: any): void => {
     setSearchStatus((event.target.value));
     let fOrders = orders;
@@ -94,8 +91,6 @@ function Orders(): JSX.Element {
     setOrderList(orders);
   };
 
-
-  const answerFromBack = useSelector((state: RootState) => state.orders);
   return (
     <div>
       {user?.admin && (
@@ -105,14 +100,12 @@ function Orders(): JSX.Element {
             <TextField
               id="outlined-required"
               label="Номер заказа"
-              // defaultValue=""
               value={searchNumber}
               onChange={handleSearchNumber}
             />
             <TextField
               id="outlined-required"
               label="Пользователь"
-              // defaultValue=""
               value={searchUser}
               onChange={handleSearchUser}
             />
@@ -149,7 +142,7 @@ function Orders(): JSX.Element {
           </Box>
         )
         : (orderList.length === 0 ? (
-          <div className='flex'>
+          <div className="flex">
             <Box>
               <Typography>{user?.name}</Typography>
               <Typography>{user?.surname}</Typography>
@@ -162,7 +155,7 @@ function Orders(): JSX.Element {
           </div>
         ) : (
           <div>
-            <Box style={{display:'flex',textAlign:'center', flexDirection:'column', marginLeft:'600px', width:'200px', border: '3px solid black', borderRadius:'11px', marginTop:'30px',backgroundColor:'rgb(233, 207, 180)'}}>
+            <Box style={{ display: 'flex', textAlign: 'center', flexDirection: 'column', marginLeft: '600px', width: '200px', border: '3px solid black', borderRadius: '11px', marginTop: '30px', backgroundColor: 'rgb(233, 207, 180)' }}>
               <Typography>{` ${user?.name}`}</Typography>
               <Typography>{user?.surname}</Typography>
               <Typography>{user?.email}</Typography>
@@ -171,7 +164,7 @@ function Orders(): JSX.Element {
             <Box sx={styles.labelSearch}>
               Ваши заказы:
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap',marginBottom:'70px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', marginBottom: '70px' }}>
               {orderList.map((order: any) => (
                 <OrderCard key={order.id} order={order} />
               ))}
@@ -180,7 +173,7 @@ function Orders(): JSX.Element {
         )
         )}
       {user?.admin && (
-        <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
           {orderList.map((order: any) => (
             <OrderCard key={order.id} order={order} />
           ))}

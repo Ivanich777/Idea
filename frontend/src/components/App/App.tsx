@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Root } from 'react-dom/client';
 import Registration from '../Auth/Registration/Registration';
 
 import Login from '../Auth/Login/Login';
 
 import { RootState, useAppDispatch } from '../../store';
 
-import Header from '../Header/Header';
 import HeaderAdmin from '../HeaderAdmin/HeaderAdmin';
 
 import Main from '../Main/Main';
@@ -21,12 +19,12 @@ import { addAsyncProducts } from '../ProductList/productSlice';
 import ProductAddForm from '../ProductAddForm/ProductAddForm';
 import { addAsyncCategories } from '../ProductAddForm/categorySlice';
 import Category from '../Category/Category';
-import { addAsyncUser, checkAsyncUser, getUser } from '../Auth/authSlice';
+import { getUser } from '../Auth/authSlice';
 import Logout from '../Auth/Logout/Logout';
 
 import { actualOrder } from '../ProductCard/basketSlice';
 import Basket from '../Basket/Basket';
-import './app.css'
+import './app.css';
 import { addAsyncOrders } from '../Orders/orderSlice';
 import { ProductOrder } from '../ProductCard/types/State';
 
@@ -44,15 +42,14 @@ function App(): JSX.Element {
     }
   }, []);
 
-
   const { basket } = useSelector((state: RootState) => state.basket);
 
   useEffect(() => {
-    let result: ProductOrder[] = [];
+    const result: ProductOrder[] = [];
     const wasd = basket.filter((item, index, arr) =>
-      index === arr.findIndex((el) => el.id === item.id))
-      setCountProduct(wasd.length)
-  }, [basket])
+      index === arr.findIndex((el) => el.id === item.id));
+    setCountProduct(wasd.length);
+  }, [basket]);
 
   const count = countProduct;
 
